@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+   <title>总览 - 茶叶溯源管理后台 </title> 
+  
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+
+       <!-- Top Bar  -->
+       <header class="top-bar">
+
+        <!-- Menu Toggler -->
+        <button type="button" class="menu-toggler la la-bars" data-toggle="menu"></button>
+
+        <!-- Brand -->
+        <span class="brand">茶叶溯源管理后台</span>
+
+        <!-- Search -->
+        <form class="hidden md:block ml-10" action="#">
+            <label class="form-control-addon-within rounded-full">
+                <input type="text" class="form-control border-none" placeholder="查找">
+                <span class="flex items-center pr-4">
+                    <button type="button"
+                        class="dark:text-gray-700 dark:hover:text-primary btn btn-link text-gray-300 hover:text-primary text-xl leading-none la la-search"></button>
+                </span>
+            </label>
+        </form>
+
+        <!-- Right -->
+        <div class="flex items-center ml-auto">
+
+            <!-- Dark Mode -->
+            <label class="switch switch_outlined" data-toggle="tooltip" data-tippy-content="Toggle Dark Mode">
+                <input id="darkModeToggler" type="checkbox">
+                <span></span>
+            </label>
+
+            <!-- Fullscreen -->
+            <button type="button"
+                class="hidden lg:inline-block btn-link ml-3 px-2 text-2xl leading-none la la-expand-arrows-alt"
+                data-toggle="tooltip" data-tippy-content="Fullscreen" id="fullScreenToggler"></button>
+
+           
+           
+            <!-- User Menu -->
+            <div class="dropdown">
+                <button class="flex items-center ml-4 text-gray-700 focus:outline-none" data-toggle="custom-dropdown-menu"
+                    data-tippy-arrow="true" data-tippy-placement="bottom-end">
+                    <span
+                        class="dark:bg-gray-900 dark:border-gray-600 dark:text-gray-500 flex items-center justify-center w-12 h-12 rounded-full bg-gray-200 border-2 border-gray-600 text-xl text-gray-700">U</span>
+                </button>
+                <div class="custom-dropdown-menu w-64">
+                  
+                    <hr class="dark:border-gray-900 mb-0">
+                    <div class="p-5">
+                        <a href="#"
+                            class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary"><span
+                                class="la la-user-circle text-2xl leading-none mr-2"></span>管理员</a>
+                        <a href="#"
+                            class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary mt-5"><span
+                                class="la la-key text-2xl leading-none mr-2"></span>更改密码</a>
+                    </div>
+                    <hr class="dark:border-gray-900 mb-0">
+                    <div class="p-5">
+                        <a href="#"
+                            class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary"><span
+                                class="la la-power-off text-2xl leading-none mr-2"></span>退出</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menu Bar -->
+    <aside class="menu-bar">
+        <div class="menu menu-sticky">
+            <div class="menu-items">
+                <a href="./tohome" data-toggle="tooltip-menu" data-tippy-content="Dashboard"><span
+                        class="icon la la-laptop"></span><span class="title">总览</span></a>
+               
+                <a href="./toforms" data-target="ui" data-toggle="tooltip-menu" data-tippy-content="UI"><span
+                        class="icon la la-cube"></span><span class="title">生产上链</span></a>
+                <a href="./toform" data-target="menu" data-toggle="tooltip-menu" data-tippy-content="Menu"><span
+                        class="icon la la-sitemap"></span><span class="title">经销上链</span></a>
+                <a href="./todata" data-target="pages" data-toggle="tooltip-menu" data-tippy-content="Pages"><span
+                    class="icon la la-file-alt"></span><span class="title">数据总览</span></a>
+                <a href="./toauthlogin" data-toggle="tooltip-menu" data-tippy-content="Blank Page"><span
+                        class="icon la la-file"></span><span class="title">登录</span></a>
+                <a href="./tosearch" target="_blank" data-toggle="tooltip-menu"
+                    data-tippy-content="Docs"><span class="icon la la-book-open"></span><span class="title">消费者查询</span></a>
+            </div>
+
+        </div>
+    </aside>
+
+    <!-- Workspace  -->
+    <main class="workspace overflow-hidden">
+
+        <!-- Breadcrumb -->
+        <section class="breadcrumb">
+            <h1>总览</h1>
+         
+               
+        </section>
+
+        <div class="lg:flex lg:-mx-4">
+            <div class="lg:w-1/2 lg:px-4">
+
+                <!-- Summaries -->
+                <div class="lg:flex lg:-mx-4">
+                    <div class="lg:w-1/3 lg:px-4">
+                        <div
+                            class="card px-4 py-8 text-center lg:transform hover:scale-110 hover:shadow-lg transition-transform duration-200">
+                            <span class="text-primary text-5xl leading-none la la-sun"></span>
+                            <p class="mt-2">茶区上月晴天数</p>
+                            <div class="text-primary mt-5 text-3xl leading-none">22</div>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/3 lg:px-4 pt-5 lg:pt-0">
+                        <div
+                            class="card px-4 py-8 text-center lg:transform hover:scale-110 hover:shadow-lg transition-transform duration-200">
+                            <span class="text-primary text-5xl leading-none la la-cloud"></span>
+                            <p class="mt-2">茶区上月阴雨天数</p>
+                            <div class="text-primary mt-5 text-3xl leading-none">8</div>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/3 lg:px-4 pt-5 lg:pt-0">
+                        <div
+                            class="card px-4 py-8 text-center lg:transform hover:scale-110 hover:shadow-lg transition-transform duration-200">
+                            <span class="text-primary text-5xl leading-none la la-layer-group"></span>
+                            <p class="mt-2">茶区茶树种类</p>
+                            <div class="text-primary mt-5 text-3xl leading-none">3</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visitors -->
+                <div class="card mt-5 p-5">
+                    <h3>茶区营收</h3>
+                    <div class="mt-5">
+                        <canvas id="visitorsChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Categories -->
+                <div class="card mt-5 p-5">
+                    <h3>茶树种类</h3>
+                    <div class="mt-5">
+                   
+                        <canvas id="categoriesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:w-1/2 lg:px-4 pt-5 lg:pt-0">
+
+                <!-- Lines -->
+                <div class="card p-5">
+                    <div class="flex flex-wrap -mx-4">
+                        <div class="w-1/2 lg:w-1/4 px-4">
+                            <h4 class="chart-value text-primary"></h4>
+                            <small class="chart-label"></small>
+                            <canvas id="lineWithLine1"></canvas>
+                        </div>
+                        <div class="w-1/2 lg:w-1/4 px-4">
+                            <h4 class="chart-value text-primary"></h4>
+                            <small class="chart-label"></small>
+                            <canvas id="lineWithLine2"></canvas>
+                        </div>
+                        <div class="w-1/2 lg:w-1/4 px-4 mt-5 sm:mt-0">
+                            <h4 class="chart-value text-primary"></h4>
+                            <small class="chart-label"></small>
+                            <canvas id="lineWithLine3"></canvas>
+                        </div>
+                        <div class="w-1/2 lg:w-1/4 px-4 mt-5 sm:mt-0">
+                            <h4 class="chart-value text-primary"></h4>
+                            <small class="chart-label"></small>
+                            <canvas id="lineWithLine4"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Posts  -->
+                <div class="card mt-5 p-5">
+                    <div class="card p-5">
+                        <h3>茶区产量</h3>
+                        <div class="mt-5">
+                            <canvas id="barWithShadowChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="card p-5">
+                    <h3>茶叶合格率</h3>
+                    <div class="mt-5">
+                        <canvas id="doughnutWithShadowChart"></canvas>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer  -->
+        <footer class="flex mt-auto">
+            <div class="footer">
+                <span class='uppercase'>&copy; 2021 茶叶溯源管理后台</span>
+                <nav class="ml-auto">
+                    <a href="">支持</a>
+                    <span class="divider mx-2">|</span>
+                    <a href="#">文档</a>
+                </nav>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Scripts -->
+    <script src="assets/js/vendor.js"></script>
+    <script src="assets/js/Chart.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
+    <script src="assets/js/script.js"></script>
+
+</body>
+
+</html>

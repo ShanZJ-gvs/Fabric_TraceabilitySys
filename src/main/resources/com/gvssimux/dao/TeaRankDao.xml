@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gvssimux.dao.TeaRankDao">
+  <resultMap id="BaseResultMap" type="com.gvssimux.pojo.TeaRank">
+    <result column="tea_rank_id" jdbcType="VARCHAR" property="teaRankId" />
+    <result column="tea_rank_perid" jdbcType="VARCHAR" property="teaRankPerid" />
+    <result column="tea_rank_time" jdbcType="TIMESTAMP" property="teaRankTime" />
+    <result column="tea_rank_rank" jdbcType="VARCHAR" property="teaRankRank" />
+  </resultMap>
+  <insert id="insert" parameterType="com.gvssimux.pojo.TeaRank">
+    insert into tea_rank (tea_rank_id, tea_rank_perid, tea_rank_time, 
+      tea_rank_rank)
+    values (#{teaRankId,jdbcType=VARCHAR}, #{teaRankPerid,jdbcType=VARCHAR}, #{teaRankTime,jdbcType=TIMESTAMP}, 
+      #{teaRankRank,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gvssimux.pojo.TeaRank">
+    insert into tea_rank
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="teaRankId != null">
+        tea_rank_id,
+      </if>
+      <if test="teaRankPerid != null">
+        tea_rank_perid,
+      </if>
+      <if test="teaRankTime != null">
+        tea_rank_time,
+      </if>
+      <if test="teaRankRank != null">
+        tea_rank_rank,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="teaRankId != null">
+        #{teaRankId,jdbcType=VARCHAR},
+      </if>
+      <if test="teaRankPerid != null">
+        #{teaRankPerid,jdbcType=VARCHAR},
+      </if>
+      <if test="teaRankTime != null">
+        #{teaRankTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="teaRankRank != null">
+        #{teaRankRank,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

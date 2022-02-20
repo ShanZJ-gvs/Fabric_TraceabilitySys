@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gvssimux.dao.TeaTestingDao">
+  <resultMap id="BaseResultMap" type="com.gvssimux.pojo.TeaTesting">
+    <result column="tea_testing_id" jdbcType="VARCHAR" property="teaTestingId" />
+    <result column="tea_testing_perid" jdbcType="VARCHAR" property="teaTestingPerid" />
+    <result column="tea_testing_time" jdbcType="TIMESTAMP" property="teaTestingTime" />
+    <result column="tea_testing_result" jdbcType="VARCHAR" property="teaTestingResult" />
+    <result column="tea_testing_ssl" jdbcType="VARCHAR" property="teaTestingSsl" />
+  </resultMap>
+  <insert id="insert" parameterType="com.gvssimux.pojo.TeaTesting">
+    insert into tea_testing (tea_testing_id, tea_testing_perid, tea_testing_time, 
+      tea_testing_result, tea_testing_ssl)
+    values (#{teaTestingId,jdbcType=VARCHAR}, #{teaTestingPerid,jdbcType=VARCHAR}, #{teaTestingTime,jdbcType=TIMESTAMP}, 
+      #{teaTestingResult,jdbcType=VARCHAR}, #{teaTestingSsl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gvssimux.pojo.TeaTesting">
+    insert into tea_testing
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="teaTestingId != null">
+        tea_testing_id,
+      </if>
+      <if test="teaTestingPerid != null">
+        tea_testing_perid,
+      </if>
+      <if test="teaTestingTime != null">
+        tea_testing_time,
+      </if>
+      <if test="teaTestingResult != null">
+        tea_testing_result,
+      </if>
+      <if test="teaTestingSsl != null">
+        tea_testing_ssl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="teaTestingId != null">
+        #{teaTestingId,jdbcType=VARCHAR},
+      </if>
+      <if test="teaTestingPerid != null">
+        #{teaTestingPerid,jdbcType=VARCHAR},
+      </if>
+      <if test="teaTestingTime != null">
+        #{teaTestingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="teaTestingResult != null">
+        #{teaTestingResult,jdbcType=VARCHAR},
+      </if>
+      <if test="teaTestingSsl != null">
+        #{teaTestingSsl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

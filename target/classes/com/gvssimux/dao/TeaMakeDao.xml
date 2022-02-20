@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gvssimux.dao.TeaMakeDao">
+  <resultMap id="BaseResultMap" type="com.gvssimux.pojo.TeaMake">
+    <result column="tea_make_id" jdbcType="VARCHAR" property="teaMakeId" />
+    <result column="tea_make_perid" jdbcType="VARCHAR" property="teaMakePerid" />
+    <result column="tea_make_time" jdbcType="TIMESTAMP" property="teaMakeTime" />
+    <result column="tea_make_way" jdbcType="VARCHAR" property="teaMakeWay" />
+    <result column="tea_make_quality" jdbcType="VARCHAR" property="teaMakeQuality" />
+  </resultMap>
+  <insert id="insert" parameterType="com.gvssimux.pojo.TeaMake">
+    insert into tea_make (tea_make_id, tea_make_perid, tea_make_time, 
+      tea_make_way, tea_make_quality)
+    values (#{teaMakeId,jdbcType=VARCHAR}, #{teaMakePerid,jdbcType=VARCHAR}, #{teaMakeTime,jdbcType=TIMESTAMP}, 
+      #{teaMakeWay,jdbcType=VARCHAR}, #{teaMakeQuality,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gvssimux.pojo.TeaMake">
+    insert into tea_make
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="teaMakeId != null">
+        tea_make_id,
+      </if>
+      <if test="teaMakePerid != null">
+        tea_make_perid,
+      </if>
+      <if test="teaMakeTime != null">
+        tea_make_time,
+      </if>
+      <if test="teaMakeWay != null">
+        tea_make_way,
+      </if>
+      <if test="teaMakeQuality != null">
+        tea_make_quality,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="teaMakeId != null">
+        #{teaMakeId,jdbcType=VARCHAR},
+      </if>
+      <if test="teaMakePerid != null">
+        #{teaMakePerid,jdbcType=VARCHAR},
+      </if>
+      <if test="teaMakeTime != null">
+        #{teaMakeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="teaMakeWay != null">
+        #{teaMakeWay,jdbcType=VARCHAR},
+      </if>
+      <if test="teaMakeQuality != null">
+        #{teaMakeQuality,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

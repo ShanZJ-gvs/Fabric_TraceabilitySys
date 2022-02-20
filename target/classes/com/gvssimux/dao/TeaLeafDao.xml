@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gvssimux.dao.TeaLeafDao">
+  <resultMap id="BaseResultMap" type="com.gvssimux.pojo.TeaLeaf">
+    <result column="tea_pick_id" jdbcType="VARCHAR" property="teaPickId" />
+    <result column="tea_making_id" jdbcType="VARCHAR" property="teaMakingId" />
+    <result column="tea_rank_id" jdbcType="VARCHAR" property="teaRankId" />
+    <result column="tea_packaging_id" jdbcType="VARCHAR" property="teaPackagingId" />
+    <result column="tea_testing_id" jdbcType="VARCHAR" property="teaTestingId" />
+    <result column="tea_warehouse_id" jdbcType="VARCHAR" property="teaWarehouseId" />
+    <result column="tea_transport _id" jdbcType="VARCHAR" property="teaTransportId" />
+    <result column="tea_shop_id" jdbcType="VARCHAR" property="teaShopId" />
+  </resultMap>
+  <insert id="insert" parameterType="com.gvssimux.pojo.TeaLeaf">
+    insert into tea_leaf (tea_pick_id, tea_making_id, tea_rank_id, 
+      tea_packaging_id, tea_testing_id, tea_warehouse_id, 
+      "tea_transport _id", tea_shop_id)
+    values (#{teaPickId,jdbcType=VARCHAR}, #{teaMakingId,jdbcType=VARCHAR}, #{teaRankId,jdbcType=VARCHAR}, 
+      #{teaPackagingId,jdbcType=VARCHAR}, #{teaTestingId,jdbcType=VARCHAR}, #{teaWarehouseId,jdbcType=VARCHAR}, 
+      #{teaTransportId,jdbcType=VARCHAR}, #{teaShopId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gvssimux.pojo.TeaLeaf">
+    insert into tea_leaf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="teaPickId != null">
+        tea_pick_id,
+      </if>
+      <if test="teaMakingId != null">
+        tea_making_id,
+      </if>
+      <if test="teaRankId != null">
+        tea_rank_id,
+      </if>
+      <if test="teaPackagingId != null">
+        tea_packaging_id,
+      </if>
+      <if test="teaTestingId != null">
+        tea_testing_id,
+      </if>
+      <if test="teaWarehouseId != null">
+        tea_warehouse_id,
+      </if>
+      <if test="teaTransportId != null">
+        "tea_transport _id",
+      </if>
+      <if test="teaShopId != null">
+        tea_shop_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="teaPickId != null">
+        #{teaPickId,jdbcType=VARCHAR},
+      </if>
+      <if test="teaMakingId != null">
+        #{teaMakingId,jdbcType=VARCHAR},
+      </if>
+      <if test="teaRankId != null">
+        #{teaRankId,jdbcType=VARCHAR},
+      </if>
+      <if test="teaPackagingId != null">
+        #{teaPackagingId,jdbcType=VARCHAR},
+      </if>
+      <if test="teaTestingId != null">
+        #{teaTestingId,jdbcType=VARCHAR},
+      </if>
+      <if test="teaWarehouseId != null">
+        #{teaWarehouseId,jdbcType=VARCHAR},
+      </if>
+      <if test="teaTransportId != null">
+        #{teaTransportId,jdbcType=VARCHAR},
+      </if>
+      <if test="teaShopId != null">
+        #{teaShopId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>
