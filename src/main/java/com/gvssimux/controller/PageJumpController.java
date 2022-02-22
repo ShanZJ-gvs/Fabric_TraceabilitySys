@@ -34,6 +34,14 @@ public class PageJumpController {
         return "home";
     }
 
+    /**
+     * 跳转到people.html页面
+     */
+    @RequestMapping("/topeople")
+    public String topeople()throws JsonProcessingException{
+
+        return "people";
+    }
 
     /**
      * 跳转到datas.html页面

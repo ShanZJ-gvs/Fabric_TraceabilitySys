@@ -19,7 +19,7 @@
       #{teaGardenTeaid,jdbcType=VARCHAR}, #{teaGardenAreaid,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.gvssimux.pojo.TeaGarden">
-    insert into tea_garden
+    insert into tea.tea_garden
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="teaGardenId != null">
         tea_garden_id,
