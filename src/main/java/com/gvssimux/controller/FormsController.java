@@ -1,7 +1,9 @@
 package com.gvssimux.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.gvssimux.pojo.TeaArea;
 import com.gvssimux.pojo.TeaGarden;
+import com.gvssimux.service.TeaAreaServiceImpl;
 import com.gvssimux.service.TeaGardenServiceImpl;
 import com.gvssimux.util.JsonUtil;
 import org.junit.Test;
@@ -17,6 +19,35 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class FormsController {
+
+
+    /**
+     * form-wizards.html 页面的控制逻辑
+     * 给 “茶区” 添加数据
+     */
+    @ResponseBody
+    @RequestMapping("/setteaarea")
+    public int setteaarea(HttpServletRequest request, HttpServletResponse response)throws JsonProcessingException {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        TeaAreaServiceImpl mapper = context.getBean("TeaAreaServiceImpl", TeaAreaServiceImpl.class);
+
+        // 创建json工具
+        JsonUtil jsonUtil = new JsonUtil();
+
+        // 创建接收对象
+        TeaArea teaArea = new TeaArea();
+
+        teaArea.setTeaAreaId(request.getParameter("sum"));
+
+        // mysql 部分插入
+        int i = mapper.insertSelective(teaArea);
+
+
+        return i;
+    }
+
+
+
 
     /**
      * form-wizards.html 页面的控制逻辑

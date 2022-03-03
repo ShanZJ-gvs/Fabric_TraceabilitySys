@@ -13,7 +13,7 @@
 
 <body>
 
-  
+<div id="root">
     <!-- Top Bar  -->
     <header class="top-bar">
 
@@ -631,9 +631,61 @@
         </footer>
 
     </main>
+
+    <h2>茶园列表{{TeaGarden}}</h2>
+    <button  @click="showInfo(66,$event)">点我冒泡</button>
+
+</div>
+
     <!-- Scripts -->
     <script src="assets/js/vendor.js"></script>
     <script src="assets/js/script.js"></script>
+    <!-- vue -->
+    <script src="assets/js/vue.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        const vm = new Vue({
+            el: '#root',
+            data:{
+                TeaGarden:{
+                    teaGardenId:"11",
+                    teaGardenAddress:"11",
+                    "teaGardenArea":"11",
+                    "teaGardenLongitude":"",
+                    "teaGardenTreekind":null,
+                    "teaGardenTeaid":null,
+                    "teaGardenAreaid":null
+                }
+            },
+            mounted () {
+                axios
+                    .get('/Fabric_TraceabilitySys_war_exploded/teagarden')
+                    .then((response) =>{ // 这里如果不用箭头函数的话，this指的Windows
+                        console.log("response.data：",response.data.teaGardenId);
+                        console.log("response",response);
+                        console.log("json:",JSON.parse(JSON.stringify(response.data)));
+                        console.log(this);
+                        /**
+                         * 把response的.data先转成字符串，再把字符串转为json格式
+                         * JSON.parse() 方法将数据转换为 JavaScript 对象。
+                         * */
+                        this.TeaGarden = JSON.parse(JSON.stringify(response.data));
+
+                    }, function (error) {
+                        console.log(error);
+                    });
+            },
+            methods:{
+                showInfo(){
+                    console.log("showInfo函数被执行")
+                    alert(11111)
+                }
+            }
+        })
+
+    </script>
 
 </body>
 
