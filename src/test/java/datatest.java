@@ -1,4 +1,5 @@
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.gvssimux.fabric.ClientApp;
 import com.gvssimux.pojo.TeaArea;
 import com.gvssimux.pojo.TeaGarden;
 import com.gvssimux.service.TeaGardenServiceImpl;
@@ -31,10 +32,26 @@ public class datatest {
 
         // 创建接收对象
         TeaArea teaArea = new TeaArea();
-        teaArea.setTeaAreaId("11435fbe37994d4e804937c6433e2ce2");
+        teaArea.setTeaAreaId1("11435fbe37994d4e804937c6433e2ce2");
 
         System.out.println(jsonUtil.getJson(teaArea));
     }
+
+
+    @Test
+    public void  teagarden02() throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        TeaGardenServiceImpl mapper = context.getBean("TeaGardenServiceImpl", TeaGardenServiceImpl.class);
+
+
+        String s = new ClientApp().get("teaArea-java-demo", "茶区");
+
+
+        System.out.println(s);
+
+
+    }
+
 
 
 

@@ -16,6 +16,24 @@
 
     <!--导入依赖-->
     <dependencies>
+
+        <!--fabric-sdk -->
+        <!-- https://mvnrepository.com/artifact/org.hyperledger.fabric-sdk-java/fabric-sdk-java -->
+        <dependency>
+            <groupId>org.hyperledger.fabric-sdk-java</groupId>
+            <artifactId>fabric-sdk-java</artifactId>
+            <version>2.2.12</version>
+        </dependency>
+
+        <!-- fabric-gateway -->
+        <!-- https://mvnrepository.com/artifact/org.hyperledger.fabric/fabric-gateway-java -->
+        <dependency>
+            <groupId>org.hyperledger.fabric</groupId>
+            <artifactId>fabric-gateway-java</artifactId>
+            <version>2.2.3</version>
+        </dependency>
+
+
         <!--lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>

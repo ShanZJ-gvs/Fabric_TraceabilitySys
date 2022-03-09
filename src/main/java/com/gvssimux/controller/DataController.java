@@ -2,6 +2,7 @@ package com.gvssimux.controller;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.gvssimux.fabric.ClientApp;
 import com.gvssimux.pojo.TeaArea;
 import com.gvssimux.pojo.TeaGarden;
 import com.gvssimux.service.TeaGardenServiceImpl;
@@ -26,22 +27,23 @@ public class DataController {
      * 测试 茶区TeaArea
      */
     @ResponseBody
-    @GetMapping("/teagarden")
-    public String  teagarden(HttpServletRequest request, HttpServletResponse response)throws JsonProcessingException {
+    @GetMapping("/teaarea")
+    public String  teaarea(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaGardenServiceImpl mapper = context.getBean("TeaGardenServiceImpl", TeaGardenServiceImpl.class);
-
-        // 创建json工具
-        JsonUtil jsonUtil = new JsonUtil();
 
         // 创建接收对象
         TeaArea teaArea = new TeaArea();
 
-        teaArea.setTeaAreaId("fwafwadsdadads");
+        teaArea.setTeaAreaId1("fwafwadsdadads");
 
-        System.out.println(request);
+        String[] arg = new String[]{"teaArea-java-demo","茶区"};
+
+
+
+        /*System.out.println(request);*/
         System.out.println("----------------------");
-        return jsonUtil.getJson(teaArea);
+        return "";
     }
 
 
@@ -52,18 +54,15 @@ public class DataController {
      * 测试 菜园TeaGarden
      */
     @ResponseBody
-    @RequestMapping("/teagarden")
-    public String  testdata(HttpServletRequest request, HttpServletResponse response)throws JsonProcessingException {
+    @GetMapping("/teagarden")
+    public String  teagarden(HttpServletRequest request, HttpServletResponse response)throws JsonProcessingException {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaGardenServiceImpl mapper = context.getBean("TeaGardenServiceImpl", TeaGardenServiceImpl.class);
-
-        // 创建json工具
-        JsonUtil jsonUtil = new JsonUtil();
 
         // 创建 返回对象
         TeaGarden teaGarden = new TeaGarden("3b9cbf4c3699462a9e8c9151b6fddf6d","安徽合肥","13000公顷","132-332");
 
-        return jsonUtil.getJson(teaGarden);
+        return JsonUtil.getJson(teaGarden);
     }
 
 

@@ -8,17 +8,17 @@ import java.util.List;
 public class TeaAreaServiceImpl implements TeaAreaService {
     private TeaAreaDao mapper;
 
-    /*全部插入*/
-    @Override
-    public int insert(TeaArea record) {
-        return mapper.insert(record);
-    }
-
-    /*部分插入*/
-    @Override
-    public int insertSelective(TeaArea record) {
-        return mapper.insertSelective(record);
-    }
+//    /*全部插入*/
+//    @Override
+//    public int insert(TeaArea record) {
+//        return mapper.insert(record);
+//    }
+//
+//    /*部分插入*/
+//    @Override
+//    public int insertSelective(TeaArea record) {
+//        return mapper.insertSelective(record);
+//    }
 
     /*全部查询*/
     @Override

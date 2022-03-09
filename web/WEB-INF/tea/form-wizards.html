@@ -13,6 +13,7 @@
 
 <body>
 
+
     <!-- Top Bar  -->
     <header class="top-bar">
 
@@ -107,6 +108,7 @@
         </div>
     </aside>
 
+    <div id="root">
     <!-- Workspace  -->
     <main class="workspace">
 
@@ -136,41 +138,51 @@
                         </nav>
                         <div class="tab-content mt-5">
                             <div class="collapse open" id="tab-1">
-                                <form action="/setteaarea" method="post">
+                                <form action="/Fabric_TraceabilitySys_war_exploded/teaarea" method="post">
                                     <div class="mb-5">
                                         <label class="label block mb-2" for="email-2">茶区编号</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <input type="text" class="form-control" id="email-2" name="tea_area_id1"
                                                placeholder="">
                                     </div>
                                     <div class="mb-5">
                                         <label class="label block mb-2" for="email-2">茶区地址</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <input type="text" class="form-control" id="email-2" name="tea_area_address"
                                                placeholder="">
                                     </div>
                                     <div class="mb-5">
                                         <label class="label block mb-2" for="email-2">茶区面积</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <input type="text" class="form-control" id="email-2" name="tea_area_area"
                                                placeholder="">
                                     </div>
                                     <div class="mb-5">
                                         <label class="label block mb-2" for="email-2">茶区经纬度</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <input type="text" class="form-control" id="email-2" name="tea_area_longitude"
+                                               placeholder="">
+                                    </div>
+                                    <div class="mb-5">
+                                        <label class="label block mb-2" for="email-2">所属茶区编号</label>
+                                        <input type="text" class="form-control" id="email-2" name="tea_area_id2"
                                                placeholder="">
                                     </div>
                                     <div class="mb-5">
                                         <label class="label block mb-2" for="email-2">所属茶园编号</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <input type="text" class="form-control" id="email-2" name="tea_garden_id"
                                                placeholder="">
                                     </div>
                                     <div class="mb-5">
                                         <label class="label block mb-2" for="password-2">密码</label>
-                                        <input type="password" class="form-control" id="password-2" value="">
+                                        <input type="password" class="form-control" id="password-2" value="" name="key">
+                                    </div>
+                                    <div class="mt-5">
+                                        <div class="btn-group">
+                                            <button type="submit" class="btn btn_primary uppercase">提交</button>
+
+                                        </div>
                                     </div>
                                 </form>
                             </div>
                             <div class="collapse" id="tab-2">
                                 <form>
-                                   
                                     <div class="mb-5">
                                         <label class="label block mb-2" for="email-2">茶园编号</label>
                                         <input type="text" class="form-control" id="email-2"
@@ -200,6 +212,9 @@
                                         <label class="label block mb-2" for="password-2">密码</label>
                                         <input type="password" class="form-control" id="password-2" value="">
                                     </div>
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn btn_primary uppercase">提交</button>
+                                    </div>
                                 </form>
                             </div>
                             <div class="collapse" id="tab-3">
@@ -214,7 +229,7 @@
                                         <input type="text" class="form-control" id="email-2"
                                             placeholder="">
                                     </div>
-                                    <div class="mb-5">
+                                    <div class="mb-5" v-show="false">
                                         <label class="label block mb-2" for="email-2">茶树经纬度</label>
                                         <input type="text" class="form-control" id="email-2"
                                             placeholder="">
@@ -258,11 +273,13 @@
                                         <label class="label block mb-2" for="password-2">密码</label>
                                         <input type="password" class="form-control" id="password-2" value="">
                                     </div>
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn btn_primary uppercase">提交</button>
+                                    </div>
                                 </form>
                             </div>
                             <div class="collapse" id="tab-4">
                                 <form>
-                                   
                                     <div class="mb-5">
                                         <label class="label block mb-2" for="email-2">采茶师编号</label>
                                         <input type="text" class="form-control" id="email-2"
@@ -303,9 +320,11 @@
                                         <label class="label block mb-2" for="password-2">密码</label>
                                         <input type="password" class="form-control" id="password-2" value="">
                                     </div>
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn btn_primary uppercase">提交</button>
+                                    </div>
                                 </form>
                             </div>
-
                             <div class="collapse" id="tab-5">
                                 <form>
                                     <div class="mb-5">
@@ -343,12 +362,13 @@
                                         <label class="label block mb-2" for="password-2">密码</label>
                                         <input type="password" class="form-control" id="password-2" value="">
                                     </div>
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn btn_primary uppercase">提交</button>
+                                    </div>
                                 </form>
                             </div>
-
                             <div class="collapse" id="tab-6">
                                 <form>
-                                   
                                     <div class="mb-5">
                                         <label class="label block mb-2" for="email-2">定级人编号</label>
                                         <input type="text" class="form-control" id="email-2"
@@ -383,13 +403,13 @@
                                         <label class="label block mb-2" for="password-2">密码</label>
                                         <input type="password" class="form-control" id="password-2" value="">
                                     </div>
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn btn_primary uppercase">提交</button>
+                                    </div>
                                 </form>
                             </div>
-
-
                             <div class="collapse" id="tab-7">
                                 <form>
-
                                     <div class="mb-5">
                                         <label class="label block mb-2" for="email-2">包装人编号</label>
                                         <input type="text" class="form-control" id="email-2"
@@ -430,12 +450,13 @@
                                         <label class="label block mb-2" for="password-2">密码</label>
                                         <input type="password" class="form-control" id="password-2" value="">
                                     </div>
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn btn_primary uppercase">提交</button>
+                                    </div>
                                 </form>
                             </div>
-
                             <div class="collapse" id="tab-8">
                                 <form>
-
                                     <div class="mb-5">
                                         <label class="label block mb-2" for="email-2">质检人编号</label>
                                         <input type="text" class="form-control" id="email-2"
@@ -476,18 +497,20 @@
                                         <label class="label block mb-2" for="password-2">密码</label>
                                         <input type="password" class="form-control" id="password-2" value="">
                                     </div>
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn btn_primary uppercase">提交</button>
+                                    </div>
                                 </form>
                             </div>
-
-
-
                         </div>
-                        <div class="mt-5">
+
+                        <!--<div class="mt-5">  已经复制到了上面每个表中
                             <div class="btn-group">
-                                <button type="button" class="btn btn_primary uppercase">提交</button>
+                                <button type="submit" class="btn btn_primary uppercase">提交</button>
                                
                             </div>
-                        </div>
+                        </div>-->
+
                     </div>
                 </div>
             </div>
@@ -566,10 +589,54 @@
             </div>
         </footer>
     </main>
+    </div>
 
     <!-- Scripts -->
     <script src="assets/js/vendor.js"></script>
     <script src="assets/js/script.js"></script>
+
+    <!-- vue -->
+    <script src="assets/js/vue.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+
+        const vm = new Vue({
+            el: '#root',
+            data:{
+                TeaGarden:{
+                    teaGardenId:"11",
+                    teaGardenAddress:"11",
+
+                }
+            },
+            mounted () {
+                axios
+                    .get('/Fabric_TraceabilitySys_war_exploded/teagarden')
+                    .then((response) =>{ // 这里如果不用箭头函数的话，this指的Windows
+                        console.log("response.data：",response.data.teaGardenId);
+                        console.log("response",response);
+                        console.log("json:",JSON.parse(JSON.stringify(response.data)));
+                        console.log(this);
+                        /**
+                         * 把response的.data先转成字符串，再把字符串转为json格式
+                         * JSON.parse() 方法将数据转换为 JavaScript 对象。
+                         * */
+                        this.TeaGarden = JSON.parse(JSON.stringify(response.data));
+
+                    }, function (error) {
+                        console.log(error);
+                    });
+            },
+            methods:{
+                showInfo(){
+                    console.log("showInfo函数被执行")
+                    alert(11111)
+                }
+            }
+        })
+    </script>
 
 </body>
 

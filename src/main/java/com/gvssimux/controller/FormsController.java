@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -26,24 +27,27 @@ public class FormsController {
      * 给 “茶区” 添加数据
      */
     @ResponseBody
-    @RequestMapping("/setteaarea")
-    public int setteaarea(HttpServletRequest request, HttpServletResponse response)throws JsonProcessingException {
+    @PostMapping("/teaarea")
+    public String setteaarea(HttpServletRequest request, HttpServletResponse response)throws JsonProcessingException {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaAreaServiceImpl mapper = context.getBean("TeaAreaServiceImpl", TeaAreaServiceImpl.class);
-
-        // 创建json工具
-        JsonUtil jsonUtil = new JsonUtil();
 
         // 创建接收对象
         TeaArea teaArea = new TeaArea();
 
-        teaArea.setTeaAreaId(request.getParameter("sum"));
+        // 将request中的数据拿给实体teaArea
+        teaArea.setTeaAreaId1(request.getParameter("tea_area_id1"));
+        teaArea.setTeaAreaAddress(request.getParameter("tea_area_address"));
+        teaArea.setTeaAreaArea(request.getParameter("tea_area_area"));
+        teaArea.setTeaAreaLongitude(request.getParameter("tea_area_longitude"));
+        teaArea.setTeaAreaId2(request.getParameter("tea_area_id2"));
+        teaArea.setTeaGardenId(request.getParameter("tea_garden_id"));
 
         // mysql 部分插入
-        int i = mapper.insertSelective(teaArea);
+        int i = 1;//mapper.insertSelective(teaArea);
+        System.out.println("------------------------------");
 
-
-        return i;
+        return JsonUtil.getJson(teaArea);
     }
 
 
@@ -54,8 +58,8 @@ public class FormsController {
      * 给 “茶园” 添加数据
      */
     @ResponseBody
-    @RequestMapping("/formssetgarden")
-    public int toFormWizards(HttpServletRequest request, HttpServletResponse response)throws JsonProcessingException {
+    @PostMapping("/teagarden")
+    public int teagarden(HttpServletRequest request, HttpServletResponse response)throws JsonProcessingException {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaGardenServiceImpl mapper = context.getBean("TeaGardenServiceImpl", TeaGardenServiceImpl.class);
 
