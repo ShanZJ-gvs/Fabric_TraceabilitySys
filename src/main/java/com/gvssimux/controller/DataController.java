@@ -8,6 +8,7 @@ import com.gvssimux.pojo.TeaGarden;
 import com.gvssimux.service.TeaGardenServiceImpl;
 import com.gvssimux.util.JsonUtil;
 import com.sun.org.apache.regexp.internal.RE;
+import lombok.extern.java.Log;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -20,7 +21,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
+@Log
 public class DataController {
+
+
 
     /**
      * 数据总览data
@@ -29,21 +33,11 @@ public class DataController {
     @ResponseBody
     @GetMapping("/teaarea")
     public String  teaarea(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        TeaGardenServiceImpl mapper = context.getBean("TeaGardenServiceImpl", TeaGardenServiceImpl.class);
-
+        log.info("controller开始执行");
         // 创建接收对象
-        TeaArea teaArea = new TeaArea();
-
-        teaArea.setTeaAreaId1("fwafwadsdadads");
-
-        String[] arg = new String[]{"teaArea-java-demo","茶区"};
-
-
-
-        /*System.out.println(request);*/
-        System.out.println("----------------------");
-        return "";
+        String s = new ClientApp().get("getTeaArea", "茶区");
+        log.info("controller执行完毕");
+        return s;
     }
 
 

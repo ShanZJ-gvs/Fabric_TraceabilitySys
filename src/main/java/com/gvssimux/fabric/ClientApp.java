@@ -12,13 +12,32 @@ public class ClientApp {
         System.setProperty("org.hyperledger.fabric.sdk.service_discovery.as_localhost", "true");
     }
 
+
+
     public  String get(String s1,String s2) throws Exception {
         // Load a file system based wallet for managing identities.
         Path walletPath = Paths.get("wallet");
+        walletPath = Paths.get("../../../../wallet/");
+        walletPath = Paths.get("../../../../wallet");
+        walletPath = Paths.get("wallet");
+        walletPath = Paths.get("../../../../../wallet/");
+
+        walletPath = Paths.get("/usr/local/tomcat/webapps/Fabric_TraceabilitySys-1.0-SNAPSHOT/wallet");
+        walletPath = Paths.get("D:\\JavaProject\\Fabric_TraceabilitySys\\src\\main\\java\\com\\gvssimux\\wallet");
+
+
         Wallet wallet = Wallets.newFileSystemWallet(walletPath);
         // load a CCP
-        String CCP = "D:/JavaProject/fabric-tea-app-java-demo/src/main/resources/com/shanzj/fabric/app/java/" +
+        String CCP = "D:/JavaProject/Fabric_TraceabilitySys/src/main/resources/com/shanzj/fabric/app/java/" +
                 "peerOrganizations/org2.example.com/connection-org2.yaml";
+
+
+        CCP = "/usr/local/tomcat/webapps/Fabric_TraceabilitySys-1.0-SNAPSHOT/WEB-INF/classes/com/shanzj/fabric/app/java/" +
+                "peerOrganizations/org2.example.com/connection-org2.yaml";
+        CCP = "D:/JavaProject/Fabric_TraceabilitySys/src/main/resources/com/shanzj/fabric/app/java/" +
+                "peerOrganizations/org2.example.com/connection-org2.yaml";
+
+
         //Path networkConfigPath = Paths.get("..", "..", "test-network", "organizations", "peerOrganizations", "org1.example.com", "connection-org1.yaml");
         Path networkConfigPath = Paths.get(CCP);
 
@@ -38,8 +57,6 @@ public class ClientApp {
             log.info("执行到了查询区块了----");
             result = contract.evaluateTransaction(s1,s2);
             sr = new String(result);
-            System.out.println(sr);
-
 
         }
         return sr;
