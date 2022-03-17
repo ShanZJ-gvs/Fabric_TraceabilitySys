@@ -6,15 +6,19 @@ import java.util.Date;
 
 @Data
 public class TeaPick {
-    private String teaTreeId;
+    // 采茶师编号
+    private String teaPickPerId;
 
-    private String teaPickId;
-
-    private String teaPickPerid;
-
+    // 采摘时间
     private Date teaPickTime;
 
-    private String teaPickQuality;
+    // 茶叶批编号
+    private String teaPickId;
 
+    // 所属茶树编号
+    private String teaTreeId2;
+
+    // 鲜叶质量
+    private String teaPickQuality;
 
 }

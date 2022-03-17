@@ -6,15 +6,24 @@ import java.util.Date;
 
 @Data
 public class TeaTesting {
+    // 质检人
+    private Employee teaTestingPer;
+
+    // 质检批次Id
     private String teaTestingId;
 
-    private String teaTestingPerid;
-
-    private Date teaTestingTime;
-
+    // 质检结果
     private String teaTestingResult;
 
-    private String teaTestingSsl;
+    // 质检时间
+    private Date teaTestingTime;
+
+    // 小盒编号
+    private String teaTestingSmllBoxId;
+
+    // 大盒编号
+    private String teaTestingBigBoxId;
+
 
 
 }

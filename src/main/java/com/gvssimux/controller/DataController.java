@@ -54,7 +54,8 @@ public class DataController {
         TeaGardenServiceImpl mapper = context.getBean("TeaGardenServiceImpl", TeaGardenServiceImpl.class);
 
         // 创建 返回对象
-        TeaGarden teaGarden = new TeaGarden("3b9cbf4c3699462a9e8c9151b6fddf6d","安徽合肥","13000公顷","132-332");
+        //TeaGarden teaGarden = new TeaGarden("3b9cbf4c3699462a9e8c9151b6fddf6d","安徽合肥","13000公顷","132-332");
+        TeaGarden teaGarden = new TeaGarden();
 
         return JsonUtil.getJson(teaGarden);
     }

@@ -39,7 +39,7 @@ public class TeaArea {
     /**
      * 所属于的--茶园编号
      * */
-    private String teaGardenId;
+    private String teaGardenId2;
 
     private List<String> teaKinds;
 

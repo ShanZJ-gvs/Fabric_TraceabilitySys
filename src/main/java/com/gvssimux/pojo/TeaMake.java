@@ -6,15 +6,16 @@ import java.util.Date;
 
 @Data
 public class TeaMake {
-    private String teaMakeId;
+    // 制茶师
+    private Employee teaMakePer;
 
-    private String teaMakePerid;
-
+    // 制茶时间
     private Date teaMakeTime;
 
+    // 制茶工艺
     private String teaMakeWay;
 
-    private String teaMakeQuality;
-
+    // 茶叶批编号  与teaPickId是对应的
+    private String teaMakeId;
 
 }

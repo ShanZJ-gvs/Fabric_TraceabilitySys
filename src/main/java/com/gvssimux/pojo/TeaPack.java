@@ -6,17 +6,19 @@ import java.util.Date;
 
 @Data
 public class TeaPack {
-    private String teaPackId;
+    // 包装人
+    private Employee teaPackPer;
 
-    private String teaPackPerid;
-
+    // 包装时间
     private Date teaPackTime;
 
-    private String teaPackBigboxid;
+    // 小盒编号
+    private String teaPackSmllBoxId;
 
-    private String teaPackSmllboxid;
+    // 大盒编号
+    private String teaPackBigBoxId;
 
-    private String teaPackSsl;
-
+    // 茶叶批编号
+    private String teaPackID;
 
 }
