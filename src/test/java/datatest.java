@@ -7,7 +7,10 @@ import com.gvssimux.util.FabricUtil;
 import com.gvssimux.util.GetUUID;
 import com.gvssimux.util.JsonUtil;
 import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.hyperledger.fabric.gateway.Contract;
+import org.hyperledger.fabric.gateway.Wallet;
+import org.hyperledger.fabric.gateway.Wallets;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Log
 public class datatest {
@@ -46,19 +51,39 @@ public class datatest {
         log.info("controller执行完毕");
         System.out.println(s);
     }
+
     @Test
     public void  teagarden03() throws Exception {
-        log.info("controller开始执行");
-        FabricUtil fabricUtil = new FabricUtil();
-        Contract contract = fabricUtil.createContract();
-
-
+        Path walletPath = Paths.get("D:\\JavaProject\\Fabric_TraceabilitySys\\src\\main\\java\\com\\gvssimux\\wallet");
+        String CCP = "D:/JavaProject/Fabric_TraceabilitySys/src/main/resources/com/shanzj/fabric/app/java/" +
+                "peerOrganizations/org1.example.com/connection-org1.yaml";
+        Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
         byte[] result;
         log.info("执行到了查询区块了----");
-        result = contract.evaluateTransaction("getTeaArea","茶区");
-        String s = new String(result);
-        log.info("controller执行完毕");
-        System.out.println(s);
+
+
+        //System.out.println(new String(result = contract.evaluateTransaction("createTeaArea2", "a4","安徽1")));
+        System.out.println(new String(contract.evaluateTransaction("getTeaArea", "a1")));
+        System.out.println(new String(contract.evaluateTransaction("getTeaArea", "a2")));
+        System.out.println(new String(contract.evaluateTransaction("getTeaArea", "a3")));
+        //System.out.println(new String(contract.evaluateTransaction("getTeaArea", "a4")));
+    }
+    @Test
+    public void  teagarden04() throws Exception {
+        String  CCP = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com" +
+                "/connection-org1.yaml";
+        Path walletPath = Paths.get("wallet");
+
+        Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
+        byte[] result;
+        log.info("执行到了查询区块了----");
+
+
+        //System.out.println(new String(result = contract.evaluateTransaction("createTeaArea2", "a4","安徽1")));
+        System.out.println(new String(contract.evaluateTransaction("getTeaArea", "a1")));
+        System.out.println(new String(contract.evaluateTransaction("getTeaArea", "a2")));
+        System.out.println(new String(contract.evaluateTransaction("getTeaArea", "a3")));
+        System.out.println(new String(contract.evaluateTransaction("getTeaArea", "a4")));
     }
 
 

@@ -9,13 +9,13 @@
 #   the value of each element is as follows:
 #   1) command line argument
 #      Examples:
-#      a) --url https://192.168.31.119:7054
+#      a) --url https://192.168.0.119:7054
 #         To set the fabric-ca server url
 #      b) --tls.client.certfile certfile.pem
 #         To set the client certificate for TLS
 #   2) environment variable
 #      Examples:
-#      a) FABRIC_CA_CLIENT_URL=https://192.168.31.119:7054
+#      a) FABRIC_CA_CLIENT_URL=https://192.168.0.119:7054
 #         To set the fabric-ca server url
 #      b) FABRIC_CA_CLIENT_TLS_CLIENT_CERTFILE=certfile.pem
 #         To set the client certificate for TLS
@@ -39,8 +39,8 @@
 # Client Configuration
 #############################################################################
 
-# URL of the Fabric-ca-server (default: http://192.168.31.119:7054)
-url: https://192.168.31.119:7054
+# URL of the Fabric-ca-server (default: http://192.168.0.119:7054)
+url: https://192.168.0.119:7054
 
 # Membership Service Provider (MSP) directory
 # This is useful when the client is used to enroll a peer or orderer, so

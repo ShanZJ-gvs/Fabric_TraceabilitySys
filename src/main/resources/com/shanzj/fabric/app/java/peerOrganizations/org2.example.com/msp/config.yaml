@@ -1,14 +1,14 @@
 NodeOUs:
   Enable: true
   ClientOUIdentifier:
-    Certificate: cacerts/192.168.31.119-8054-ca-org2.pem
+    Certificate: cacerts/192.168.0.119-8054-ca-org2.pem
     OrganizationalUnitIdentifier: client
   PeerOUIdentifier:
-    Certificate: cacerts/192.168.31.119-8054-ca-org2.pem
+    Certificate: cacerts/192.168.0.119-8054-ca-org2.pem
     OrganizationalUnitIdentifier: peer
   AdminOUIdentifier:
-    Certificate: cacerts/192.168.31.119-8054-ca-org2.pem
+    Certificate: cacerts/192.168.0.119-8054-ca-org2.pem
     OrganizationalUnitIdentifier: admin
   OrdererOUIdentifier:
-    Certificate: cacerts/192.168.31.119-8054-ca-org2.pem
+    Certificate: cacerts/192.168.0.119-8054-ca-org2.pem
     OrganizationalUnitIdentifier: orderer

@@ -30,13 +30,13 @@ public class RegisterUser {
                 "peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem";*/
 
         String certificatePath = "D:/JavaProject/fabric-tea-app-java-demo/src/main/resources/" +
-                "ca.org2.example.com-cert.pem";
+                "ca.org1.example.com-cert.pem";
 
         props.put("pemFile",
                 certificatePath);
         props.put("allowAllHostNames", "true");
         // 创建实例
-        HFCAClient caClient = HFCAClient.createNewInstance("https://192.168.31.119:8054", props);
+        HFCAClient caClient = HFCAClient.createNewInstance("https://192.168.0.119:8054", props);
         CryptoSuite cryptoSuite = CryptoSuiteFactory.getDefault().getCryptoSuite();
         caClient.setCryptoSuite(cryptoSuite);
 
@@ -73,7 +73,7 @@ public class RegisterUser {
 
             @Override
             public String getAffiliation() {
-                return "org2.department1";
+                return "org1.department1";
             }
 
             @Override
@@ -94,7 +94,7 @@ public class RegisterUser {
 
             @Override
             public String getMspId() {
-                return "Org2MSP";
+                return "Org1MSP";
             }
 
         };
@@ -102,11 +102,11 @@ public class RegisterUser {
         // Register the user, enroll the user, and import the new identity into the wallet.
         // 注册用户，注册用户，并将新身份导入钱包。
         RegistrationRequest registrationRequest = new RegistrationRequest("appUser");
-        registrationRequest.setAffiliation("org2.department1");
+        registrationRequest.setAffiliation("org1.department1");
         registrationRequest.setEnrollmentID("appUser");
         String enrollmentSecret = caClient.register(registrationRequest, admin);
         Enrollment enrollment = caClient.enroll("appUser", enrollmentSecret);
-        Identity user = Identities.newX509Identity("Org2MSP", enrollment);
+        Identity user = Identities.newX509Identity("Org1MSP", enrollment);
         wallet.put("appUser", user);
         System.out.println("Successfully enrolled user \"appUser\" and imported it into the wallet");
     }
@@ -119,13 +119,13 @@ public class RegisterUser {
                 "peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem";*/
 
         String certificatePath = "D:/JavaProject/fabric-tea-app-java-demo/src/main/resources/" +
-                "ca.org2.example.com-cert.pem";
+                "ca.org1.example.com-cert.pem";
 
         props.put("pemFile",
                 certificatePath);
         props.put("allowAllHostNames", "true");
         // 创建实例
-        HFCAClient caClient = HFCAClient.createNewInstance("https://192.168.31.119:8054", props);
+        HFCAClient caClient = HFCAClient.createNewInstance("https://192.168.0.119:8054", props);
         CryptoSuite cryptoSuite = CryptoSuiteFactory.getDefault().getCryptoSuite();
         caClient.setCryptoSuite(cryptoSuite);
 
@@ -162,7 +162,7 @@ public class RegisterUser {
 
             @Override
             public String getAffiliation() {
-                return "org2.department1";
+                return "org1.department1";
             }
 
             @Override
@@ -183,7 +183,7 @@ public class RegisterUser {
 
             @Override
             public String getMspId() {
-                return "Org2MSP";
+                return "Org1MSP";
             }
 
         };
@@ -191,11 +191,11 @@ public class RegisterUser {
         // Register the user, enroll the user, and import the new identity into the wallet.
         // 注册用户，注册用户，并将新身份导入钱包。
         RegistrationRequest registrationRequest = new RegistrationRequest("appUser");
-        registrationRequest.setAffiliation("org2.department1");
+        registrationRequest.setAffiliation("org1.department1");
         registrationRequest.setEnrollmentID("appUser");
         String enrollmentSecret = caClient.register(registrationRequest, admin);
         Enrollment enrollment = caClient.enroll("appUser", enrollmentSecret);
-        Identity user = Identities.newX509Identity("Org2MSP", enrollment);
+        Identity user = Identities.newX509Identity("Org1MSP", enrollment);
         wallet.put("appUser", user);
         System.out.println("Successfully enrolled user \"appUser\" and imported it into the wallet");
     }

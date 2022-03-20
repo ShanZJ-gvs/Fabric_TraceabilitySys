@@ -29,13 +29,13 @@ public class ClientApp {
         Wallet wallet = Wallets.newFileSystemWallet(walletPath);
         // load a CCP
         String CCP = "D:/JavaProject/Fabric_TraceabilitySys/src/main/resources/com/shanzj/fabric/app/java/" +
-                "peerOrganizations/org2.example.com/connection-org2.yaml";
+                "peerOrganizations/org1.example.com/connection-org1.yaml";
 
 
         CCP = "/usr/local/tomcat/webapps/Fabric_TraceabilitySys-1.0-SNAPSHOT/WEB-INF/classes/com/shanzj/fabric/app/java/" +
-                "peerOrganizations/org2.example.com/connection-org2.yaml";
+                "peerOrganizations/org1.example.com/connection-org1.yaml";
         CCP = "D:/JavaProject/Fabric_TraceabilitySys/src/main/resources/com/shanzj/fabric/app/java/" +
-                "peerOrganizations/org2.example.com/connection-org2.yaml";
+                "peerOrganizations/org1.example.com/connection-org1.yaml";
 
 
         //Path networkConfigPath = Paths.get("..", "..", "test-network", "organizations", "peerOrganizations", "org1.example.com", "connection-org1.yaml");
@@ -66,10 +66,13 @@ public class ClientApp {
     public static void main(String[] args) throws Exception {
         // Load a file system based wallet for managing identities.
         Path walletPath = Paths.get("wallet");
+        walletPath = Paths.get("D:\\JavaProject\\Fabric_TraceabilitySys\\src\\main\\java\\com\\gvssimux\\wallet");
         Wallet wallet = Wallets.newFileSystemWallet(walletPath);
         // load a CCP
         String CCP = "D:/JavaProject/fabric-tea-app-java-demo/src/main/resources/com/shanzj/fabric/app/java/" +
-                "peerOrganizations/org2.example.com/connection-org2.yaml";
+                "peerOrganizations/org1.example.com/connection-org1.yaml";
+        CCP = "D:/JavaProject/Fabric_TraceabilitySys/src/main/resources/com/shanzj/fabric/app/java/" +
+                "peerOrganizations/org1.example.com/connection-org1.yaml";
         //Path networkConfigPath = Paths.get("..", "..", "test-network", "organizations", "peerOrganizations", "org1.example.com", "connection-org1.yaml");
         Path networkConfigPath = Paths.get(CCP);
 

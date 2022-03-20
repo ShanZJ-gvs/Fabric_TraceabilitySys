@@ -30,13 +30,13 @@ public class gateway {
         /*String certificatePath = "D:/JavaProject/fabric-tea-app-java-demo/src/main/resources/com/shanzj/fabric/app/java/" +
                 "peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem";*/
 
-        String certificatePath = "D:/JavaProject/fabric-tea-app-java-demo/src/main/resources/" +
-                "ca.org2.example.com-cert.pem";
+        String certificatePath = "D:/JavaProject/fabric-tea-app-java-demo/src/main/resources/com/shanzj/fabric/app/java/" +
+                "peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem";
 
         props.put("pemFile",
                 certificatePath);
         props.put("allowAllHostNames", "true");
-        HFCAClient caClient = HFCAClient.createNewInstance("https://192.168.31.119:8054", props);
+        HFCAClient caClient = HFCAClient.createNewInstance("https://192.168.0.119:8054", props);
         CryptoSuite cryptoSuite = CryptoSuiteFactory.getDefault().getCryptoSuite();
         caClient.setCryptoSuite(cryptoSuite);
 
@@ -54,7 +54,7 @@ public class gateway {
         // Enroll the admin user, and import the new identity into the wallet.
         // 注册管理用户，并将新身份导入钱包。
         final EnrollmentRequest enrollmentRequestTLS = new EnrollmentRequest();
-        enrollmentRequestTLS.addHost("192.168.31.119");
+        enrollmentRequestTLS.addHost("192.168.0.119");
         enrollmentRequestTLS.setProfile("tls");
         Enrollment enrollment = caClient.enroll("admin", "adminpw", enrollmentRequestTLS);
         Identity user = Identities.newX509Identity("Org1MSP", enrollment);
@@ -69,13 +69,13 @@ public class gateway {
         /*String certificatePath = "D:/JavaProject/fabric-tea-app-java-demo/src/main/resources/com/shanzj/fabric/app/java/" +
                 "peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem";*/
 
-        String certificatePath = "D:/JavaProject/fabric-tea-app-java-demo/src/main/resources/" +
-                "ca.org2.example.com-cert.pem";
+        String certificatePath = "D:/JavaProject/fabric-tea-app-java-demo/src/main/resources/com/shanzj/fabric/app/java/" +
+                "peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem";
 
         props.put("pemFile",
                 certificatePath);
         props.put("allowAllHostNames", "true");
-        HFCAClient caClient = HFCAClient.createNewInstance("https://192.168.31.119:8054", props);
+        HFCAClient caClient = HFCAClient.createNewInstance("https://192.168.0.119:8054", props);
         CryptoSuite cryptoSuite = CryptoSuiteFactory.getDefault().getCryptoSuite();
         caClient.setCryptoSuite(cryptoSuite);
 
@@ -93,7 +93,7 @@ public class gateway {
         // Enroll the admin user, and import the new identity into the wallet.
         // 注册管理用户，并将新身份导入钱包。
         final EnrollmentRequest enrollmentRequestTLS = new EnrollmentRequest();
-        enrollmentRequestTLS.addHost("192.168.31.119");
+        enrollmentRequestTLS.addHost("192.168.0.119");
         enrollmentRequestTLS.setProfile("tls");
         Enrollment enrollment = caClient.enroll("admin", "adminpw", enrollmentRequestTLS);
         Identity user = Identities.newX509Identity("Org1MSP", enrollment);
