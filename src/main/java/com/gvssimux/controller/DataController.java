@@ -1,20 +1,15 @@
 package com.gvssimux.controller;
 
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.gvssimux.fabric.ClientApp;
-import com.gvssimux.pojo.TeaArea;
 import com.gvssimux.pojo.TeaGarden;
 import com.gvssimux.service.TeaGardenServiceImpl;
 import com.gvssimux.util.JsonUtil;
-import com.sun.org.apache.regexp.internal.RE;
 import lombok.extern.java.Log;
-import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;

@@ -105,12 +105,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>5.2.7.RELEASE</version>
+            <version>5.3.16</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>5.2.7.RELEASE</version>
+            <version>5.3.16</version>
         </dependency>
         <!--aspectjweaver -->
         <dependency>

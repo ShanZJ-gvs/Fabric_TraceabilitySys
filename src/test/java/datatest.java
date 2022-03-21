@@ -65,7 +65,7 @@ public class datatest {
         //System.out.println(new String(result = contract.evaluateTransaction("createTeaArea2", "a4","安徽1")));
         System.out.println(new String(contract.evaluateTransaction("getTeaArea", "a1")));
         System.out.println(new String(contract.evaluateTransaction("getTeaArea", "a2")));
-        System.out.println(new String(contract.evaluateTransaction("getTeaArea", "a3")));
+
         //System.out.println(new String(contract.evaluateTransaction("getTeaArea", "a4")));
     }
     @Test
@@ -79,11 +79,25 @@ public class datatest {
         log.info("执行到了查询区块了----");
 
 
-        //System.out.println(new String(result = contract.evaluateTransaction("createTeaArea2", "a4","安徽1")));
-        System.out.println(new String(contract.evaluateTransaction("getTeaArea", "a1")));
-        System.out.println(new String(contract.evaluateTransaction("getTeaArea", "a2")));
-        System.out.println(new String(contract.evaluateTransaction("getTeaArea", "a3")));
-        System.out.println(new String(contract.evaluateTransaction("getTeaArea", "a4")));
+
+        contract.submitTransaction("createOneTeaArea","TeaArea1",
+                "001","埃塞俄比亚","321-231","6000公顷","null","null");
+        contract.submitTransaction("createOneTeaGarden","TeaGarden1",
+                "garden001","埃塞俄比亚-1号茶园","231-231","1000公顷","null","null");
+        contract.submitTransaction("createOneTeaTree","TeaTree1",
+                "tree1","黄山","231-231","180","毛峰","良好","良好","潮湿","area1","garden1");
+        contract.submitTransaction("createOneTeaPick","TeaPick1",
+                "工号001","张三","男","2022年3月21日","000003","TeaTree1","鲜叶良好");
+        System.out.println(new String(contract.evaluateTransaction("getTeaArea", "茶区")));
+        System.out.println(new String(contract.evaluateTransaction("getTeaGarden", "茶园")));
+        System.out.println(new String(contract.evaluateTransaction("getTeaTree", "茶树")));
+        System.out.println(new String(contract.evaluateTransaction("getTeaPick", "采摘")));
+
+        System.out.println(new String(contract.evaluateTransaction("getTeaArea", "TeaArea1")));
+        System.out.println(new String(contract.evaluateTransaction("getTeaGarden", "TeaGarden1")));
+        System.out.println(new String(contract.evaluateTransaction("getTeaTree", "TeaTree1")));
+        System.out.println(new String(contract.evaluateTransaction("getTeaPick", "TeaPick1")));
+
     }
 
 

@@ -6,8 +6,8 @@ import java.util.Date;
 
 @Data
 public class TeaPick {
-    // 采茶师编号
-    private String teaPickPerId;
+    // 采茶师
+    private Employee teaPickPer;
 
     // 采摘时间
     private Date teaPickTime;
