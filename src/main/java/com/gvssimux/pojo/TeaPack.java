@@ -10,7 +10,7 @@ public class TeaPack {
     private Employee teaPackPer;
 
     // 包装时间
-    private Date teaPackTime;
+    private String teaPackTime;
 
     // 小盒编号
     private String teaPackSmllBoxId;

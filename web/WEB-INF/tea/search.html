@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
    <title>消费者查询 </title> 
-  
 
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
@@ -106,8 +105,9 @@
 
         </div>
     </aside>
+
     <!-- Workspace  -->
-    <main class="workspace overflow-hidden">
+    <main class="workspace overflow-hidden" id="root">
 
         <!-- Breadcrumb -->
         <section class="breadcrumb lg:flex items-start">
@@ -167,10 +167,10 @@
                                 </label>
                             </td>
                             <td>574e1bd4c24fb7b7b017c55bf97d16377f991d19e2c8d582f2b600876e01c9c0</td>
-                            <td class="text-center">101</td>
-                            <td class="text-center">合格</td>
+                            <td class="text-center">{{TeaArea.teaAreaId1}}</td>
+                            <td class="text-center">{{TeaTree.teaTreeCultivate}}</td>
                             <td class="text-center">
-                                <div class="badge badge_outlined badge_secondary uppercase">湿润</div>
+                                <div class="badge badge_outlined badge_secondary uppercase">{{TeaTree.teaTreeGrowingEnv}}</div>
                             </td>
                             <td class="text-right whitespace-no-wrap">
                                
@@ -217,12 +217,10 @@
                                 </label>
                             </td>
                             <td>574e1bd4c24fb7b7b017c55bf97d16377f991d19e2c8d582f2b600876e01c9c0</td>
-                            <td class="text-center">096</td>
-                            <td class="text-center">2021/04/26</td>
-                            <td class="text-center">
-                                C2
-                            </td>
-                            <td class="text-center">合格</td>
+                            <td class="text-center">{{TeaPick.teaPickPer.eid}}</td>
+                            <td class="text-center">{{TeaPick.teaPickTime}}</td>
+                            <td class="text-center">{{TeaPick.teaPickId}}</td>
+                            <td class="text-center">{{TeaPick.teaPickQuality}}</td>
                             <td class="text-right whitespace-no-wrap">
                                
                             </td>
@@ -260,20 +258,15 @@
                         <tr>
                             
                             
-                            <td >8954</td>
-                            <td>2021/04/27</td>
-                            <td class="text-center">炒制</td>
-                            <td class="text-center">C2</td>
-                            <td class="text-center">
-                                优
-                            </td>
-                            <td class="text-center">c8954154</td>
-                            
-                            <td class="text-center">合格</td>   
+                            <td>{{TeaMake.teaMakePer.eid}}</td>
+                            <td>{{TeaMake.teaMakeTime}}</td>
+                            <td class="text-center">{{TeaMake.teaMakeWay}}</td>
+                            <td class="text-center">{{TeaMake.teaMakeId}}</td>
+                            <td class="text-center">{{TeaPick.teaPickQuality}}</td>
+                            <td class="text-center">{{TeaPick.teaPickId}}</td>
+                            <td class="text-center">{{TeaPick.teaPickQuality}}</td>
                         </tr>
-                        
-                        
-                        
+
                     </tbody>
                 </table>
             </div>
@@ -300,14 +293,12 @@
                     </thead>
                     <tbody>
                         <tr>
-                            
-                            
-                            <td >68459</td>
-                            <td>2021/04/30</td>
+                            <td >{{TeaRank.teaRankPer.eid}}</td>
+                            <td>{{TeaRank.teaRankTime}}</td>
                 
-                            <td class="text-center">c8954154</td>
+                            <td class="text-center">{{TeaRank.teaRankId}}</td>
                             
-                            <td class="text-center">优</td>   
+                            <td class="text-center">{{TeaRank.teaRankRank}}</td>
                         </tr>
                         
                         
@@ -340,19 +331,18 @@
                         <tr>
                             
                             
-                            <td >85475</td>
-                            <td>2021/05/01</td>
+                            <td >{{TeaPack.teaPackPer.eid}}</td>
+                            <td>{{TeaPack.teaPackTime}}</td>
                 
-                            <td>5454</td>
+                            <td>{{TeaPack.teaPackSmllBoxId}}</td>
                             
-                            <td class="text-center">c82dssd85</td> 
-                            <td class="text-center">c8954154</td>   
-                            <td >&nbsp;&nbsp;&nbsp;优</td>   
-                            <td >9568</td>     
+                            <td class="text-center">c82dssd85：未改</td>
+                            <td class="text-center">c8954154：未改</td>
+                            <td >&nbsp;&nbsp;&nbsp;优：未改</td>
+                            <td >{{TeaPack.teaPackBigBoxId}}</td>
                             
                         </tr>
-                        
-                        
+
                         
                     </tbody>
                 </table>
@@ -385,14 +375,14 @@
                         <tr>
                             
                             
-                            <td >85694</td>
-                            <td>5642</td>
+                            <td >{{TeaTesting.teaTestingId}}</td>
+                            <td>{TeaTesting}</td>
                 
-                            <td>2021/05/04</td>
+                            <td>{{TeaTesting.teaTestingTime}}</td>
                             
-                            <td class="text-center">9568</td> 
-                            <td class="text-center">5454</td>   
-                            <td >&nbsp;&nbsp;&nbsp;合格</td>   
+                            <td class="text-center">{{TeaTesting.teaTestingBigBoxId}}</td>
+                            <td class="text-center">{{TeaTesting.teaTestingSmllBoxId}}</td>
+                            <td >&nbsp;&nbsp;&nbsp;{{TeaTesting.teaTestingResult}}</td>
                              
                             
                         </tr>
@@ -560,9 +550,183 @@
 
     </main>
 
+
     <!-- Scripts -->
     <script src="assets/js/vendor.js"></script>
     <script src="assets/js/script.js"></script>
+    <!-- vue -->
+    <script src="assets/js/vue.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        const vm = new Vue({
+            el: '#root',
+            data:{
+                TeaArea:{
+                    "teaAreaLongitude": "",
+                    "teaAreaArea": "",
+                    "teaGardenId2": "",
+                    "teaAreaId2": "",
+                    "teaAreaId1": "",
+                    "teaAreaAddress": ""
+                },
+                TeaGarden:{
+                    teaGardenId1:"",
+                    teaGardenAddress:"",
+                    "teaGardenArea":"",
+                    "teaGardenLongitude":"",
+                    teaGardenId1:"",
+                    "teaGardenId2": ""
+                },
+                TeaTree:{
+                    "teaTreeAddress": "",
+                    "teaTreeLongitude": "",
+                    "teaGardenId2": "",
+                    "teaTreeCultivate": "",
+                    "teaAreaId2": "",
+                    "teaTreeId": "",
+                    "teaTreeHeight": 0,
+                    "teaTreeKind": "",
+                    "teaTreeState": "",
+                    "teaTreeGrowingEnv": ""
+                },
+                TeaPick:{
+                    "teaPickPer": {
+                        "eid": "",
+                        "ename": "",
+                        "esex": ""
+                    },
+                    "teaTreeId2": "",
+                    "teaPickId": "",
+                    "teaPickQuality": "",
+                    "teaPickTime": ""
+                },
+                TeaMake:{
+                    "teaMakeId": "",
+                    "teaMakeWay": "",
+                    "teaMakeTime": ":38:36",
+                    "teaMakePer": {
+                        "eid": "",
+                        "ename": "",
+                        "esex": ""
+                    }
+                },
+                TeaRank:{
+                    "teaRankId": "",
+                    "teaRankRank": "",
+                    "teaRankPer": {
+                        "eid": "",
+                        "ename": "",
+                        "esex": ""
+                    },
+                    "teaRankTime": ""
+                },
+                TeaPack:{
+                    "teaPackTime": ":48:46",
+                    "teaPackSmllBoxId": "",
+                    "teaPackPer": {
+                        "eid": "",
+                        "ename": "",
+                        "esex": ""
+                    },
+                    "teaPackID": "",
+                    "teaPackBigBoxId": ""
+                },
+                TeaTesting:{
+                    "teaTestingId": "",
+                    "teaTestingSmllBoxId": "",
+                    "teaTestingTime": "",
+                    "teaTestingBigBoxId": "",
+                    "teaTestingResult": ""
+                }
+            },
+            mounted () {
+                axios
+                    .get('/Fabric_TraceabilitySys_war_exploded/teaarea')
+                    .then((response) =>{ // 这里如果不用箭头函数的话，this指的Windows
+                        console.log("response.data：",response.data.teaAreaId1);
+                        console.log("response",response);
+                        console.log("json:",JSON.parse(JSON.stringify(response.data)));
+                        console.log(this);
+                        /**
+                         * 把response的.data先转成字符串，再把字符串转为json格式
+                         * JSON.parse() 方法将数据转换为 JavaScript 对象。
+                         * */
+                        this.TeaArea = JSON.parse(JSON.stringify(response.data));
+
+                    }, function (error) {
+                        console.log(error);
+                    });
+                axios
+                    .get('/Fabric_TraceabilitySys_war_exploded/teagarden')
+                    .then((response) =>{ // 这里如果不用箭头函数的话，this指的Windows
+                        console.log("response.data：",response.data.teaGardenId);
+                        console.log("response",response);
+                        console.log("json:",JSON.parse(JSON.stringify(response.data)));
+                        console.log(this);
+                        /**
+                         * 把response的.data先转成字符串，再把字符串转为json格式
+                         * JSON.parse() 方法将数据转换为 JavaScript 对象。
+                         * */
+                        this.TeaGarden = JSON.parse(JSON.stringify(response.data));
+
+                    }, function (error) {
+                        console.log(error);
+                    });
+                axios
+                    .get('/Fabric_TraceabilitySys_war_exploded/teatree')
+                    .then((response) =>{ // 这里如果不用箭头函数的话，this指的Windows
+                        this.TeaTree = JSON.parse(JSON.stringify(response.data));
+
+                    }, function (error) {
+                        console.log(error);
+                    });
+                axios
+                    .get('/Fabric_TraceabilitySys_war_exploded/teapick')
+                    .then((response) =>{ // 这里如果不用箭头函数的话，this指的Windows
+                        this.TeaPick = JSON.parse(JSON.stringify(response.data));
+                    }, function (error) {
+                        console.log(error);
+                    });
+                axios
+                    .get('/Fabric_TraceabilitySys_war_exploded/teamake')
+                    .then((response) =>{ // 这里如果不用箭头函数的话，this指的Windows
+                        this.TeaMake = JSON.parse(JSON.stringify(response.data));
+                    }, function (error) {
+                        console.log(error);
+                    });
+                axios
+                    .get('/Fabric_TraceabilitySys_war_exploded/tearank')
+                    .then((response) =>{ // 这里如果不用箭头函数的话，this指的Windows
+                        this.TeaRank = JSON.parse(JSON.stringify(response.data));
+                    }, function (error) {
+                        console.log(error);
+                    });
+                axios
+                    .get('/Fabric_TraceabilitySys_war_exploded/teapack')
+                    .then((response) =>{ // 这里如果不用箭头函数的话，this指的Windows
+                        this.TeaPack = JSON.parse(JSON.stringify(response.data));
+                    }, function (error) {
+                        console.log(error);
+                    });
+                axios
+                    .get('/Fabric_TraceabilitySys_war_exploded/teatesting')
+                    .then((response) =>{ // 这里如果不用箭头函数的话，this指的Windows
+                        this.TeaTesting = JSON.parse(JSON.stringify(response.data));
+                    }, function (error) {
+                        console.log(error);
+                    });
+            },
+            methods:{
+                showInfo(){
+                    console.log("showInfo函数被执行")
+                    alert(11111)
+                }
+            }
+        })
+
+    </script>
 
 </body>
 

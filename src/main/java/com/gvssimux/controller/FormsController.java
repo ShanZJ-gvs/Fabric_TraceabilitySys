@@ -1,10 +1,16 @@
 package com.gvssimux.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.gvssimux.pojo.*;
 import com.gvssimux.service.TeaAreaServiceImpl;
 import com.gvssimux.service.TeaGardenServiceImpl;
+import com.gvssimux.util.FabricUtil;
 import com.gvssimux.util.JsonUtil;
+import lombok.extern.java.Log;
+import org.hyperledger.fabric.gateway.Contract;
+import org.hyperledger.fabric.gateway.ContractException;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -17,8 +23,12 @@ import javax.json.Json;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.nio.channels.Pipe;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.concurrent.TimeoutException;
 
 
+@Log
 @Controller
 public class FormsController {
 
@@ -29,7 +39,7 @@ public class FormsController {
      */
     @ResponseBody
     @PostMapping("/teaarea")
-    public String setteaarea(HttpServletRequest request, HttpServletResponse response)throws JsonProcessingException {
+    public String setteaarea(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaAreaServiceImpl mapper = context.getBean("TeaAreaServiceImpl", TeaAreaServiceImpl.class);
 
@@ -45,11 +55,27 @@ public class FormsController {
         pojo.setTeaGardenId2(request.getParameter("tea_garden_id2"));
         request.getParameter("key");
 
-        // mysql 部分插入
-        int i = 1;//mapper.insertSelective(teaArea);
-        System.out.println("------------------------------");
+        /*往区块中加数据*/
+        String  CCP = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com" +
+                "/connection-org1.yaml";
+        Path walletPath = Paths.get("/usr/software/Fabric_TraceabilitySys/wallet");
 
-        return JsonUtil.getJson(pojo);
+        Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
+        byte[] result;
+        log.info("===>开始提交区块链交易===>");
+        log.info("key===> "+request.getParameter("key"));
+
+        byte[] bytes = contract.submitTransaction("createOneTeaArea", request.getParameter("key"),
+                request.getParameter("tea_area_id1"),
+                request.getParameter("tea_area_address"), request.getParameter("tea_area_longitude"),
+                request.getParameter("tea_area_area"),request.getParameter("tea_area_id2"),
+                request.getParameter("tea_garden_id2"));
+
+        String s = new String(bytes);
+        if (bytes!=null){
+            log.info("===>交易提交成功===>");
+        }
+        return s;
     }
 
 
@@ -60,7 +86,7 @@ public class FormsController {
      */
     @ResponseBody
     @PostMapping("/teagarden")
-    public String teagarden(HttpServletRequest request, HttpServletResponse response)throws JsonProcessingException {
+    public String teagarden(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaGardenServiceImpl mapper = context.getBean("TeaGardenServiceImpl", TeaGardenServiceImpl.class);
 
@@ -75,7 +101,27 @@ public class FormsController {
         pojo.setTeaGardenId2(request.getParameter("tea_garden_id2"));
         request.getParameter("key");
 
-        return JsonUtil.getJson(pojo);
+
+        /*往区块中加数据*/
+        String  CCP = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com" +
+                "/connection-org1.yaml";
+        Path walletPath = Paths.get("/usr/software/Fabric_TraceabilitySys/wallet");
+
+        Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
+        log.info("===>开始提交区块链交易===>");
+
+        byte[] bytes = contract.submitTransaction("createOneTeaGarden",request.getParameter("key"),
+                request.getParameter("tea_garden_id1"),request.getParameter("tea_garden_address"),
+                request.getParameter("tea_garden_area"),request.getParameter("tea_garden_longitude"),
+                request.getParameter("tea_area_id2"),request.getParameter("tea_garden_id2"));
+
+        String s = new String(bytes);
+
+        if (bytes!=null){
+            log.info("===>交易提交成功===>");
+        }
+
+        return s;
     }
 
 
@@ -86,7 +132,7 @@ public class FormsController {
      */
     @ResponseBody
     @PostMapping("/teatree")
-    public String teatree(HttpServletRequest request,HttpServletResponse response) throws JsonProcessingException {
+    public String teatree(HttpServletRequest request,HttpServletResponse response) throws Exception {
         TeaTree pojo = new TeaTree();
         pojo.setTeaTreeId(request.getParameter("tea_tree_id"));
         pojo.setTeaTreeAddress(request.getParameter("tea_tree_address"));
@@ -101,7 +147,27 @@ public class FormsController {
 
         request.getParameter("key");
 
-        return JsonUtil.getJson(pojo);
+        /*往区块中加数据*/
+        String  CCP = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com" +
+                "/connection-org1.yaml";
+        Path walletPath = Paths.get("/usr/software/Fabric_TraceabilitySys/wallet");
+
+        Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
+        log.info("===>开始提交区块链交易===>");
+
+        byte[] bytes = contract.submitTransaction("createOneTeaTree",request.getParameter("key"),
+                request.getParameter("tea_tree_id"),request.getParameter("tea_tree_address"),request.getParameter("tea_tree_longitude"),
+                request.getParameter("tea_tree_height"),request.getParameter("tea_tree_kind"),request.getParameter("tea_tree_state"),
+                request.getParameter("tea_tree_cultivate"),request.getParameter("tea_tree_Growing_Env"),
+                request.getParameter("tea_area_id2"),request.getParameter("tea_garden_id2"));
+
+        String s = new String(bytes);
+
+        if (bytes!=null){
+            log.info("===>交易提交成功===>");
+        }
+
+        return s;
     }
 
 
@@ -112,7 +178,7 @@ public class FormsController {
      * */
     @ResponseBody
     @PostMapping("teapick")
-    public String teapick(HttpServletRequest request,HttpServletResponse response) throws JsonProcessingException {
+    public String teapick(HttpServletRequest request,HttpServletResponse response) throws Exception {
 
         /**
          * 给采摘实体添加数据
@@ -121,13 +187,14 @@ public class FormsController {
          *  pojo.setTeaPickTime(request.getParameter("tea_pick_time"));
          * */
         TeaPick pojo = new TeaPick();
+        pojo.setTeaPickTime(request.getParameter("tea_pick_time"));
         pojo.setTeaPickId(request.getParameter("tea_pick_id"));// 用teaPickId充当茶叶批id，因为一批茶叶的是同时采摘的
         pojo.setTeaTreeId2(request.getParameter("tea_tree_id2"));
         pojo.setTeaPickQuality(request.getParameter("tea_pick_quality"));
 
+
         /**
          * 给采摘师添加数据
-         *
          *
          * */
         Employee employee = new Employee();// 采摘师
@@ -135,10 +202,28 @@ public class FormsController {
         employee.setEname(request.getParameter("tea_pick_per_name"));// 采摘师姓名
         employee.setEsex(request.getParameter("tea_pick_per_sex"));// 采摘师性别
 
-
         request.getParameter("key");
 
-        return JsonUtil.getJson(pojo);// 返回字符串
+        /*往区块中加数据*/
+        String  CCP = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com" +
+                "/connection-org1.yaml";
+        Path walletPath = Paths.get("/usr/software/Fabric_TraceabilitySys/wallet");
+
+        Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
+        log.info("===>开始提交区块链交易===>");
+
+        byte[] bytes = contract.submitTransaction("createOneTeaPick",request.getParameter("key"),
+                request.getParameter("tea_pick_per_id"),request.getParameter("tea_pick_per_name"),request.getParameter("tea_pick_per_sex"),
+                request.getParameter("tea_pick_time"),request.getParameter("tea_pick_id"),request.getParameter("tea_tree_id2"),
+                request.getParameter("tea_pick_quality"));
+
+        String s = new String(bytes);
+
+        if (bytes!=null){
+            log.info("===>交易提交成功===>");
+        }
+
+        return s;// 返回字符串
     }
 
 
@@ -148,7 +233,7 @@ public class FormsController {
      * */
     @ResponseBody
     @PostMapping("/teamake")
-    public String teamake(HttpServletRequest request,HttpServletResponse response) throws JsonProcessingException {
+    public String teamake(HttpServletRequest request,HttpServletResponse response) throws Exception {
         /**
          * 给制茶师添加数据
          * */
@@ -166,7 +251,25 @@ public class FormsController {
         teaMake.setTeaMakeWay(request.getParameter("tea_make_way"));// 制茶方式
         teaMake.setTeaMakeId(request.getParameter("tea_make_id"));// 茶叶批编号
 
-        return JsonUtil.getJson(teaMake);
+
+        /*往区块中加数据*/
+        String  CCP = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com" +
+                "/connection-org1.yaml";
+        Path walletPath = Paths.get("/usr/software/Fabric_TraceabilitySys/wallet");
+
+        Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
+        log.info("===>开始提交区块链交易===>");
+
+        byte[] bytes = contract.submitTransaction("createOneTeaMake",request.getParameter("key"),
+                request.getParameter("tea_make_per_id"),request.getParameter("tea_make_per_name"),request.getParameter("tea_make_per_sex"),
+                request.getParameter("tea_make_time"),request.getParameter("tea_make_way"),request.getParameter("tea_make_id"));
+
+        String s = new String(bytes);
+        if (bytes!=null){
+            log.info("===>交易提交成功===>");
+        }
+
+        return s;// 返回字符串
     }
 
 
@@ -176,7 +279,7 @@ public class FormsController {
      * */
     @ResponseBody
     @PostMapping("/tearank")
-    public String  tearank(HttpServletRequest request,HttpServletResponse response) throws JsonProcessingException {
+    public String  tearank(HttpServletRequest request,HttpServletResponse response) throws Exception {
         /**
          * 定级人
          * */
@@ -195,7 +298,26 @@ public class FormsController {
         teaRank.setTeaRankRank(request.getParameter("tea_rank_rank"));// 茶叶等级
 
         request.getParameter("key");// ssl密钥
-        return JsonUtil.getJson(teaRank);
+
+        /*往区块中加数据*/
+        String  CCP = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com" +
+                "/connection-org1.yaml";
+        Path walletPath = Paths.get("/usr/software/Fabric_TraceabilitySys/wallet");
+
+        Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
+        log.info("===>开始提交区块链交易===>");
+
+        byte[] bytes = contract.submitTransaction("createOneTeaRank",request.getParameter("key"),
+                request.getParameter("tea_rank_per_id"),request.getParameter("tea_rank_per_name"),request.getParameter("tea_rank_per_sex"),
+                request.getParameter("tea_rank_time"),request.getParameter("tea_rank_id"),request.getParameter("tea_rank_rank"));
+
+        String s = new String(bytes);
+
+        if (bytes!=null){
+            log.info("===>交易提交成功===>");
+        }
+
+        return s;// 返回字符串
     }
 
 
@@ -205,7 +327,7 @@ public class FormsController {
      * */
     @ResponseBody
     @PostMapping("/teapack")
-    public String teapack(HttpServletRequest request,HttpServletResponse response) throws JsonProcessingException {
+    public String teapack(HttpServletRequest request,HttpServletResponse response) throws Exception {
         /**
          * 包装人
          * */
@@ -220,12 +342,32 @@ public class FormsController {
         TeaPack teaPack = new TeaPack();
         teaPack.setTeaPackPer(employee);// 包装人
         request.getParameter("tea_pack_time"); // 包装时间
-        teaPack.setTeaPackSmllBoxId(request.getParameter("tea_pack_smll_box_id"));// 大盒编号
         teaPack.setTeaPackBigBoxId(request.getParameter("tea_pack_big_box_id"));// 小盒编号
+        teaPack.setTeaPackSmllBoxId(request.getParameter("tea_pack_smll_box_id"));// 大盒编号
         teaPack.setTeaPackID(request.getParameter("tea_pack_id"));
 
         request.getParameter("key");// ssl密钥
-        return JsonUtil.getJson(teaPack);
+
+        /*往区块中加数据*/
+        String  CCP = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com" +
+                "/connection-org1.yaml";
+        Path walletPath = Paths.get("/usr/software/Fabric_TraceabilitySys/wallet");
+
+        Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
+        log.info("===>开始提交区块链交易===>");
+
+        byte[] bytes = contract.submitTransaction("createOneTeaPack",request.getParameter("key"),
+                request.getParameter("tea_pack_per_id"),request.getParameter("tea_pack_per_name"),request.getParameter("tea_pack_per_sex"),
+                request.getParameter("tea_pack_time"),request.getParameter("tea_pack_smll_box_id"),request.getParameter("tea_pack_big_box_id"),
+                request.getParameter("tea_pack_id"));
+
+        String s = new String(bytes);
+
+        if (bytes!=null){
+            log.info("===>交易提交成功===>");
+        }
+
+        return s;// 返回字符串
     }
 
 
@@ -235,7 +377,7 @@ public class FormsController {
      * */
     @ResponseBody
     @PostMapping("/teatesting")
-    public String teatesting(HttpServletRequest request,HttpServletResponse response) throws JsonProcessingException {
+    public String teatesting(HttpServletRequest request,HttpServletResponse response) throws Exception {
         /**
          * 质检人
          * */
@@ -249,11 +391,35 @@ public class FormsController {
          * */
         TeaTesting pojo = new TeaTesting();
         pojo.setTeaTestingPer(employee); // 质检人
+        request.getParameter("tea_testing_time");// 质检时间
         pojo.setTeaTestingId(request.getParameter("tea_testing_id"));// 质检批次id
         pojo.setTeaTestingResult(request.getParameter("tea_testing_result"));// 质检结果
-        request.getParameter("tea_testing_time");// 质检时间
         pojo.setTeaTestingSmllBoxId(request.getParameter("tea_testing_smll_box_id"));// 小盒编号
+        pojo.setTeaTestingBigBoxId(request.getParameter("tea_testing_big_box_id"));// 小盒编号
         request.getParameter("key");// ssl密钥
-        return JsonUtil.getJson(pojo);
+
+
+        /*往区块中加数据*/
+        String  CCP = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com" +
+                "/connection-org1.yaml";
+        Path walletPath = Paths.get("/usr/software/Fabric_TraceabilitySys/wallet");
+
+        Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
+        log.info("===>开始提交区块链交易===>");
+
+        byte[] bytes = contract.submitTransaction("createOneTeaTesting",request.getParameter("key"),
+                request.getParameter("tea_testing_per_id"),request.getParameter("tea_testing_per_name"),request.getParameter("tea_testing_per_sex"),
+                request.getParameter("tea_testing_id"),request.getParameter("tea_testing_result"),request.getParameter("tea_testing_time")
+                ,request.getParameter("tea_testing_smll_box_id"),request.getParameter("tea_testing_big_box_id"));
+
+        String s = new String(bytes);
+
+        if (bytes!=null){
+            log.info("===>交易提交成功===>");
+        }
+
+        return s;// 返回字符串
     }
+
+
 }

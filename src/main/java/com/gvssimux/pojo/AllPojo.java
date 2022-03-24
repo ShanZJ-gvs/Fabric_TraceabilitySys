@@ -4,17 +4,22 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 
-
-
-
-//@DataType
 @Data
-@Accessors(chain = true)
 public class AllPojo {
-    //@Property
+    TeaArea teaArea;
+
+    TeaGarden teaGarden;
+
     TeaTree teaTree;
 
-    //@Property
-    TeaLeaf teaLeaf;
+    TeaPick teaPick;
+
+    TeaMake teaMake;
+
+    TeaRank teaRank;
+
+    TeaPack teaPack;
+
+    TeaTesting teaTesting;
 
 }

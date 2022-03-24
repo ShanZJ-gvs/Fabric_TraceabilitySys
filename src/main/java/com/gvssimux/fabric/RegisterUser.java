@@ -118,14 +118,14 @@ public class RegisterUser {
         /*String certificatePath = "D:/JavaProject/fabric-tea-app-java-demo/src/main/resources/com/shanzj/fabric/app/java/" +
                 "peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem";*/
 
-        String certificatePath = "D:/JavaProject/fabric-tea-app-java-demo/src/main/resources/" +
-                "ca.org1.example.com-cert.pem";
+        String certificatePath = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem";
+
 
         props.put("pemFile",
                 certificatePath);
         props.put("allowAllHostNames", "true");
         // 创建实例
-        HFCAClient caClient = HFCAClient.createNewInstance("https://192.168.0.119:8054", props);
+        HFCAClient caClient = HFCAClient.createNewInstance("https://192.168.0.119:7054", props);
         CryptoSuite cryptoSuite = CryptoSuiteFactory.getDefault().getCryptoSuite();
         caClient.setCryptoSuite(cryptoSuite);
 

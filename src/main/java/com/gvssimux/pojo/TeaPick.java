@@ -10,7 +10,7 @@ public class TeaPick {
     private Employee teaPickPer;
 
     // 采摘时间
-    private Date teaPickTime;
+    private String teaPickTime;
 
     // 茶叶批编号
     private String teaPickId;

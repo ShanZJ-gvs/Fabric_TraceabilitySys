@@ -10,7 +10,7 @@ public class TeaMake {
     private Employee teaMakePer;
 
     // 制茶时间
-    private Date teaMakeTime;
+    private String teaMakeTime;
 
     // 制茶工艺
     private String teaMakeWay;

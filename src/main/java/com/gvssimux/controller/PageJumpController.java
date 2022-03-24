@@ -2,6 +2,8 @@ package com.gvssimux.controller;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.gvssimux.fabric.RegisterUser;
+import com.gvssimux.fabric.gateway;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +20,7 @@ public class PageJumpController {
      * 跳转到home页面
      */
     @RequestMapping("/tohome")
-    public String tohome()throws JsonProcessingException{
-
+    public String tohome() throws Exception {
         return "home";
     }
 

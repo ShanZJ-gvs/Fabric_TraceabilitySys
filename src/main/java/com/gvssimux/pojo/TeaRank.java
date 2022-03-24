@@ -10,7 +10,7 @@ public class TeaRank {
     private Employee teaRankPer;
 
     // 定级时间
-    private Date teaRankTime;
+    private String teaRankTime;
 
     // 茶叶批编号
     private String teaRankId;

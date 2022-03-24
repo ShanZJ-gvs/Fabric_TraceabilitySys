@@ -16,7 +16,7 @@ public class TeaTesting {
     private String teaTestingResult;
 
     // 质检时间
-    private Date teaTestingTime;
+    private String teaTestingTime;
 
     // 小盒编号
     private String teaTestingSmllBoxId;
