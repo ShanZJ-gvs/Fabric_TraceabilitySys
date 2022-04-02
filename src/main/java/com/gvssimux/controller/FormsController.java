@@ -66,7 +66,7 @@ public class FormsController {
         log.info("key===> "+request.getParameter("key"));
 
         byte[] bytes = contract.submitTransaction("createOneTeaArea", request.getParameter("key"),
-                request.getParameter("tea_area_id1"),
+                request.getParameter("tea_area_id1"),request.getParameter("tea_area_name"),
                 request.getParameter("tea_area_address"), request.getParameter("tea_area_longitude"),
                 request.getParameter("tea_area_area"),request.getParameter("tea_area_id2"),
                 request.getParameter("tea_garden_id2"));
@@ -111,8 +111,8 @@ public class FormsController {
         log.info("===>开始提交区块链交易===>");
 
         byte[] bytes = contract.submitTransaction("createOneTeaGarden",request.getParameter("key"),
-                request.getParameter("tea_garden_id1"),request.getParameter("tea_garden_address"),
-                request.getParameter("tea_garden_area"),request.getParameter("tea_garden_longitude"),
+                request.getParameter("tea_garden_id1"),request.getParameter("tea_garden_name"),
+                request.getParameter("tea_garden_address"), request.getParameter("tea_garden_area"),request.getParameter("tea_garden_longitude"),
                 request.getParameter("tea_area_id2"),request.getParameter("tea_garden_id2"));
 
         String s = new String(bytes);
