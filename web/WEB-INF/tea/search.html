@@ -772,9 +772,6 @@
                              * JSON.parse() 方法将数据转换为 JavaScript 对象。
                              * */
                             /* this.AllPojo = JSON.parse(JSON.stringify(response.data));*/
-                            if (this.TeaArea!= null){
-                                this.retr = true;
-                            }
                             this.TeaArea = JSON.parse(JSON.stringify(response.data.teaArea));
                             this.TeaGarden = JSON.parse(JSON.stringify(response.data.teaGarden));
                             this.TeaTree = JSON.parse(JSON.stringify(response.data.teaTree));
@@ -783,6 +780,9 @@
                             this.TeaMake = JSON.parse(JSON.stringify(response.data.teaMake));
                             this.TeaRank = JSON.parse(JSON.stringify(response.data.teaRank));
                             this.TeaTesting = JSON.parse(JSON.stringify(response.data.teaTesting));
+                            if (this.TeaArea!= null){
+                                this.retr = true;
+                            }
                         }, function (error) {
                             console.log(error);
                         });

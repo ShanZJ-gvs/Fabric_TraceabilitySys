@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sun.reflect.generics.tree.Tree;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,10 +38,10 @@ public class DataController {
      * 2022-3-24 21:59:53
      * */
     @ResponseBody
-    @PostMapping("/userCode/key")
+    @GetMapping("/userCode/key")
     public String userCode(@Param("userCode") String key, HttpServletRequest request, HttpServletResponse response) throws Exception {
         log.info("===>请求:userCode:用户溯源码===>");
-        JSON json;
+        String json;
         AllPojo allPojo = new AllPojo();
         TeaPack pack;
 
@@ -50,52 +51,76 @@ public class DataController {
         Contract contract = FabricUtil.getContract();
 
         /*逻辑判断*/
-        if (key!=null){
+        if (key==null){
             return "UserCode为空";
         }
 
-        json = FabricUtil.queryById("teaPackBigBoxId", key, "TeaPack", 0);
+        json = FabricUtil.fz1("teaPackBigBoxId", key,  0);
 
-        pack = json.toJavaObject(TeaPack.class);// 拿到TeaPack实体
+        JSONObject jsonObj = JSONObject.parseObject(json);//转JSONObject对象
+        pack = jsonObj.toJavaObject(TeaPack.class);// 拿到TeaPack实体
         allPojo.setTeaPack(pack);
-
-
+        System.out.println("成功获取pack");
 
 
         // 再次提交查询
-        json = FabricUtil.queryById("teaPickId", pack.getTeaPackID(), "TeaPick", 0);
-        TeaPick pick = json.toJavaObject(TeaPick.class);// 拿到TeaPick实体
+        json = FabricUtil.fz1("teaPickId", pack.getTeaPackID(),  0);
+
+        jsonObj = JSONObject.parseObject(json);//转JSONObject对象
+        TeaPick pick = jsonObj.toJavaObject(TeaPick.class);// 拿到TeaPick实体
         allPojo.setTeaPick(pick);
+        System.out.println("成功获取pick");
 
         // 再次提交查询
-        json = FabricUtil.queryById("teaRankId", pack.getTeaPackID(), "TeaRank", 0);
-        TeaRank rank = json.toJavaObject(TeaRank.class);// 拿到TeaRank实体
+        json = FabricUtil.fz1("teaRankId", pack.getTeaPackID(),  0);
+
+        jsonObj = JSONObject.parseObject(json);//转JSONObject对象
+        TeaRank rank = jsonObj.toJavaObject(TeaRank.class);// 拿到TeaRank实体
         allPojo.setTeaRank(rank);
+        System.out.println("成功获取rank");
 
         // 再次提交查询
-        json = FabricUtil.queryById("teaMakeId", pack.getTeaPackID(), "TeaMake", 0);
-        TeaMake make = json.toJavaObject(TeaMake.class);
+        json = FabricUtil.fz1("teaMakeId", pack.getTeaPackID(), 0);
+        jsonObj = JSONObject.parseObject(json);//转JSONObject对象
+        TeaMake make = jsonObj.toJavaObject(TeaMake.class);
         allPojo.setTeaMake(make);
+        System.out.println("成功获取make");
 
         // 再次提交查询
-        json = FabricUtil.queryById("teaTestingBigBoxId", key, "TeaTesting", 0);
-        TeaTesting testing = json.toJavaObject(TeaTesting.class);
+        json = FabricUtil.fz1("teaTestingBigBoxId", key, 0);
+        jsonObj = JSONObject.parseObject(json);//转JSONObject对象
+        TeaTesting testing = jsonObj.toJavaObject(TeaTesting.class);
         allPojo.setTeaTesting(testing);
+        System.out.println("成功获取testing");
 
 
-        // 再次提交查询
-        json = FabricUtil.queryById("teaTreeId",pick.getTeaTreeId2(),"TeaTree" ,0);
-        TeaTree tree = json.toJavaObject(TeaTree.class);
+        json = FabricUtil.fz1("teaTreeId","t356",0);
+        jsonObj = JSONObject.parseObject(json);//转JSONObject对象
+        TeaTree tree = jsonObj.toJavaObject(TeaTree.class);
+        /*TeaTree tree = new TeaTree();
+        tree.setTeaGardenId2("gt23");
+        tree.setTeaAreaId2("a676");
+        tree.setTeaTreeCultivate("wadad");
+        tree.setTeaTreeState("好！！");
+        tree.setTeaTreeKind("毛峰");
+        tree.setTeaTreeLongitude("wafwafa");
+        tree.setTeaTreeGrowingEnv("潮湿");*/
         allPojo.setTeaTree(tree);
 
-        json = FabricUtil.queryById("teaGardenId1", tree.getTeaGardenId2(),  "TeaGarden",0);
-        TeaGarden garden = json.toJavaObject(TeaGarden.class);
+
+
+        json = FabricUtil.fz1("teaGardenId1", "gt23",0);
+        jsonObj = JSONObject.parseObject(json);//转JSONObject对象
+        TeaGarden garden = jsonObj.toJavaObject(TeaGarden.class);
         allPojo.setTeaGarden(garden);
 
-        json = FabricUtil.queryById("teaAreaId1",tree.getTeaAreaId2(), "TeaArea",0);
-        TeaArea area = json.toJavaObject(TeaArea.class);
+        json = FabricUtil.fz1("teaAreaId1","a676",0);
+        jsonObj = JSONObject.parseObject(json);//转JSONObject对象
+        TeaArea area = jsonObj.toJavaObject(TeaArea.class);
         allPojo.setTeaArea(area);
 
+        String s = CreateUserCode.CreateUserCode(key, JsonUtil.getJson(allPojo));
+        System.out.println(s);
         return JsonUtil.getJson(allPojo);
     }
 

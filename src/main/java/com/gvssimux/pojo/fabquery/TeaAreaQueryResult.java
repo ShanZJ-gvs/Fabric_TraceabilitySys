@@ -8,10 +8,10 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class TeaAreaQueryResult<T> {
+public class TeaAreaQueryResult {
 
     private String key;
 
-    private T record;
+    private String json;
 
 }

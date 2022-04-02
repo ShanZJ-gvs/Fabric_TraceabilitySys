@@ -26,6 +26,21 @@ public class FabricUtil<T> {
 
     static Path walletPath = Paths.get("/usr/software/Fabric_TraceabilitySys/wallet");
 
+    public static String fz1(String key,String value,int index) throws Exception {
+        Contract contract = getContract();
+        TeaAreaQueryResultList resultList = JSON.toJavaObject(JSONObject.parseObject(
+                new String(
+                        contract.submitTransaction("queryById" , "{\"selector\":{\""+key+"\":\""+value+"\"}, \"use_index\":[]}")
+                )
+        ),TeaAreaQueryResultList.class);
+        System.out.println(resultList);
+        TeaAreaQueryResult result = resultList.getTeaAreas().get(index);
+        System.out.println(result);
+        String json = result.getJson();
+        return json;
+    }
+
+
 
     public static JSON queryById(String key,String value,String clas,int index) throws Exception {
         Contract contract = getContract();
@@ -40,7 +55,7 @@ public class FabricUtil<T> {
                         String.valueOf(resultList.getTeaAreas().get(index))
                 ),TeaAreaQueryResult.class
         );
-        JSON json = JSON.parseObject(JSON.toJSONString(a.getRecord()));
+        JSON json = JSON.parseObject(JSON.toJSONString(a.getJson()));
         //TeaPack pack = json.toJavaObject(TeaPack.class);// 拿到TeaPack实体
         return json;
     }

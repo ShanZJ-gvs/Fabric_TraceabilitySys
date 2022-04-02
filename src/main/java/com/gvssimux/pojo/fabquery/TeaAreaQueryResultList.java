@@ -7,7 +7,7 @@ import java.util.List;
 
 
 @Data
-public class TeaAreaQueryResultList<T> {
+public class TeaAreaQueryResultList {
 
-    List<T> teaAreas;
+    List<TeaAreaQueryResult> teaAreas;
 }

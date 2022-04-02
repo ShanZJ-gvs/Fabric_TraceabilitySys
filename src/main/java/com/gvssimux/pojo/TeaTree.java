@@ -23,7 +23,7 @@ public class TeaTree {
 
     // 茶树高度
 
-    private Double teaTreeHeight;
+    private String teaTreeHeight;
 
     // 茶树种类
 

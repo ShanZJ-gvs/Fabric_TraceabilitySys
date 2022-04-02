@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-
 public class Test {
 
     /**
@@ -27,22 +26,17 @@ public class Test {
      * */
     @ResponseBody
     @GetMapping("/t1")
-    public String userCode(@RequestParam("key") String key, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String userCode(@RequestParam("userCode") String key, HttpServletRequest request, HttpServletResponse response) throws Exception {
         JSON json;
         AllPojo allPojo = new AllPojo();
         TeaPack pack;
         Contract contract = FabricUtil.getContract();
 
-
-
         json = FabricUtil.queryById("teaAreaId1","a676", "TeaArea",0);
         TeaArea area = json.toJavaObject(TeaArea.class);
         allPojo.setTeaArea(area);
 
-
-
         return JsonUtil.getJson(allPojo);
-
     }
 
     /**
@@ -51,7 +45,7 @@ public class Test {
      * */
     @ResponseBody
     @GetMapping("/t2")
-    public String userCode1(@RequestParam("key") String key, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String userCode1(@RequestParam("userCode") String key, HttpServletRequest request, HttpServletResponse response) throws Exception {
         TeaAreaQueryResultList list;
         AllPojo allPojo = new AllPojo();
         TeaPack pack;
@@ -59,7 +53,7 @@ public class Test {
 
 
 
-        list = FabricUtil.queryByIdList("teaAreaId1","a676", "TeaArea");
+        list = FabricUtil.queryByIdList("teaAreaTree","a676", "TeaArea");
 
 
         return JsonUtil.getJson(list);

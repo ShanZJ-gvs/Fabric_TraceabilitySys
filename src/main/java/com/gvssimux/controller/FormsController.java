@@ -137,7 +137,7 @@ public class FormsController {
         pojo.setTeaTreeId(request.getParameter("tea_tree_id"));
         pojo.setTeaTreeAddress(request.getParameter("tea_tree_address"));
         pojo.setTeaTreeLongitude(request.getParameter("tea_tree_longitude"));
-        pojo.setTeaTreeHeight(Double.valueOf(request.getParameter("tea_tree_height")));
+        pojo.setTeaTreeHeight(request.getParameter("tea_tree_height"));
         pojo.setTeaTreeKind(request.getParameter("tea_tree_kind"));
         pojo.setTeaTreeState(request.getParameter("tea_tree_state"));
         pojo.setTeaTreeCultivate(request.getParameter("tea_tree_cultivate"));
