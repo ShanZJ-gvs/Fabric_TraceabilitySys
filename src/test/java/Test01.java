@@ -2,9 +2,13 @@ import com.alibaba.fastjson.JSON;
 import com.gvssimux.pojo.AllPojo;
 import com.gvssimux.pojo.TeaTree;
 import com.gvssimux.service.TeaAreaServiceImpl;
+import com.gvssimux.service.TeaKindServiceImpl;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Test01 {
 
@@ -25,5 +29,17 @@ public class Test01 {
         allPojo.setTeaTree(tree);
 
         System.out.println(JSON.toJSONString(allPojo));
+    }
+
+
+
+    /*测试种类*/
+    @Test
+    public void test02() throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        TeaKindServiceImpl mapper = context.getBean("TeaKindServiceImpl", TeaKindServiceImpl.class);
+        ArrayList<String> kinds = new ArrayList<>();
+        kinds.add("黄山");
+        System.out.println(mapper.insertOne(kinds));
     }
 }

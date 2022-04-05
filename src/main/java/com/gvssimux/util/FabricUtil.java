@@ -33,6 +33,9 @@ public class FabricUtil<T> {
                         contract.submitTransaction("queryById" , "{\"selector\":{\""+key+"\":\""+value+"\"}, \"use_index\":[]}")
                 )
         ),TeaAreaQueryResultList.class);
+        System.out.println("提交交易"+new String(
+                contract.submitTransaction("queryById" , "{\"selector\":{\""+key+"\":\""+value+"\"}, \"use_index\":[]}")
+        ));
         System.out.println(resultList);
         TeaAreaQueryResult result = resultList.getTeaAreas().get(index);
         System.out.println(result);

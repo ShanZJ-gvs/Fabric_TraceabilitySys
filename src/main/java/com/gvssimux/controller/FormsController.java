@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.gvssimux.pojo.*;
 import com.gvssimux.service.TeaAreaServiceImpl;
 import com.gvssimux.service.TeaGardenServiceImpl;
+import com.gvssimux.service.TeaTreeServiceImpl;
 import com.gvssimux.util.FabricUtil;
 import com.gvssimux.util.JsonUtil;
 import lombok.extern.java.Log;
@@ -53,19 +54,12 @@ public class FormsController {
         pojo.setTeaAreaLongitude(request.getParameter("tea_area_longitude"));
         pojo.setTeaAreaId2(request.getParameter("tea_area_id2"));
         pojo.setTeaGardenId2(request.getParameter("tea_garden_id2"));
+        pojo.setTeaAreaName(request.getParameter("tea_area_name"));
         request.getParameter("key");
 
-        /*往区块中加数据*/
-        String  CCP = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com" +
-                "/connection-org1.yaml";
-        Path walletPath = Paths.get("/usr/software/Fabric_TraceabilitySys/wallet");
-
-        Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
-        byte[] result;
-        log.info("===>开始提交区块链交易===>");
         log.info("key===> "+request.getParameter("key"));
 
-        byte[] bytes = contract.submitTransaction("createOneTeaArea", request.getParameter("key"),
+        /*byte[] bytes = contract.submitTransaction("createOneTeaArea", request.getParameter("key"),
                 request.getParameter("tea_area_id1"),request.getParameter("tea_area_name"),
                 request.getParameter("tea_area_address"), request.getParameter("tea_area_longitude"),
                 request.getParameter("tea_area_area"),request.getParameter("tea_area_id2"),
@@ -74,8 +68,8 @@ public class FormsController {
         String s = new String(bytes);
         if (bytes!=null){
             log.info("===>交易提交成功===>");
-        }
-        return s;
+        }*/
+        return mapper.insertOne(pojo);
     }
 
 
@@ -98,19 +92,12 @@ public class FormsController {
         pojo.setTeaGardenArea(request.getParameter("tea_garden_area"));
         pojo.setTeaGardenLongitude(request.getParameter("tea_garden_longitude"));
         pojo.setTeaAreaId2(request.getParameter("tea_area_id2"));
+        pojo.setTeaGardenName(request.getParameter("tea_garden_name"));
         pojo.setTeaGardenId2(request.getParameter("tea_garden_id2"));
         request.getParameter("key");
 
 
-        /*往区块中加数据*/
-        String  CCP = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com" +
-                "/connection-org1.yaml";
-        Path walletPath = Paths.get("/usr/software/Fabric_TraceabilitySys/wallet");
-
-        Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
-        log.info("===>开始提交区块链交易===>");
-
-        byte[] bytes = contract.submitTransaction("createOneTeaGarden",request.getParameter("key"),
+       /* byte[] bytes = contract.submitTransaction("createOneTeaGarden",request.getParameter("key"),
                 request.getParameter("tea_garden_id1"),request.getParameter("tea_garden_name"),
                 request.getParameter("tea_garden_address"), request.getParameter("tea_garden_area"),request.getParameter("tea_garden_longitude"),
                 request.getParameter("tea_area_id2"),request.getParameter("tea_garden_id2"));
@@ -119,9 +106,9 @@ public class FormsController {
 
         if (bytes!=null){
             log.info("===>交易提交成功===>");
-        }
+        }*/
 
-        return s;
+        return mapper.insertOne(pojo);
     }
 
 
@@ -133,6 +120,9 @@ public class FormsController {
     @ResponseBody
     @PostMapping("/teatree")
     public String teatree(HttpServletRequest request,HttpServletResponse response) throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        TeaTreeServiceImpl mapper = context.getBean("TeaTreeServiceImpl", TeaTreeServiceImpl.class);
+
         TeaTree pojo = new TeaTree();
         pojo.setTeaTreeId(request.getParameter("tea_tree_id"));
         pojo.setTeaTreeAddress(request.getParameter("tea_tree_address"));
@@ -146,15 +136,7 @@ public class FormsController {
         pojo.setTeaGardenId2(request.getParameter("tea_garden_id2"));
 
         request.getParameter("key");
-
-        /*往区块中加数据*/
-        String  CCP = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com" +
-                "/connection-org1.yaml";
-        Path walletPath = Paths.get("/usr/software/Fabric_TraceabilitySys/wallet");
-
-        Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
-        log.info("===>开始提交区块链交易===>");
-
+/*
         byte[] bytes = contract.submitTransaction("createOneTeaTree",request.getParameter("key"),
                 request.getParameter("tea_tree_id"),request.getParameter("tea_tree_address"),request.getParameter("tea_tree_longitude"),
                 request.getParameter("tea_tree_height"),request.getParameter("tea_tree_kind"),request.getParameter("tea_tree_state"),
@@ -165,9 +147,9 @@ public class FormsController {
 
         if (bytes!=null){
             log.info("===>交易提交成功===>");
-        }
+        }*/
 
-        return s;
+        return mapper.insertOne(pojo);
     }
 
 

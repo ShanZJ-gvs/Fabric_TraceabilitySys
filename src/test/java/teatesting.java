@@ -20,7 +20,7 @@ public class teatesting {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaAreaServiceImpl mapper = context.getBean("TeaAreaServiceImpl", TeaAreaServiceImpl.class);
 
-        System.out.println(mapper.selectAll());
+        System.out.println(mapper.selectOffsetLimit(0,1));
 
     }
 
@@ -30,7 +30,7 @@ public class teatesting {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaGardenServiceImpl mapper = context.getBean("TeaGardenServiceImpl", TeaGardenServiceImpl.class);
 
-        System.out.println(mapper.selectAll());
+        System.out.println(mapper.selectOffsetLimit(0,1));
 
     }
 
@@ -40,7 +40,7 @@ public class teatesting {
     public void test03(){
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaTreeServiceImpl mapper = context.getBean("TeaTreeServiceImpl", TeaTreeServiceImpl.class);
-        System.out.println(mapper.selectAll());
+        System.out.println(mapper.selectOffsetLimit(0,1));
     }
 
     // 全部查询teaLeaf

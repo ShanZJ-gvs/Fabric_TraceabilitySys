@@ -1,17 +1,20 @@
 package com.gvssimux.service;
 
+import com.gvssimux.pojo.TeaArea;
 import com.gvssimux.pojo.TeaTree;
+import com.gvssimux.pojo.fabquery.TeaAreaQueryResultList;
 
 import java.util.List;
 
 public interface TeaTreeService {
+
     /*全部插入*/
-    int insert(TeaTree record);
+    String insertOne(TeaTree record);
 
-    /*部分插入*/
-    int insertSelective(TeaTree record);
+    /*查询全部*/
+    TeaAreaQueryResultList selectOffsetLimit(int offset,int limit) throws Exception;
 
-    /*全部查询*/
-    List<TeaTree> selectAll();
+
+
 
 }

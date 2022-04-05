@@ -18,19 +18,25 @@
         <property name="mapper" ref="userLoginDao"/>
     </bean>
 
+    <!--茶种类service-->
+    <bean id="TeaKindServiceImpl" class="com.gvssimux.service.TeaKindServiceImpl">
+        <property name="k" value="TeaKind"/>
+    </bean>
+
+
     <!--茶区service-->
     <bean id="TeaAreaServiceImpl" class="com.gvssimux.service.TeaAreaServiceImpl">
-        <property name="mapper" ref="teaAreaDao"/>
+        <property name="k" value="Area"/>
     </bean>
 
     <!--茶园service-->
     <bean id="TeaGardenServiceImpl" class="com.gvssimux.service.TeaGardenServiceImpl">
-        <property name="mapper" ref="teaGardenDao"/>
+        <property name="k" value="Garden"/>
     </bean>
 
     <!--茶树service-->
     <bean id="TeaTreeServiceImpl" class="com.gvssimux.service.TeaTreeServiceImpl">
-        <property name="mapper" ref="teaTreeDao"/>
+        <property name="k" value="Tree"/>
     </bean>
 
 
