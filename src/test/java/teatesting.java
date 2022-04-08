@@ -1,4 +1,6 @@
 import com.gvssimux.service.*;
+import com.gvssimux.util.FabricUtil;
+import org.hyperledger.fabric.gateway.Contract;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -16,31 +18,31 @@ public class teatesting {
 
     // 全部查询teaArea
     @Test
-    public void test01(){
+    public void test01() throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaAreaServiceImpl mapper = context.getBean("TeaAreaServiceImpl", TeaAreaServiceImpl.class);
-
-        System.out.println(mapper.selectOffsetLimit(0,1));
+        Contract contract = FabricUtil.getContract();
+        System.out.println(mapper.selectOffsetLimit(contract,0,1));
 
     }
 
     // 全部查询teaGarden
     @Test
-    public void test02(){
+    public void test02() throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaGardenServiceImpl mapper = context.getBean("TeaGardenServiceImpl", TeaGardenServiceImpl.class);
-
-        System.out.println(mapper.selectOffsetLimit(0,1));
+        Contract contract = FabricUtil.getContract();
+        System.out.println(mapper.selectOffsetLimit(contract,0,1));
 
     }
 
 
     // 全部查询teaTree
     @Test
-    public void test03(){
+    public void test03() throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaTreeServiceImpl mapper = context.getBean("TeaTreeServiceImpl", TeaTreeServiceImpl.class);
-        System.out.println(mapper.selectOffsetLimit(0,1));
+        System.out.println(mapper.selectOffsetLimit(FabricUtil.getContract(),0,1));
     }
 
     // 全部查询teaLeaf

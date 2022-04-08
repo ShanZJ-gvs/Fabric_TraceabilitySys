@@ -29,8 +29,8 @@ public class DataController {
         TeaPack pack;
         String json;
         key = request.getParameter("userCode");
-        if (key==null){
-            return "UserCode为空";
+        if (key.equals("")){
+            return "溯源码为空";
         }
 
         Contract contract = FabricUtil.getContract();
@@ -50,7 +50,7 @@ public class DataController {
                return createUserCodeByKey(key);
             }
             catch (Throwable r){
-                return "msg:溯源码无效";
+                return "溯源码无效";
             }
         }
 

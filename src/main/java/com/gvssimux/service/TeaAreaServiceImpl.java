@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.gvssimux.dao.TeaAreaDao;
 import com.gvssimux.pojo.TeaArea;
-import com.gvssimux.pojo.fabquery.TeaAreaQueryResult;
-import com.gvssimux.pojo.fabquery.TeaAreaQueryResultList;
+import com.gvssimux.pojo.fabquery.QueryResult;
+import com.gvssimux.pojo.fabquery.QueryResultList;
 import com.gvssimux.util.FabricUtil;
 import org.hyperledger.fabric.gateway.Contract;
 import org.hyperledger.fabric.gateway.ContractException;
@@ -19,24 +19,17 @@ import static org.apache.logging.log4j.ThreadContext.isEmpty;
 public class TeaAreaServiceImpl implements TeaAreaService {
     private String k;
 
-    public String insertOne(TeaArea record) {
-        Contract contract = null;
-        try {
-            contract = FabricUtil.getContract();
-        } catch (Exception e) {
-            System.out.println("FabUtil异常");
-            e.printStackTrace();
-        }
+    public String insertOne(Contract contract,TeaArea record) {
         byte[] bytes = new byte[0];
         byte[] bytes2 = new byte[0];
         int size = 0;
         try {
-            bytes2 = contract.submitTransaction("queryAll", k);
+            bytes2 = contract.submitTransaction("queryAllByKey", k);
             String s = new String(bytes2);
             //System.out.println("提交交易" + s);
             JSONObject jsonObject = JSONObject.parseObject(s);
-            TeaAreaQueryResultList resultList = JSON.toJavaObject(jsonObject, TeaAreaQueryResultList.class);
-            List<TeaAreaQueryResult> teaAreas = resultList.getTeaAreas();
+            QueryResultList resultList = JSON.toJavaObject(jsonObject, QueryResultList.class);
+            List<QueryResult> teaAreas = resultList.getResultList();
             size = teaAreas.size();
         } catch (Exception e) {
             e.printStackTrace();
@@ -45,7 +38,6 @@ public class TeaAreaServiceImpl implements TeaAreaService {
 
         try {
             bytes = contract.submitTransaction("createData", k+(size+1),JSON.toJSONString(record));
-
         } catch (Exception e) {
             String errorMessage = "交易提交失败~";
             System.out.println(errorMessage);
@@ -58,12 +50,12 @@ public class TeaAreaServiceImpl implements TeaAreaService {
         return s;
     }
 
-    /*全部查询*/
+    /*限制查询*/
     @Override
-    public TeaAreaQueryResultList selectOffsetLimit(int offset,int limit) {
+    public QueryResultList selectOffsetLimit(Contract contract,int offset,int limit) {
         byte[] bytes;
         try {
-            bytes = FabricUtil.getContract().submitTransaction("queryAll", k);
+            bytes = contract.submitTransaction("queryAllByKey", k);
         } catch (ContractException e) {
             e.printStackTrace();
             return null;
@@ -80,23 +72,67 @@ public class TeaAreaServiceImpl implements TeaAreaService {
         String s = new String(bytes);
         //System.out.println("提交交易" + s);
         JSONObject jsonObject = JSONObject.parseObject(s);
-        TeaAreaQueryResultList resultList = JSON.toJavaObject(jsonObject, TeaAreaQueryResultList.class);
+        QueryResultList resultList = JSON.toJavaObject(jsonObject, QueryResultList.class);
         //System.out.println(resultList);
-        List<TeaAreaQueryResult> teaAreas = resultList.getTeaAreas();
+        List<QueryResult> teaAreas = resultList.getResultList();
         int size = teaAreas.size();
+        System.out.println("try前"+resultList);
         try {
-            List<TeaAreaQueryResult> teaAreaQueryResults = teaAreas.subList(offset, offset + limit);
-            resultList.setTeaAreas(teaAreaQueryResults);
+            List<QueryResult> QueryResults = teaAreas.subList(offset, offset + limit);
+            resultList.setResultList(QueryResults);
+            System.out.println("try中"+resultList);
         } catch (IndexOutOfBoundsException e) {
+            List<QueryResult> QueryResults = teaAreas.subList(offset,size);
+            resultList.setResultList(QueryResults);
             System.out.println("开始下标小于 0 或大于数组的长度，");
             e.printStackTrace();
         }catch (IllegalArgumentException e){
             System.out.println("结束下标大于 toIndex 的值");
             e.printStackTrace();
         }
+        System.out.println("try后"+resultList);
         return resultList;
     }
 
+
+    @Override
+    public int getSum(Contract contract) {
+        byte[] bytes = new byte[0];
+        try {
+            bytes = contract.submitTransaction("queryAllByKey", k);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        JSONObject jsonObject = JSONObject.parseObject(new String(bytes));
+        QueryResultList resultList = JSON.toJavaObject(jsonObject, QueryResultList.class);
+
+        List<QueryResult> teaAreas = resultList.getResultList();
+        return teaAreas.size();
+    }
+
+
+    /*查询一个公司下有哪些茶区*/
+    public int getAreaSumByCompany(Contract contract,String companyName){
+        byte[] bytes = new byte[0];
+        String str = "{\"selector\":{\"company\":\""+companyName+"\",\"type\":\"TeaArea\"}, \"use_index\":[]}";// 富查询字符串
+        try {
+            bytes = contract.submitTransaction("richQuery", str);
+            String s = new String(bytes);
+            JSONObject jsonObject = JSONObject.parseObject(s);
+            QueryResultList resultList = JSON.toJavaObject(jsonObject, QueryResultList.class);
+            System.out.println(resultList);
+
+            List<QueryResult> teaAreas = resultList.getResultList();
+            System.out.println(str);
+            System.out.println(s);
+            return resultList.getResultList().size();// 返回茶区数量
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+
+    }
 
 
 

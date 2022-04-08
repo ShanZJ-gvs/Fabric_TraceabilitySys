@@ -16,8 +16,8 @@ import java.util.concurrent.TimeoutException;
 public class TeaKindServiceImpl implements TeaKindService{
     private String k;
 
-    @Override
-    public String insertOne(List record) {
+
+    public String insertOne(List<String> record) {
         Contract contract = null;
         String s = "";
         byte[] result = new byte[0];
@@ -54,7 +54,13 @@ public class TeaKindServiceImpl implements TeaKindService{
                 List<String> list1 = JSONArray.toJavaObject(jsonArr, List.class);
 
                 System.out.println("list1====" + list1);
-                list1.addAll(record);
+                // list1.addAll(record);
+                for (String a:record){
+                    int i = list1.indexOf(a);
+                    if (i == -1){// 说明a不在list1中
+                        list1.add(a);
+                    }
+                }
                 result = contract.submitTransaction("updateData", k, JSON.toJSONString(list1));
                 return new String(result);
             } catch (ContractException e) {
@@ -84,7 +90,24 @@ public class TeaKindServiceImpl implements TeaKindService{
         return s;
     }
 
-
+    @Override
+    public int getSum(Contract contract){
+        String s = "";
+        byte[] result = new byte[0];
+        try {
+            result = contract.submitTransaction("queryData", k);
+        } catch (ContractException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        s = new String(result);
+        JSONArray jsonArr = JSONArray.parseArray(s);
+        List<String> list1 = JSONArray.toJavaObject(jsonArr, List.class);
+        return list1.size();
+    }
 
 
 

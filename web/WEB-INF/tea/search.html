@@ -559,6 +559,7 @@
             data:{
                 UserCode:"24c0e81c573147589634ae12faa32236",
                 retr:true,
+                msg:"",
                 /*AllPojo:{*/
                     TeaArea:{
                     "teaAreaLongitude": "",
@@ -762,24 +763,31 @@
                         )
                         .then((response) =>{ // 这里如果不用箭头函数的话，this指的Windows
                             console.log("response",response);
-                            console.log("json:",JSON.parse(JSON.stringify(response.data)));
-                            console.log("json:",JSON.parse(JSON.stringify(response.data.teaArea)));
-                            console.log(this);
-                            /**
-                             * 把response的.data先转成字符串，再把字符串转为json格式
-                             * JSON.parse() 方法将数据转换为 JavaScript 对象。
-                             * */
-                            /* this.AllPojo = JSON.parse(JSON.stringify(response.data));*/
-                            this.TeaArea = JSON.parse(JSON.stringify(response.data.teaArea));
-                            this.TeaGarden = JSON.parse(JSON.stringify(response.data.teaGarden));
-                            this.TeaTree = JSON.parse(JSON.stringify(response.data.teaTree));
-                            this.TeaPick = JSON.parse(JSON.stringify(response.data.teaPick));
-                            this.TeaPack = JSON.parse(JSON.stringify(response.data.teaPack));
-                            this.TeaMake = JSON.parse(JSON.stringify(response.data.teaMake));
-                            this.TeaRank = JSON.parse(JSON.stringify(response.data.teaRank));
-                            this.TeaTesting = JSON.parse(JSON.stringify(response.data.teaTesting));
-                            if (this.TeaArea!= null){
-                                this.retr = true;
+                            if (JSON.parse(JSON.stringify(response.data))=="溯源码为空"){
+                                alert("溯源码为空")
+                            }
+                            if(JSON.parse(JSON.stringify(response.data))=="溯源码无效"){
+                                alert("溯源码无效")
+                            }else {
+                                console.log("json:",JSON.parse(JSON.stringify(response.data)));
+                                console.log("json:",JSON.parse(JSON.stringify(response.data.teaArea)));
+                                console.log(this);
+                                /**
+                                 * 把response的.data先转成字符串，再把字符串转为json格式
+                                 * JSON.parse() 方法将数据转换为 JavaScript 对象。
+                                 * */
+                                /* this.AllPojo = JSON.parse(JSON.stringify(response.data));*/
+                                this.TeaArea = JSON.parse(JSON.stringify(response.data.teaArea));
+                                this.TeaGarden = JSON.parse(JSON.stringify(response.data.teaGarden));
+                                this.TeaTree = JSON.parse(JSON.stringify(response.data.teaTree));
+                                this.TeaPick = JSON.parse(JSON.stringify(response.data.teaPick));
+                                this.TeaPack = JSON.parse(JSON.stringify(response.data.teaPack));
+                                this.TeaMake = JSON.parse(JSON.stringify(response.data.teaMake));
+                                this.TeaRank = JSON.parse(JSON.stringify(response.data.teaRank));
+                                this.TeaTesting = JSON.parse(JSON.stringify(response.data.teaTesting));
+                                if (this.TeaArea!= null){
+                                    this.retr = true;
+                                }
                             }
                         }, function (error) {
                             console.log(error);

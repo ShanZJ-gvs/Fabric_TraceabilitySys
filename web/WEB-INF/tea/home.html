@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 
 <head>
   <meta charset="UTF-8" />
@@ -108,14 +108,13 @@
        </aside>
 
     <!-- Workspace  -->
-    <main class="workspace overflow-hidden">
+    <main class="workspace overflow-hidden" id="root">
 
         <!-- Breadcrumb -->
         <section class="breadcrumb">
             <h1>总览</h1>
-         
-               
         </section>
+
 
         <div class="lg:flex lg:-mx-4">
             <div class="lg:w-1/2 lg:px-4">
@@ -126,16 +125,16 @@
                         <div
                             class="card px-4 py-8 text-center lg:transform hover:scale-110 hover:shadow-lg transition-transform duration-200">
                             <span class="text-primary text-5xl leading-none la la-sun"></span>
-                            <p class="mt-2">茶区上月晴天数</p>
-                            <div class="text-primary mt-5 text-3xl leading-none">22</div>
+                            <p class="mt-2">茶区数</p>
+                            <div class="text-primary mt-5 text-3xl leading-none">{{areasum}}</div>
                         </div>
                     </div>
                     <div class="lg:w-1/3 lg:px-4 pt-5 lg:pt-0">
                         <div
                             class="card px-4 py-8 text-center lg:transform hover:scale-110 hover:shadow-lg transition-transform duration-200">
                             <span class="text-primary text-5xl leading-none la la-cloud"></span>
-                            <p class="mt-2">茶区上月阴雨天数</p>
-                            <div class="text-primary mt-5 text-3xl leading-none">8</div>
+                            <p class="mt-2">茶园数</p>
+                            <div class="text-primary mt-5 text-3xl leading-none">{{gardensum}}</div>
                         </div>
                     </div>
                     <div class="lg:w-1/3 lg:px-4 pt-5 lg:pt-0">
@@ -143,7 +142,7 @@
                             class="card px-4 py-8 text-center lg:transform hover:scale-110 hover:shadow-lg transition-transform duration-200">
                             <span class="text-primary text-5xl leading-none la la-layer-group"></span>
                             <p class="mt-2">茶区茶树种类</p>
-                            <div class="text-primary mt-5 text-3xl leading-none">3</div>
+                            <div class="text-primary mt-5 text-3xl leading-none">{{kindsum}}</div>
                         </div>
                     </div>
                 </div>
@@ -232,6 +231,63 @@
     <script src="assets/js/Chart.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
     <script src="assets/js/script.js"></script>
+
+       <!-- vue -->
+       <script src="assets/js/vue.js"></script>
+       <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+
+       <!--BMS-->
+       <script src="assets/js/jquery.min.js"></script>
+
+       <script type="text/javascript" >
+           Vue.config.productionTip = false
+           const vm = new Vue({
+               el: '#root',
+               data:{
+                   kindsum:0,
+                   areasum:0,
+                   gardensum:0
+               },
+               mounted () {
+                   axios
+                    .get('/Fabric_TraceabilitySys_war_exploded/kindsum')
+                    .then((response) =>{ // 这里如果不用箭头函数的话，this指的Windows
+
+                        console.log("json:",JSON.parse(JSON.stringify(response.data)));
+                        console.log(this);
+                        console.log(JSON.parse(JSON.stringify(response.data[0])));
+                        this.kindsum = JSON.parse(JSON.stringify(response.data[0]));
+                        this.areasum = JSON.parse(JSON.stringify(response.data[1]));
+                        this.gardensum = JSON.parse(JSON.stringify(response.data[2]));
+                    }, function (error) {
+                        console.log(error);
+                    });
+
+                   axios
+                       .get('/Fabric_TraceabilitySys_war_exploded/kindsum')
+                       .then((response) =>{ // 这里如果不用箭头函数的话，this指的Windows
+
+                           console.log("json:",JSON.parse(JSON.stringify(response.data)));
+                           console.log(this);
+                           console.log(JSON.parse(JSON.stringify(response.data[0])));
+                           this.kindsum = JSON.parse(JSON.stringify(response.data[0]));
+                           this.areasum = JSON.parse(JSON.stringify(response.data[1]));
+                           this.gardensum = JSON.parse(JSON.stringify(response.data[2]));
+                       }, function (error) {
+                           console.log(error);
+                       });
+
+               },
+               methods:{
+
+               }
+           })
+
+       </script>
+
+
+
+
 
 </body>
 

@@ -4,8 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.gvssimux.pojo.AllPojo;
 import com.gvssimux.pojo.TeaPack;
-import com.gvssimux.pojo.fabquery.TeaAreaQueryResult;
-import com.gvssimux.pojo.fabquery.TeaAreaQueryResultList;
+
+import com.gvssimux.pojo.fabquery.QueryResult;
+import com.gvssimux.pojo.fabquery.QueryResultList;
 import com.gvssimux.util.FabricUtil;
 import com.gvssimux.util.JsonUtil;
 import org.apache.ibatis.annotations.Param;
@@ -36,7 +37,7 @@ public class Test01 {
     @ResponseBody
     @GetMapping("/tree1")
     public String userCode1(@RequestParam("userCode") String key, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        TeaAreaQueryResultList list;
+        QueryResultList list;
         AllPojo allPojo = new AllPojo();
         TeaPack pack;
         Contract contract = FabricUtil.getContract();
@@ -63,13 +64,13 @@ public class Test01 {
         key = "teaAreaId1";
         String value = "a676";
 
-        TeaAreaQueryResultList resultList = JSON.toJavaObject(JSONObject.parseObject(
+        QueryResultList resultList = JSON.toJavaObject(JSONObject.parseObject(
                 new String(
                         FabricUtil.getContract().submitTransaction("queryById" , "{\"selector\":{\""+key+"\":\""+value+"\"}, \"use_index\":[]}")
                 )
-        ),TeaAreaQueryResultList.class);
+        ),QueryResultList.class);
         System.out.println(resultList);
-        TeaAreaQueryResult result = resultList.getTeaAreas().get(0);
+        QueryResult result = resultList.getResultList().get(0);
         System.out.println(result);
         String json1 = result.getJson();
         String s = FabricUtil.fz1("teaAreaId1", "a676", 0);

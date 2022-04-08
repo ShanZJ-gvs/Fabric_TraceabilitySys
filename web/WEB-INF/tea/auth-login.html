@@ -41,24 +41,26 @@
                 <h2 class="uppercase">很高兴见到你!</h2>
                 
             </div>
-            <form class="card mt-5 p-5 md:p-10" action="index.html">
+            <form class="card mt-5 p-5 md:p-10" action="/Fabric_TraceabilitySys_war_exploded/login" method="post">
                 <div class="mb-5">
                     <label class="label block mb-2" for="email">账号</label>
-                    <input type="text" class="form-control" id="email" placeholder="">
+                    <input type="text" class="form-control" id="email" name="loginUser" placeholder="邮箱">
                 </div>
                 <div class="mb-5">
                     <label class="label block mb-2" for="password">密码</label>
                     <label class="form-control-addon-within">
-                        <input type="password" class="form-control border-none" id="password" value="">
+                        <input type="password" class="form-control border-none" id="password" name="loginPwd" value="">
                         <span class="flex items-center pr-4"><button type="button"
                                 class="btn btn-link text-gray-600 dark:text-gray-600 la la-eye text-xl leading-none"
                                 data-toggle="password-visibility"></button></span>
                     </label>
                 </div>
+
                 <div class="flex items-center">
                     <a href="auth-forgot-password.html" class="text-sm uppercase">忘记密码?</a>
                     <button type="submit" class="btn btn_primary ml-auto uppercase">登录</button>
                 </div>
+
             </form>
         </div>
     </div>

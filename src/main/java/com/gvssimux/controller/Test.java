@@ -2,7 +2,7 @@ package com.gvssimux.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.gvssimux.pojo.*;
-import com.gvssimux.pojo.fabquery.TeaAreaQueryResultList;
+import com.gvssimux.pojo.fabquery.QueryResultList;
 import com.gvssimux.util.FabricUtil;
 import com.gvssimux.util.JsonUtil;
 import lombok.extern.java.Log;
@@ -46,7 +46,7 @@ public class Test {
     @ResponseBody
     @GetMapping("/t2")
     public String userCode1(@RequestParam("userCode") String key, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        TeaAreaQueryResultList list;
+        QueryResultList list;
         AllPojo allPojo = new AllPojo();
         TeaPack pack;
         Contract contract = FabricUtil.getContract();

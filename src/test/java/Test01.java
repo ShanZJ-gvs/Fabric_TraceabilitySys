@@ -3,6 +3,8 @@ import com.gvssimux.pojo.AllPojo;
 import com.gvssimux.pojo.TeaTree;
 import com.gvssimux.service.TeaAreaServiceImpl;
 import com.gvssimux.service.TeaKindServiceImpl;
+import com.gvssimux.util.FabricUtil;
+import org.hyperledger.fabric.gateway.Contract;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -41,5 +43,15 @@ public class Test01 {
         ArrayList<String> kinds = new ArrayList<>();
         kinds.add("黄山");
         System.out.println(mapper.insertOne(kinds));
+    }
+
+
+    /*测试种类数量*/
+    @Test
+    public void test03() throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        TeaKindServiceImpl mapper = context.getBean("TeaKindServiceImpl", TeaKindServiceImpl.class);
+        Contract contract = FabricUtil.getContract();
+        System.out.println(mapper.getSum(contract));
     }
 }

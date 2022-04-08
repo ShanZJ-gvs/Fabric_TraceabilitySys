@@ -69,7 +69,8 @@ public class FormsController {
         if (bytes!=null){
             log.info("===>交易提交成功===>");
         }*/
-        return mapper.insertOne(pojo);
+        Contract contract = FabricUtil.getContract();
+        return mapper.insertOne(contract,pojo);
     }
 
 
@@ -107,8 +108,8 @@ public class FormsController {
         if (bytes!=null){
             log.info("===>交易提交成功===>");
         }*/
-
-        return mapper.insertOne(pojo);
+        Contract contract = FabricUtil.getContract();
+        return mapper.insertOne(contract,pojo);
     }
 
 
@@ -149,7 +150,7 @@ public class FormsController {
             log.info("===>交易提交成功===>");
         }*/
 
-        return mapper.insertOne(pojo);
+        return mapper.insertOne(FabricUtil.getContract(),pojo);
     }
 
 

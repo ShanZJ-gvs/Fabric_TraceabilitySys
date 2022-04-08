@@ -2,9 +2,9 @@ package com.gvssimux.util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.gvssimux.pojo.TeaPack;
-import com.gvssimux.pojo.fabquery.TeaAreaQueryResult;
-import com.gvssimux.pojo.fabquery.TeaAreaQueryResultList;
+
+import com.gvssimux.pojo.fabquery.QueryResult;
+import com.gvssimux.pojo.fabquery.QueryResultList;
 import lombok.Data;
 
 import lombok.extern.java.Log;
@@ -28,16 +28,16 @@ public class FabricUtil<T> {
 
     public static String fz1(String key,String value,int index) throws Exception {
         Contract contract = getContract();
-        TeaAreaQueryResultList resultList = JSON.toJavaObject(JSONObject.parseObject(
+        QueryResultList resultList = JSON.toJavaObject(JSONObject.parseObject(
                 new String(
                         contract.submitTransaction("queryById" , "{\"selector\":{\""+key+"\":\""+value+"\"}, \"use_index\":[]}")
                 )
-        ),TeaAreaQueryResultList.class);
+        ),QueryResultList.class);
         System.out.println("提交交易"+new String(
                 contract.submitTransaction("queryById" , "{\"selector\":{\""+key+"\":\""+value+"\"}, \"use_index\":[]}")
         ));
         System.out.println(resultList);
-        TeaAreaQueryResult result = resultList.getTeaAreas().get(index);
+        QueryResult result = resultList.getResultList().get(index);
         System.out.println(result);
         String json = result.getJson();
         return json;
@@ -48,15 +48,15 @@ public class FabricUtil<T> {
     public static JSON queryById(String key,String value,String clas,int index) throws Exception {
         Contract contract = getContract();
         // 用户溯源码查询pack实体
-        TeaAreaQueryResultList resultList = JSON.toJavaObject(JSONObject.parseObject(
+        QueryResultList resultList = JSON.toJavaObject(JSONObject.parseObject(
                 new String(
                         contract.submitTransaction("queryById" , "{\"selector\":{\""+key+"\":\""+value+"\"}, \"use_index\":[]}", clas)
                 )
-        ),TeaAreaQueryResultList.class);
-        TeaAreaQueryResult a = JSON.toJavaObject(
+        ),QueryResultList.class);
+        QueryResult a = JSON.toJavaObject(
                 JSONObject.parseObject(
-                        String.valueOf(resultList.getTeaAreas().get(index))
-                ),TeaAreaQueryResult.class
+                        String.valueOf(resultList.getResultList().get(index))
+                ),QueryResult.class
         );
         JSON json = JSON.parseObject(JSON.toJSONString(a.getJson()));
         //TeaPack pack = json.toJavaObject(TeaPack.class);// 拿到TeaPack实体
@@ -65,14 +65,14 @@ public class FabricUtil<T> {
 
 
 
-    public static TeaAreaQueryResultList queryByIdList(String key,String value,String clas) throws Exception {
+    public static QueryResultList queryByIdList(String key, String value, String clas) throws Exception {
         Contract contract = getContract();
         // 用户溯源码查询pack实体
-        TeaAreaQueryResultList resultList = JSON.toJavaObject(JSONObject.parseObject(
+        QueryResultList resultList = JSON.toJavaObject(JSONObject.parseObject(
                 new String(
                         contract.submitTransaction("queryById" , "{\"selector\":{\""+key+"\":\""+value+"\"}, \"use_index\":[]}", clas)
                 )
-        ),TeaAreaQueryResultList.class);
+        ),QueryResultList.class);
 
         return resultList;
     }

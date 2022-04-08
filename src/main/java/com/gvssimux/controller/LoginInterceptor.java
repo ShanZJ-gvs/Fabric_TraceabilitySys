@@ -1,4 +1,4 @@
-package com.gvssimux.config;
+package com.gvssimux.controller;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,6 +33,18 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         if (request.getRequestURI().contains("setuser")){
             System.out.println("Loginintercepter===>url contian setuser");
+            return true;
+        }
+        if (request.getRequestURI().contains("tohome")){
+            System.out.println("Loginintercepter===>url contian tohome");
+            return true;
+        }
+        if (request.getRequestURI().contains("login")){
+            System.out.println("Loginintercepter===>url contian login");
+            return true;
+        }
+        if (request.getRequestURI().contains("toauthlogin")){
+            System.out.println("Loginintercepter===>url contian toauthlogin");
             return true;
         }
 

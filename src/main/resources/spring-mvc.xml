@@ -115,12 +115,12 @@
 
 
     <!--拦截器配置-->
-    <!--    <mvc:interceptors>-->
-    <!--        <mvc:interceptor>-->
-    <!--            &lt;!&ndash;/**包括这个请求下面的所有请求 &ndash;&gt;-->
-    <!--            <mvc:mapping path="/**"/>-->
-    <!--            <bean class="com.gvssimux.config.LoginInterceptor"/>-->
-    <!--        </mvc:interceptor>-->
-    <!--    </mvc:interceptors>-->
+       <!-- <mvc:interceptors>
+            <mvc:interceptor>
+                &lt;!&ndash;/**包括这个请求下面的所有请求 &ndash;&gt;
+                <mvc:mapping path="/**"/>
+                <bean class="com.gvssimux.controller.LoginInterceptor"/>
+            </mvc:interceptor>
+        </mvc:interceptors>-->
 
 </beans>

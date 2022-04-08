@@ -38,6 +38,18 @@ public class TeaGarden {
     private String teaGardenId2;
 
 
+    /**
+     * 所属公司
+     * */
+    private String company;
+
+
+    /**
+     * 用于在富查询时标识查询类型的实体对象
+     * */
+    private final String type = "TeaGarden";
+
+
     private String teaGardenAreaid;
 
 

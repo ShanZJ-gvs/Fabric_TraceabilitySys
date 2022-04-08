@@ -20,7 +20,8 @@ public class PageJumpController {
      * 跳转到home页面
      */
     @RequestMapping("/tohome")
-    public String tohome() throws Exception {
+    public String tohome( Model model) throws Exception {
+        model.addAttribute("action","wwwwdgwa");
         return "home";
     }
 
