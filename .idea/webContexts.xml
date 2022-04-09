@@ -4,6 +4,7 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/tea/form-wizards.html" value="file://$PROJECT_DIR$/web" />
+        <entry key="file://$PROJECT_DIR$/web/WEB-INF/tea/home.html" value="file://$PROJECT_DIR$/web/WEB-INF/tea" />
       </map>
     </option>
   </component>

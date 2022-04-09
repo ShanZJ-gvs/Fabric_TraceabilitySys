@@ -28,7 +28,7 @@ public class Test03 {
         System.out.println(mapper.selectOffsetLimit(contract,1,7));
     }
 
-    /*插入带公司标识的茶区*/
+    /*插入带公司标识的茶园*/
     @Test
     public void test04() throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -41,7 +41,7 @@ public class Test03 {
 
     }
 
-    /*查询某个公司下有多少个茶区*/
+    /*查询某个公司下有多少个茶园*/
     @Test
     public void test05() throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");

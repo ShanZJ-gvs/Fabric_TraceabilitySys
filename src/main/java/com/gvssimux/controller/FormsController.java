@@ -195,7 +195,7 @@ public class FormsController {
         Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
         log.info("===>开始提交区块链交易===>");
 
-        byte[] bytes = contract.submitTransaction("createOneTeaPick",request.getParameter("key"),
+        byte[] bytes = contract.submitTransaction("createData",request.getParameter("key"),
                 request.getParameter("tea_pick_per_id"),request.getParameter("tea_pick_per_name"),request.getParameter("tea_pick_per_sex"),
                 request.getParameter("tea_pick_time"),request.getParameter("tea_pick_id"),request.getParameter("tea_tree_id2"),
                 request.getParameter("tea_pick_quality"));
@@ -243,7 +243,7 @@ public class FormsController {
         Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
         log.info("===>开始提交区块链交易===>");
 
-        byte[] bytes = contract.submitTransaction("createOneTeaMake",request.getParameter("key"),
+        byte[] bytes = contract.submitTransaction("createData",request.getParameter("key"),
                 request.getParameter("tea_make_per_id"),request.getParameter("tea_make_per_name"),request.getParameter("tea_make_per_sex"),
                 request.getParameter("tea_make_time"),request.getParameter("tea_make_way"),request.getParameter("tea_make_id"));
 
@@ -290,7 +290,7 @@ public class FormsController {
         Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
         log.info("===>开始提交区块链交易===>");
 
-        byte[] bytes = contract.submitTransaction("createOneTeaRank",request.getParameter("key"),
+        byte[] bytes = contract.submitTransaction("createData",request.getParameter("key"),
                 request.getParameter("tea_rank_per_id"),request.getParameter("tea_rank_per_name"),request.getParameter("tea_rank_per_sex"),
                 request.getParameter("tea_rank_time"),request.getParameter("tea_rank_id"),request.getParameter("tea_rank_rank"));
 
@@ -339,7 +339,7 @@ public class FormsController {
         Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
         log.info("===>开始提交区块链交易===>");
 
-        byte[] bytes = contract.submitTransaction("createOneTeaPack",request.getParameter("key"),
+        byte[] bytes = contract.submitTransaction("createData",request.getParameter("key"),
                 request.getParameter("tea_pack_per_id"),request.getParameter("tea_pack_per_name"),request.getParameter("tea_pack_per_sex"),
                 request.getParameter("tea_pack_time"),request.getParameter("tea_pack_smll_box_id"),request.getParameter("tea_pack_big_box_id"),
                 request.getParameter("tea_pack_id"));
@@ -390,7 +390,7 @@ public class FormsController {
         Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
         log.info("===>开始提交区块链交易===>");
 
-        byte[] bytes = contract.submitTransaction("createOneTeaTesting",request.getParameter("key"),
+        byte[] bytes = contract.submitTransaction("createData",request.getParameter("key"),
                 request.getParameter("tea_testing_per_id"),request.getParameter("tea_testing_per_name"),request.getParameter("tea_testing_per_sex"),
                 request.getParameter("tea_testing_id"),request.getParameter("tea_testing_result"),request.getParameter("tea_testing_time")
                 ,request.getParameter("tea_testing_smll_box_id"),request.getParameter("tea_testing_big_box_id"));

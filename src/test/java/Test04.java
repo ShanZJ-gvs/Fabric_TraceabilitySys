@@ -29,7 +29,7 @@ public class Test04 {
         System.out.println(mapper.selectOffsetLimit(contract,0,10));
     }
 
-    /*插入带公司标识的茶区*/
+    /*插入带公司标识的茶树*/
     @Test
     public void test04() throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -37,19 +37,19 @@ public class Test04 {
         Contract contract = FabricUtil.getContract();
         TeaTree pojo = new TeaTree();
         pojo.setTeaTreeKind("瓜片");
-        pojo.setCompany("百度");
+        pojo.setCompany("阿里巴巴");
         System.out.println(mapper.insertOne(contract,pojo));
 
     }
 
-    /*查询某个公司下有多少个茶区*/
+    /*查询某个公司下有多少个茶树*/
     @Test
     public void test05() throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaTreeServiceImpl mapper = context.getBean("TeaTreeServiceImpl", TeaTreeServiceImpl.class);
         Contract contract = FabricUtil.getContract();
 
-        System.out.println(mapper.getTreeSumByCompany(contract, "百度"));
+        System.out.println(mapper.getTreeSumByCompany(contract, "阿里巴巴"));
 
     }
 

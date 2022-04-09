@@ -17,7 +17,7 @@
 
     <!--导入依赖-->
     <dependencies>
-        <!--html解析model数据-->
+        <!--html解析Model数据-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>

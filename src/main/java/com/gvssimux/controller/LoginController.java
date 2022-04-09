@@ -38,7 +38,7 @@ public class LoginController {
             //把用户的信息存在session中,用于验证
             session.setAttribute("uuid",user);
             System.out.println("LoginController===>");
-            model.addAttribute("msg","wwwwdgwa");
+            model.addAttribute("company",user.getUserUname());
             return "home";
         }
         return "UserPwdError";

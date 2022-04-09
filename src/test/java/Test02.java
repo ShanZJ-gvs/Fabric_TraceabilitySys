@@ -44,7 +44,7 @@ public class Test02 {
         Contract contract = FabricUtil.getContract();
         TeaArea pojo = new TeaArea();
         pojo.setTeaAreaName("007");
-        pojo.setCompany("腾讯");
+        pojo.setCompany("阿里巴巴");
         System.out.println(mapper.insertOne(contract,pojo));
 
     }
@@ -56,7 +56,7 @@ public class Test02 {
         TeaAreaServiceImpl mapper = context.getBean("TeaAreaServiceImpl", TeaAreaServiceImpl.class);
         Contract contract = FabricUtil.getContract();
 
-        System.out.println(mapper.getAreaSumByCompany(contract, "腾讯"));
+        System.out.println(mapper.getAreaSumByCompany(contract, "阿里巴巴"));
 
     }
 

@@ -1,12 +1,12 @@
 ﻿<!DOCTYPE html>
-<html lang="en" >
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-   <title>总览 - 茶叶溯源管理后台 </title> 
-  
+   <title>总览 - 茶叶溯源管理后台 </title>
+
 
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
@@ -47,8 +47,8 @@
                 class="hidden lg:inline-block btn-link ml-3 px-2 text-2xl leading-none la la-expand-arrows-alt"
                 data-toggle="tooltip" data-tippy-content="Fullscreen" id="fullScreenToggler"></button>
 
-           
-           
+
+
             <!-- User Menu -->
             <div class="dropdown">
                 <button class="flex items-center ml-4 text-gray-700 focus:outline-none" data-toggle="custom-dropdown-menu"
@@ -57,7 +57,7 @@
                         class="dark:bg-gray-900 dark:border-gray-600 dark:text-gray-500 flex items-center justify-center w-12 h-12 rounded-full bg-gray-200 border-2 border-gray-600 text-xl text-gray-700">U</span>
                 </button>
                 <div class="custom-dropdown-menu w-64">
-                  
+
                     <hr class="dark:border-gray-900 mb-0">
                     <div class="p-5">
                         <a href="#"
@@ -141,8 +141,8 @@
                         <div
                             class="card px-4 py-8 text-center lg:transform hover:scale-110 hover:shadow-lg transition-transform duration-200">
                             <span class="text-primary text-5xl leading-none la la-layer-group"></span>
-                            <p class="mt-2">茶区茶树种类</p>
-                            <div class="text-primary mt-5 text-3xl leading-none">{{kindsum}}</div>
+                            <p class="mt-2">茶树数</p>
+                            <div class="text-primary mt-5 text-3xl leading-none">{{treesum}}</div>
                         </div>
                     </div>
                 </div>
@@ -223,8 +223,14 @@
                 </nav>
             </div>
         </footer>
+        <span id="company2" >wadwa</span>
+        <span v-show="false" th:text="${company}" id="company" ></span>
 
     </main>
+
+
+
+
 
     <!-- Scripts -->
     <script src="assets/js/vendor.js"></script>
@@ -246,36 +252,32 @@
                data:{
                    kindsum:0,
                    areasum:0,
-                   gardensum:0
+                   gardensum:0,
+                   treesum:0,
+                   company1:document.getElementById("company").innerHTML
                },
                mounted () {
                    axios
-                    .get('/Fabric_TraceabilitySys_war_exploded/kindsum')
+                    .get('/Fabric_TraceabilitySys_war_exploded/kindsum',
+                        {
+                            params: {
+                                companyName:document.getElementById("company").innerHTML
+                            }
+                        }
+                    )
                     .then((response) =>{ // 这里如果不用箭头函数的话，this指的Windows
-
+                        console.log("company"+document.getElementById("company").innerHTML);
                         console.log("json:",JSON.parse(JSON.stringify(response.data)));
                         console.log(this);
                         console.log(JSON.parse(JSON.stringify(response.data[0])));
+                        this.company1 = document.getElementById("company").innerHTML;
                         this.kindsum = JSON.parse(JSON.stringify(response.data[0]));
                         this.areasum = JSON.parse(JSON.stringify(response.data[1]));
                         this.gardensum = JSON.parse(JSON.stringify(response.data[2]));
+                        this.treesum = JSON.parse(JSON.stringify(response.data[3]));
                     }, function (error) {
                         console.log(error);
                     });
-
-                   axios
-                       .get('/Fabric_TraceabilitySys_war_exploded/kindsum')
-                       .then((response) =>{ // 这里如果不用箭头函数的话，this指的Windows
-
-                           console.log("json:",JSON.parse(JSON.stringify(response.data)));
-                           console.log(this);
-                           console.log(JSON.parse(JSON.stringify(response.data[0])));
-                           this.kindsum = JSON.parse(JSON.stringify(response.data[0]));
-                           this.areasum = JSON.parse(JSON.stringify(response.data[1]));
-                           this.gardensum = JSON.parse(JSON.stringify(response.data[2]));
-                       }, function (error) {
-                           console.log(error);
-                       });
 
                },
                methods:{
