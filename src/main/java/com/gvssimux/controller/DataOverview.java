@@ -3,16 +3,14 @@ package com.gvssimux.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.gvssimux.pojo.fabquery.QueryResultList;
-import com.gvssimux.service.TeaAreaServiceImpl;
-import com.gvssimux.service.TeaGardenServiceImpl;
-import com.gvssimux.service.TeaKindServiceImpl;
+import com.gvssimux.service.*;
 
-import com.gvssimux.service.TeaTreeServiceImpl;
 import com.gvssimux.util.FabricUtil;
 import com.gvssimux.util.JsonUtil;
 import lombok.extern.java.Log;
 import org.apache.ibatis.annotations.Param;
 import org.hyperledger.fabric.gateway.Contract;
+import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -98,6 +96,22 @@ public class DataOverview {
 
 
 
+    /* 查询每月的采摘量*/
+    @ResponseBody
+    @GetMapping("/pickper")
+    public String pickper(@Param("companyName") String companyName, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        TeaPickServiceImpl mapper = context.getBean("TeaPickServiceImpl", TeaPickServiceImpl.class);
+        Contract contract = FabricUtil.getContract();
+
+        HashMap map = mapper.getPickPerSumByCompany(contract, companyName);
+
+
+        System.out.println("每月的采摘量====》"+map);
+        System.out.println("前端接收的数据====》"+JsonUtil.getJson(map));
+
+        return JsonUtil.getJson(map);
+    }
 
 
 

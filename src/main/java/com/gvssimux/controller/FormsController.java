@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.gvssimux.pojo.*;
 import com.gvssimux.service.TeaAreaServiceImpl;
 import com.gvssimux.service.TeaGardenServiceImpl;
+import com.gvssimux.service.TeaPickServiceImpl;
 import com.gvssimux.service.TeaTreeServiceImpl;
 import com.gvssimux.util.FabricUtil;
 import com.gvssimux.util.JsonUtil;
@@ -165,6 +166,8 @@ public class FormsController {
     @ResponseBody
     @PostMapping("teapick")
     public String teapick(HttpServletRequest request,HttpServletResponse response) throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        TeaPickServiceImpl mapper = context.getBean("TeaPickServiceImpl", TeaPickServiceImpl.class);
 
         /**
          * 给采摘实体添加数据
@@ -177,6 +180,8 @@ public class FormsController {
         pojo.setTeaPickId(request.getParameter("tea_pick_id"));// 用teaPickId充当茶叶批id，因为一批茶叶的是同时采摘的
         pojo.setTeaTreeId2(request.getParameter("tea_tree_id2"));
         pojo.setTeaPickQuality(request.getParameter("tea_pick_quality"));
+        pojo.setCompany(request.getParameter("companyName"));// 公司
+        pojo.setOutput(Integer.valueOf(request.getParameter("output"))); //产量
 
 
         /**
@@ -188,9 +193,13 @@ public class FormsController {
         employee.setEname(request.getParameter("tea_pick_per_name"));// 采摘师姓名
         employee.setEsex(request.getParameter("tea_pick_per_sex"));// 采摘师性别
 
+
         request.getParameter("key");
 
-        /*往区块中加数据*/
+        Contract contract = FabricUtil.getContract();
+
+        /*
+         往区块中加数据
         String  CCP = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com" +
                 "/connection-org1.yaml";
         Path walletPath = Paths.get("/usr/software/Fabric_TraceabilitySys/wallet");
@@ -207,9 +216,9 @@ public class FormsController {
 
         if (bytes!=null){
             log.info("===>交易提交成功===>");
-        }
+        }*/
 
-        return s;// 返回字符串
+        return mapper.insertOne(contract, pojo);// 返回字符串
     }
 
 

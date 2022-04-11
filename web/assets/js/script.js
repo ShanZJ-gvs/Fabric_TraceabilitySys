@@ -1314,7 +1314,7 @@ if (typeof Chart !== "undefined") {
 
       // The data for our dataset
       data: {
-        labels: ["白茶", "碧螺春", "西湖龙井"],
+        labels: ["null", "null"], //labels: ["白茶", "碧螺春", "西湖龙井"],
         datasets: [
           {
             backgroundColor: [

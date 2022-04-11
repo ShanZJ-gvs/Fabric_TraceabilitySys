@@ -47,7 +47,7 @@
 
     <!--采摘service-->
     <bean id="TeaPickServiceImpl" class="com.gvssimux.service.TeaPickServiceImpl">
-        <property name="mapper" ref="teaPickDao"/>
+        <property name="k" value="Pick"/>
     </bean>
 
     <!--制茶service-->

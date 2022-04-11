@@ -51,7 +51,7 @@ public class TeaGardenServiceImpl implements TeaGardenService{
         return s;
     }
 
-    /*全部查询*/
+    /*限制查询*/
     @Override
     public QueryResultList selectOffsetLimit(Contract contract,int offset,int limit) {
         byte[] bytes;

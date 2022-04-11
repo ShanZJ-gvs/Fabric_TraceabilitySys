@@ -66,7 +66,7 @@ public class teatesting {
     public void test06(){
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaPickServiceImpl mapper = context.getBean("TeaPickServiceImpl", TeaPickServiceImpl.class);
-        System.out.println(mapper.selectAll());
+
     }
 
     // 全部查询teaRank
@@ -74,7 +74,7 @@ public class teatesting {
     public void test07(){
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaRankServiceImpl mapper = context.getBean("TeaRankServiceImpl", TeaRankServiceImpl.class);
-        System.out.println(mapper.selectAll());
+
     }
 
 
@@ -83,7 +83,7 @@ public class teatesting {
     public void test08(){
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaTestingServiceImpl mapper = context.getBean("TeaTestingServiceImpl", TeaTestingServiceImpl.class);
-        System.out.println(mapper.selectAll());
+
     }
 
 
@@ -92,7 +92,7 @@ public class teatesting {
     public void test09(){
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaMakeServiceImpl mapper = context.getBean("TeaMakeServiceImpl", TeaMakeServiceImpl.class);
-        System.out.println(mapper.selectAll());
+
     }
 
 
@@ -101,7 +101,7 @@ public class teatesting {
     public void test010(){
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaMakeServiceImpl mapper = context.getBean("TeaMakeServiceImpl", TeaMakeServiceImpl.class);
-        System.out.println(mapper.selectAll());
+
     }
 
 

@@ -1,16 +1,21 @@
 package com.gvssimux.service;
 
+import com.gvssimux.pojo.TeaArea;
 import com.gvssimux.pojo.TeaPick;
+import com.gvssimux.pojo.fabquery.QueryResultList;
+import org.hyperledger.fabric.gateway.Contract;
 
 import java.util.List;
 
 public interface TeaPickService {
-    /*全部插入*/
-    int insert(TeaPick record);
 
-    /*部分插入*/
-    int insertSelective(TeaPick record);
 
-    /*全部查询*/
-    List<TeaPick> selectAll();
+    /*插入*/
+    String insertOne(Contract contract, TeaPick record);
+
+    /*限制查询*/
+    QueryResultList selectOffsetLimit(Contract contract,String companyName,String teaPickId, int offset, int limit) throws Exception;
+
+
+
 }

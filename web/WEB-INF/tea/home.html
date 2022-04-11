@@ -13,8 +13,8 @@
 
 <body>
 
-       <!-- Top Bar  -->
-       <header class="top-bar">
+    <!-- Top Bar  -->
+    <header class="top-bar" id="topbar">
 
         <!-- Menu Toggler -->
         <button type="button" class="menu-toggler la la-bars" data-toggle="menu"></button>
@@ -62,7 +62,7 @@
                     <div class="p-5">
                         <a href="#"
                             class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary"><span
-                                class="la la-user-circle text-2xl leading-none mr-2"></span>管理员</a>
+                                class="la la-user-circle text-2xl leading-none mr-2"></span>管理员:{{company1}}</a>
                         <a href="#"
                             class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary mt-5"><span
                                 class="la la-key text-2xl leading-none mr-2"></span>更改密码</a>
@@ -78,8 +78,9 @@
         </div>
     </header>
 
+
     <!-- Menu Bar -->
-       <aside class="menu-bar">
+    <aside class="menu-bar" id=menu>
            <div class="menu menu-sticky">
                <div class="menu-items">
                    <a href="./tohome" data-toggle="tooltip-menu" data-tippy-content="Dashboard"><span
@@ -223,6 +224,7 @@
                 </nav>
             </div>
         </footer>
+
         <span v-show="false" th:text="${company}" id="company" ></span>
 
     </main>
@@ -244,7 +246,8 @@
        <!--BMS-->
        <script src="assets/js/jquery.min.js"></script>
 
-       <script src="assets/js/shanzj1.js"></script>
+       <script src="assets/js/workspace_shanzj.js"></script>
+       <script src="assets/js/topbar_shanzj.js"></script>
 
 
 
