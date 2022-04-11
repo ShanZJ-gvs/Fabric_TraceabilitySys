@@ -1,6 +1,7 @@
 package com.gvssimux.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.gvssimux.pojo.fabquery.QueryResultList;
 import com.gvssimux.service.TeaAreaServiceImpl;
 import com.gvssimux.service.TeaGardenServiceImpl;
@@ -23,6 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @Log
@@ -45,30 +48,74 @@ public class DataOverview {
     @GetMapping("/kindsum")
     public String  kindsum(@Param("companyName") String companyName, HttpServletRequest request, HttpServletResponse response) throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        TeaKindServiceImpl mapper = context.getBean("TeaKindServiceImpl", TeaKindServiceImpl.class);
+        TeaTreeServiceImpl mapper = context.getBean("TeaTreeServiceImpl", TeaTreeServiceImpl.class);
 
         Contract contract = FabricUtil.getContract();
-        ArrayList<Integer> list1 = new ArrayList<Integer>();
         companyName = request.getParameter("companyName");
 
         System.out.println("--------------------------------------"+request.getParameter("companyName")+"--------------------------------------");
+        System.out.println();
 
-        list1.add(mapper.getSum(contract));
-        list1.add(areasum(contract,companyName));// 按公司名查茶区数
-        list1.add(gardensum(contract,companyName));// 按公司名查茶园数
-        list1.add(treesum(contract,companyName));// 按公司名查茶树数
-        System.out.println("list11111111  "+list1);
+
+        String json = "{\"瓜片1\":2,\"猴魁\":2,\"瓜片\":2}";
+        HashMap<String,Integer> hashMap = mapper.getTreeSumByCompanyToKind(contract, companyName);
+
+
+        System.out.println();
+        System.out.println("hashMap====>"+hashMap);
+
+        hashMap.put("茶区数量",areasum(contract,companyName));
+        hashMap.put("茶园数量",gardensum(contract,companyName));
+        hashMap.put("茶树数量",treesum(contract,companyName));
+
+        System.out.println("\n hashMap to jsonStr====》 "+JsonUtil.getJson(hashMap));
+
+        System.out.println("\n 前端拿到的json字符串====》 "+JsonUtil.getJson(hashMap));
+
+        return JsonUtil.getJson(hashMap);
+    }
+
+
+    @ResponseBody
+    @GetMapping("/kinds")
+    // 获取有哪些种类
+    public String  kinds(@Param("companyName") String companyName, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        TeaKindServiceImpl mapper = context.getBean("TeaKindServiceImpl", TeaKindServiceImpl.class);
+
+        Contract contract = FabricUtil.getContract();
+        companyName = request.getParameter("companyName");
+
+        List list1 = mapper.getKindByCompany(contract, companyName);
+        System.out.println();
+        System.out.println("公司有哪些茶种 List====>"+list1);
+        System.out.println();
+        System.out.println("前端哪到的数据====>"+ JsonUtil.getJson(list1));
+
         return JsonUtil.getJson(list1);
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*        被上面调用的方法                      */
 
     public static int areasum(Contract contract,String companyName) throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaAreaServiceImpl mapper = context.getBean("TeaAreaServiceImpl", TeaAreaServiceImpl.class);
         return mapper.getAreaSumByCompany(contract,companyName);
     }
-
 
     public static int gardensum(Contract contract,String companyName) throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -81,6 +128,8 @@ public class DataOverview {
         TeaTreeServiceImpl mapper = context.getBean("TeaTreeServiceImpl", TeaTreeServiceImpl.class);
         return mapper.getTreeSumByCompany(contract,companyName);
     }
+
+    /*            被上面调用的方法                  */
 
 
 

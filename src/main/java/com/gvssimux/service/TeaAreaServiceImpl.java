@@ -2,19 +2,15 @@ package com.gvssimux.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.gvssimux.dao.TeaAreaDao;
 import com.gvssimux.pojo.TeaArea;
 import com.gvssimux.pojo.fabquery.QueryResult;
 import com.gvssimux.pojo.fabquery.QueryResultList;
-import com.gvssimux.util.FabricUtil;
 import org.hyperledger.fabric.gateway.Contract;
 import org.hyperledger.fabric.gateway.ContractException;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
-import static org.apache.logging.log4j.ThreadContext.isEmpty;
+
 
 public class TeaAreaServiceImpl implements TeaAreaService {
     private String k;
@@ -112,7 +108,7 @@ public class TeaAreaServiceImpl implements TeaAreaService {
     }
 
 
-    /*查询一个公司下有哪些茶区*/
+    /*查询一个公司下有多少茶区*/
     public int getAreaSumByCompany(Contract contract,String companyName){
         byte[] bytes = new byte[0];
         String str = "{\"selector\":{\"company\":\""+companyName+"\",\"type\":\"TeaArea\"}, \"use_index\":[]}";// 富查询字符串

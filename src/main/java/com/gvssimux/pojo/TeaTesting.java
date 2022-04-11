@@ -32,6 +32,9 @@ public class TeaTesting {
 
     private String teaTestingBigBoxId;
 
+    // 公司
+    private String company;
+
 
 
 }

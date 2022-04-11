@@ -3,13 +3,18 @@ package com.gvssimux.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.gvssimux.pojo.TeaTree;
+import com.gvssimux.pojo.fabquery.QueryResult;
 import com.gvssimux.util.FabricUtil;
+import com.gvssimux.util.JsonUtil;
 import org.hyperledger.fabric.gateway.Contract;
 import org.hyperledger.fabric.gateway.ContractException;
 
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
@@ -109,9 +114,37 @@ public class TeaKindServiceImpl implements TeaKindService{
         return list1.size();
     }
 
+    // 获取一个公司有哪些种茶树
+    public List getKindByCompany(Contract contract,String companyName) {
+        byte[] bytes = new byte[0];
+        String str = "{\"selector\":{\"company\":\"" + companyName + "\",\"type\":\"TeaTree\"}, \"use_index\":[]}";// 富查询字符串
+        ArrayList<String> l1 = new ArrayList<>();
+        try {
+            bytes = contract.submitTransaction("richQuery", str);
+            String s = new String(bytes);
+            List<QueryResult> list = JsonUtil.jsonStrToList(s);
+            for (QueryResult a : list) {    // for循环可以打印某公司所有的茶树
+                String json = a.getJson(); // 一棵茶树的jsonStr
+                JSONObject jsonObject = JSONObject.parseObject(json);
+                TeaTree tree1 = JSON.toJavaObject(jsonObject, TeaTree.class); // 拿到一颗茶树
+                String kind = tree1.getTeaTreeKind(); // 拿到茶种
+                if (!l1.contains(kind)){
+                    l1.add(kind);  // 茶种不在记录，便添加
+                }
+            }
+            return l1;     //  ["瓜片","瓜片1","猴魁"]
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 
 
-    public void setK(String k) {
+
+
+
+        public void setK(String k) {
         this.k = k;
     }
 

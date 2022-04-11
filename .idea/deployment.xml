@@ -1,14 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="192.168.0.119" remoteFilesAllowedToDisappearOnAutoupload="false" showNewOnTargetInSync="false">
-    <serverData>
-      <paths name="192.168.0.119">
-        <serverdata>
-          <mappings>
-            <mapping deploy="/Fabric_TraceabilitySys" local="$PROJECT_DIR$" web="/Fabric_TraceabilitySys" />
-          </mappings>
-        </serverdata>
-      </paths>
-    </serverData>
-  </component>
+  <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false" showNewOnTargetInSync="false" />
 </project>

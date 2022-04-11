@@ -8,10 +8,13 @@ import com.gvssimux.pojo.TeaTree;
 import com.gvssimux.pojo.fabquery.QueryResult;
 import com.gvssimux.pojo.fabquery.QueryResultList;
 import com.gvssimux.util.FabricUtil;
+import com.gvssimux.util.JsonUtil;
 import org.hyperledger.fabric.gateway.Contract;
 import org.hyperledger.fabric.gateway.ContractException;
+import sun.reflect.generics.tree.Tree;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
@@ -139,6 +142,47 @@ public class TeaTreeServiceImpl implements TeaTreeService{
             return -1;
         }
 
+    }
+
+
+    /*查询一个公司下，茶种对应有多少棵茶树*/
+    public HashMap getTreeSumByCompanyToKind(Contract contract,String companyName) {
+        byte[] bytes = new byte[0];
+        String str = "{\"selector\":{\"company\":\"" + companyName + "\",\"type\":\"TeaTree\"}, \"use_index\":[]}";// 富查询字符串
+        HashMap<String, Integer> Sites = null;
+        try {
+            bytes = contract.submitTransaction("richQuery", str);
+            String s = new String(bytes);
+            List<QueryResult> list = JsonUtil.jsonStrToList(s);
+            for (QueryResult a : list) {    // for循环可以打印某公司所有的茶树
+                String json = a.getJson(); // 一棵茶树的jsonStr
+                JSONObject jsonObject = JSONObject.parseObject(json);
+                TeaTree tree1 = JSON.toJavaObject(jsonObject, TeaTree.class);
+                System.out.println(tree1);
+            }
+
+            System.out.println();
+            Sites = new HashMap<String, Integer>();
+            List<String> kinds = new ArrayList<>();// new 一个来接收这些茶树的种类
+            for (QueryResult a : list) {
+                String json = a.getJson(); // 一棵茶树的jsonStr
+                JSONObject jsonObject = JSONObject.parseObject(json);
+                TeaTree tree2 = JSON.toJavaObject(jsonObject, TeaTree.class);// 拿到一棵茶树
+                String kind = tree2.getTeaTreeKind();  // 茶树种类
+                if (!Sites.containsKey(kind)) { // 判断集合是否存在 这棵茶树的茶种
+                    Sites.put(kind, 1); // 加入记录
+                } else {// 如果茶种类已被纪录
+                    Integer sum = Sites.get(kind);
+                    Sites.replace(kind, sum + 1);
+                }
+            }
+            System.out.println("茶树种类以及对应数量的Map映射集===》" + Sites);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return Sites;
     }
 
 

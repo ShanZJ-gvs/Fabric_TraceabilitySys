@@ -223,7 +223,6 @@
                 </nav>
             </div>
         </footer>
-        <span id="company2" >wadwa</span>
         <span v-show="false" th:text="${company}" id="company" ></span>
 
     </main>
@@ -245,47 +244,7 @@
        <!--BMS-->
        <script src="assets/js/jquery.min.js"></script>
 
-       <script type="text/javascript" >
-           Vue.config.productionTip = false
-           const vm = new Vue({
-               el: '#root',
-               data:{
-                   kindsum:0,
-                   areasum:0,
-                   gardensum:0,
-                   treesum:0,
-                   company1:document.getElementById("company").innerHTML
-               },
-               mounted () {
-                   axios
-                    .get('/Fabric_TraceabilitySys_war_exploded/kindsum',
-                        {
-                            params: {
-                                companyName:document.getElementById("company").innerHTML
-                            }
-                        }
-                    )
-                    .then((response) =>{ // 这里如果不用箭头函数的话，this指的Windows
-                        console.log("company"+document.getElementById("company").innerHTML);
-                        console.log("json:",JSON.parse(JSON.stringify(response.data)));
-                        console.log(this);
-                        console.log(JSON.parse(JSON.stringify(response.data[0])));
-                        this.company1 = document.getElementById("company").innerHTML;
-                        this.kindsum = JSON.parse(JSON.stringify(response.data[0]));
-                        this.areasum = JSON.parse(JSON.stringify(response.data[1]));
-                        this.gardensum = JSON.parse(JSON.stringify(response.data[2]));
-                        this.treesum = JSON.parse(JSON.stringify(response.data[3]));
-                    }, function (error) {
-                        console.log(error);
-                    });
-
-               },
-               methods:{
-
-               }
-           })
-
-       </script>
+       <script src="assets/js/shanzj1.js"></script>
 
 
 

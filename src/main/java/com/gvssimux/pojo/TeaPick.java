@@ -28,4 +28,9 @@ public class TeaPick {
 
     private String teaPickQuality;
 
+
+    // 公司
+
+    private String company;
+
 }

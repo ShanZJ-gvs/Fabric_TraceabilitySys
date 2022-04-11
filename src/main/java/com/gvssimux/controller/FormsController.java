@@ -55,6 +55,7 @@ public class FormsController {
         pojo.setTeaAreaId2(request.getParameter("tea_area_id2"));
         pojo.setTeaGardenId2(request.getParameter("tea_garden_id2"));
         pojo.setTeaAreaName(request.getParameter("tea_area_name"));
+        pojo.setCompany(request.getParameter("companyName"));
         request.getParameter("key");
 
         log.info("key===> "+request.getParameter("key"));
@@ -95,6 +96,7 @@ public class FormsController {
         pojo.setTeaAreaId2(request.getParameter("tea_area_id2"));
         pojo.setTeaGardenName(request.getParameter("tea_garden_name"));
         pojo.setTeaGardenId2(request.getParameter("tea_garden_id2"));
+        pojo.setCompany(request.getParameter("companyName"));
         request.getParameter("key");
 
 
@@ -135,6 +137,7 @@ public class FormsController {
         pojo.setTeaTreeGrowingEnv(request.getParameter("tea_tree_Growing_Env"));
         pojo.setTeaAreaId2(request.getParameter("tea_area_id2"));
         pojo.setTeaGardenId2(request.getParameter("tea_garden_id2"));
+        pojo.setCompany(request.getParameter("companyName"));
 
         request.getParameter("key");
 /*
