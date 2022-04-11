@@ -4,9 +4,12 @@ package com.gvssimux.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.gvssimux.fabric.RegisterUser;
 import com.gvssimux.fabric.gateway;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class PageJumpController {
@@ -20,8 +23,9 @@ public class PageJumpController {
      * 跳转到home页面
      */
     @RequestMapping("/tohome")
-    public String tohome( Model model) throws Exception {
-        model.addAttribute("action","wwwwdgwa");
+    public String tohome(@Param("companyName") String companyName ,Model model,HttpServletRequest request) throws Exception {
+        companyName = request.getParameter("companyName");
+        model.addAttribute("company",companyName);
         return "home";
     }
 
@@ -49,8 +53,9 @@ public class PageJumpController {
      * 跳转到datas.html页面
      */
     @RequestMapping("/todata")
-    public String toData()throws JsonProcessingException{
-
+    public String toData(@Param("companyName") String companyName ,Model model,HttpServletRequest request)throws JsonProcessingException{
+        companyName = request.getParameter("companyName");
+        model.addAttribute("company",companyName);
         return "datas";
     }
 

@@ -1,15 +1,21 @@
 
 Vue.config.productionTip = false
-const vm = new Vue({
+const menu_vm = new Vue({
     el: '#menu',
     data:{
-        kinds:["null","null"],
-        kinds2:[-1,-1],
-        kindsum:-1,
-        areasum:-1,
-        gardensum:-1,
-        treesum:-1,
-        company1:document.getElementById("company").innerHTML
+        company1:document.getElementById("company").innerHTML,
+    },
+    computed:{
+        tohome:{
+            get(){
+                return "./tohome?companyName="+this.company1
+            }
+        },
+        todata:{
+            get(){
+                return "./todata?companyName="+this.company1
+            }
+        }
     },
     mounted () {
     },

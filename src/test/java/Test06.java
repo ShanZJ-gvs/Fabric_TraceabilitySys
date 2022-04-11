@@ -34,7 +34,7 @@ public class Test06 {
         pojo.setTeaPickQuality("合格");
         pojo.setCompany("阿里巴巴");
         pojo.setTeaPickId("pick001");
-        pojo.setTeaPickTime("二月");
+        pojo.setMonth("二月");
         pojo.setOutput(1000);
         mapper.insertOne(contract,pojo);
     }

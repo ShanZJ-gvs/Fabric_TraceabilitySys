@@ -23,6 +23,7 @@ public class Test02 {
         Contract contract = FabricUtil.getContract();
         TeaArea pojo = new TeaArea();
         pojo.setTeaAreaName("006");
+        pojo.setCompany("阿里巴巴");
 
         System.out.println(mapper.insertOne(contract,pojo));
     }
@@ -33,7 +34,7 @@ public class Test02 {
         TeaAreaServiceImpl mapper = context.getBean("TeaAreaServiceImpl", TeaAreaServiceImpl.class);
 
         Contract contract = FabricUtil.getContract();
-        System.out.println(mapper.selectOffsetLimit(contract,1,7));
+        System.out.println(mapper.selectOffsetLimit(contract,"阿里巴巴",0,5));
     }
 
     /*插入带公司标识的茶区*/

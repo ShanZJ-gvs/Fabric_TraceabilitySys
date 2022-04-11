@@ -3,15 +3,16 @@ Vue.config.productionTip = false
 const vm = new Vue({
     el: '#root',
     data:{
-    kinds:[],
-    kinds2:[],
-    perkey:["一月", "二月", "三月", "四月", "五月", "六月","七月","八月","九月","十月","十一月","十二月"],
-    pickpersumvalue:[],
-    kindsum:-1,
-    areasum:-1,
-    gardensum:-1,
-    treesum:-1,
-    company1:document.getElementById("company").innerHTML
+        kinds:[],
+        kinds2:[],
+        perkey:["一月", "二月", "三月", "四月", "五月", "六月","七月","八月","九月","十月","十一月","十二月"],
+        pickpersumvalue:[],
+        makepersumvalue:[],
+        kindsum:-1,
+        areasum:-1,
+        gardensum:-1,
+        treesum:-1,
+        company1:document.getElementById("company").innerHTML
 },
 mounted () {
     axios.get('/Fabric_TraceabilitySys_war_exploded/kinds',
@@ -83,6 +84,31 @@ mounted () {
     }, function (error) {
         console.log(error);
     });
+
+    axios.get('/Fabric_TraceabilitySys_war_exploded/makeper',
+        {
+            params: {
+                companyName:document.getElementById("company").innerHTML
+            }
+        })
+        .then((response) =>{ // 这里如果不用箭头函数的话，this指的Windows
+
+            const jsonData = JSON.parse(JSON.stringify(response.data));
+            console.log("makeper 返回数据的json===》",jsonData);
+
+            this.company1 = document.getElementById("company").innerHTML;
+
+            for (let i = 0; i < this.perkey.length; i++) {
+                if (jsonData[this.pickpersumvalue[i]] !== 0){
+                    this.makepersumvalue[i] = jsonData[this.perkey[i]];
+                }else {
+                    this.makepersumvalue[i] = 0;
+                }
+            };
+
+        }, function (error) {
+            console.log(error);
+        });
 
    /* function canvas1() {
         console.log("canvas===>");
@@ -685,11 +711,11 @@ function canvas2(){
                     labels: vm.perkey,
                     datasets: [
                         {
-                            label: "出货量",
+                            label: "制茶量",
                             backgroundColor: "rgba(" + colors.primary + ", .1)",
                             borderColor: "rgba(" + colors.primary + ")",
                             borderWidth: 2,
-                            data: [5, 7, 13, 10, 10, 10],
+                            data: vm.makepersumvalue,
                         },
                         {
                             label: "采摘量",
@@ -719,9 +745,9 @@ function canvas2(){
                                     drawBorder: false,
                                 },
                                 ticks: {
-                                    stepSize: 5,
+                                    stepSize: 1000,
                                     min: 0,
-                                    max: 20,
+                                    max: 5000,
                                 },
                             },
                         ],

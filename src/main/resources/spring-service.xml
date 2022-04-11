@@ -52,7 +52,7 @@
 
     <!--制茶service-->
     <bean id="TeaMakeServiceImpl" class="com.gvssimux.service.TeaMakeServiceImpl">
-        <property name="mapper" ref="teaMakeDao"/>
+        <property name="k" value="Make"/>
     </bean>
 
     <!--定级service-->

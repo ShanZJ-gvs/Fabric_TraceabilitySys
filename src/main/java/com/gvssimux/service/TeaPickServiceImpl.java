@@ -128,7 +128,7 @@ public class TeaPickServiceImpl implements TeaPickService{
         for (QueryResult a : list) {
             jsonObject = JSONObject.parseObject( a.getJson() );
             TeaPick teaPick = JSON.toJavaObject(jsonObject, TeaPick.class);
-            String key = teaPick.getTeaPickTime(); // 时间作为key
+            String key = teaPick.getMonth(); // 时间作为key
             Integer value = teaPick.getOutput(); // 产量作为value
             if (!map.containsKey(key)){ // key不在map中
                 map.put(key,value);

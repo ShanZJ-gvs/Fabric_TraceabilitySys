@@ -46,12 +46,14 @@ public class TeaAreaServiceImpl implements TeaAreaService {
         return s;
     }
 
+
     /*限制查询*/
     @Override
-    public QueryResultList selectOffsetLimit(Contract contract,int offset,int limit) {
+    public QueryResultList selectOffsetLimit(Contract contract,String companyName,int offset,int limit) {
         byte[] bytes;
+        String str = "{\"selector\":{\"company\":\""+companyName+"\",\"type\":\"TeaArea\"}, \"use_index\":[]}";// 富查询字符串
         try {
-            bytes = contract.submitTransaction("queryAllByKey", k);
+            bytes = contract.submitTransaction("richQuery", str);
         } catch (ContractException e) {
             e.printStackTrace();
             return null;

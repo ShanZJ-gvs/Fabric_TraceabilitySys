@@ -14,6 +14,9 @@ public class TeaMake {
     // 制茶时间
     private String teaMakeTime;
 
+    // 采摘月份
+    private String month;
+
     // 制茶工艺
     private String teaMakeWay;
 

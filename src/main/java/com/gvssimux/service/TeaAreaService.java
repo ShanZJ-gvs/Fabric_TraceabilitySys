@@ -15,7 +15,7 @@ public interface TeaAreaService {
     String insertOne(Contract contract,TeaArea record);
 
     /*查询全部*/
-    QueryResultList selectOffsetLimit(Contract contract,int offset,int limit) throws Exception;
+    QueryResultList selectOffsetLimit(Contract contract,String companyName,int offset,int limit) throws Exception;
 
     int getSum(Contract contract);
 

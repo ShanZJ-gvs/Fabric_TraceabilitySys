@@ -14,6 +14,9 @@ public class TeaPack {
     // 包装时间
     private String teaPackTime;
 
+    // 采摘月份
+    private String month;
+
     // 小盒编号
     private String teaPackSmllBoxId;
 

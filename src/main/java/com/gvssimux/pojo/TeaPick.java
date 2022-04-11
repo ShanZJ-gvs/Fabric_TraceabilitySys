@@ -14,6 +14,9 @@ public class TeaPick {
     // 采摘时间
     private String teaPickTime;
 
+    // 采摘月份
+    private String month;
+
     // 茶叶批编号
     private String teaPickId;
 

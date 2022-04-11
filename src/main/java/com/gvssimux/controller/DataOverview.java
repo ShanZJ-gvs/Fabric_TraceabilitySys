@@ -30,17 +30,6 @@ import java.util.List;
 public class DataOverview {
 
 
-    @ResponseBody
-    @GetMapping("/areas")
-    public String  teaarea(@RequestParam("limit") int limit, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        TeaAreaServiceImpl mapper = context.getBean("TeaAreaServiceImpl", TeaAreaServiceImpl.class);
-        Contract contract = FabricUtil.getContract();
-        QueryResultList resultList = mapper.selectOffsetLimit(contract,0,10);
-
-        return JSON.toJSONString(resultList);
-    }
-
 
     @ResponseBody
     @GetMapping("/kindsum")
@@ -109,6 +98,23 @@ public class DataOverview {
 
         System.out.println("每月的采摘量====》"+map);
         System.out.println("前端接收的数据====》"+JsonUtil.getJson(map));
+
+        return JsonUtil.getJson(map);
+    }
+
+    /* 查询每月的制茶量*/
+    @ResponseBody
+    @GetMapping("/makeper")
+    public String makeper(@Param("companyName") String companyName, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        TeaMakeServiceImpl mapper = context.getBean("TeaMakeServiceImpl", TeaMakeServiceImpl.class);
+        Contract contract = FabricUtil.getContract();
+
+        HashMap map = mapper.getMakePerSumByCompany(contract, companyName);
+
+
+        System.out.println("每月的制茶量====》"+map);
+        System.out.println("前端接收的数据====》"+ JsonUtil.getJson(map));
 
         return JsonUtil.getJson(map);
     }

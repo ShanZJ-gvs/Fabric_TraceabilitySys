@@ -1,15 +1,26 @@
 package com.gvssimux.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.gvssimux.pojo.*;
+import com.gvssimux.pojo.fabquery.QueryResult;
+import com.gvssimux.pojo.fabquery.QueryResultList;
+import com.gvssimux.service.TeaAreaServiceImpl;
 import com.gvssimux.util.FabricUtil;
 import lombok.extern.java.Log;
 import org.apache.ibatis.annotations.Param;
 import org.hyperledger.fabric.gateway.Contract;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.gvssimux.service.CreateUserCode.createUserCodeByKey;
 
@@ -17,6 +28,7 @@ import static com.gvssimux.service.CreateUserCode.createUserCodeByKey;
 @Controller
 @Log
 public class DataController {
+
 
     /**
      * 用户溯源码查询
@@ -61,24 +73,33 @@ public class DataController {
 
 
 
-
-  /*  *//**
-     * 数据总览data
-     * 测试 茶区TeaArea
-     *//*
     @ResponseBody
-    @GetMapping("/teaareas")
-    public String  teaarea(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        log.info("===>请求:teaareas:查询所有茶区===>");
-        String  CCP = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com" +
-                "/connection-org1.yaml";
-        Path walletPath = Paths.get("/usr/software/Fabric_TraceabilitySys/wallet");
-        Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
-        byte[] result = contract.evaluateTransaction("queryAllTeaArea");
-        log.info("===>请求:teaareas:查询完毕===>");
-        return new String(result);
+    @GetMapping("/areas")
+    public String  teaarea(@Param("companyName") String companyName,@RequestParam("offset") int offset,@RequestParam("limit")int limit, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        TeaAreaServiceImpl mapper = context.getBean("TeaAreaServiceImpl", TeaAreaServiceImpl.class);
+
+        Contract contract = FabricUtil.getContract();
+        companyName = request.getParameter("companyName");
+        offset = Integer.parseInt(request.getParameter("offset"));
+        limit = Integer.parseInt(request.getParameter("limit"));
+
+        QueryResultList resultList = mapper.selectOffsetLimit(contract,companyName,offset,limit); // 拿到数据
+
+        ArrayList<TeaArea> listarea = new ArrayList<>();
+
+        List<QueryResult> resultList1 = resultList.getResultList(); // 提取数据
+        for ( QueryResult a :resultList1) { // 将数据中的json字符串转为实体对象，然后存入数组，给前端
+            String jsonData = a.getJson();
+            JSONObject jsonObject = JSONObject.parseObject(jsonData);
+            TeaArea temparea = JSON.toJavaObject(jsonObject, TeaArea.class);
+            listarea.add(temparea);
+        }
+
+        return JSON.toJSONString(listarea);
     }
-*/
+
+
 
 
 
