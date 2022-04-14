@@ -26,11 +26,13 @@ public class TeaPick {
     // 鲜叶质量
     private String teaPickQuality;
 
+    // 数量
+    private Integer output;
+
     // 公司
     private String company;
 
-    // 数量
-    private Integer output;
+
 
     /**
      * 用于在富查询时标识查询类型的实体对象

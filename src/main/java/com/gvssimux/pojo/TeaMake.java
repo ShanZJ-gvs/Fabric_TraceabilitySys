@@ -23,11 +23,12 @@ public class TeaMake {
     // 茶叶批编号  与teaPickId是对应的
     private String teaMakeId;
 
+    // 数量
+    private Integer output;
+
     // 公司
     private String company;
 
-    // 数量
-    private Integer output;
 
     /**
      * 用于在富查询时标识查询类型的实体对象

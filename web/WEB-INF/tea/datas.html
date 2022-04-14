@@ -16,96 +16,100 @@
     <!-- Top Bar  -->
     <header class="top-bar" id="topbar">
 
-        <!-- Menu Toggler -->
-        <button type="button" class="menu-toggler la la-bars" data-toggle="menu"></button>
+    <!-- Menu Toggler -->
+    <button type="button" class="menu-toggler la la-bars" data-toggle="menu"></button>
 
-        <!-- Brand -->
-        <span class="brand">茶叶溯源管理后台</span>
+    <!-- Brand -->
+    <span class="brand">茶叶溯源管理后台</span>
 
-        <!-- Search -->
-        <form class="hidden md:block ml-10" action="#">
-            <label class="form-control-addon-within rounded-full">
-                <input type="text" class="form-control border-none" placeholder="查找">
-                <span class="flex items-center pr-4">
+    <!-- Search -->
+    <form class="hidden md:block ml-10" action="#">
+        <label class="form-control-addon-within rounded-full">
+            <input type="text" class="form-control border-none" placeholder="查找">
+            <span class="flex items-center pr-4">
                     <button type="button"
                             class="dark:text-gray-700 dark:hover:text-primary btn btn-link text-gray-300 hover:text-primary text-xl leading-none la la-search"></button>
                 </span>
-            </label>
-        </form>
+        </label>
+    </form>
 
-        <!-- Right -->
-        <div class="flex items-center ml-auto">
+    <!-- Right -->
+    <div class="flex items-center ml-auto">
 
-            <!-- Dark Mode -->
-            <label class="switch switch_outlined" data-toggle="tooltip" data-tippy-content="Toggle Dark Mode">
-                <input id="darkModeToggler" type="checkbox">
-                <span></span>
-            </label>
+        <!-- Dark Mode -->
+        <label class="switch switch_outlined" data-toggle="tooltip" data-tippy-content="Toggle Dark Mode">
+            <input id="darkModeToggler" type="checkbox">
+            <span></span>
+        </label>
 
-            <!-- Fullscreen -->
-            <button type="button"
-                    class="hidden lg:inline-block btn-link ml-3 px-2 text-2xl leading-none la la-expand-arrows-alt"
-                    data-toggle="tooltip" data-tippy-content="Fullscreen" id="fullScreenToggler"></button>
+        <!-- Fullscreen -->
+        <button type="button"
+                class="hidden lg:inline-block btn-link ml-3 px-2 text-2xl leading-none la la-expand-arrows-alt"
+                data-toggle="tooltip" data-tippy-content="Fullscreen" id="fullScreenToggler"></button>
 
 
 
-            <!-- User Menu -->
-            <div class="dropdown">
-                <button class="flex items-center ml-4 text-gray-700 focus:outline-none" data-toggle="custom-dropdown-menu"
-                        data-tippy-arrow="true" data-tippy-placement="bottom-end">
+        <!-- User Menu -->
+        <div class="dropdown">
+            <button class="flex items-center ml-4 text-gray-700 focus:outline-none" data-toggle="custom-dropdown-menu"
+                    data-tippy-arrow="true" data-tippy-placement="bottom-end">
                     <span
                             class="dark:bg-gray-900 dark:border-gray-600 dark:text-gray-500 flex items-center justify-center w-12 h-12 rounded-full bg-gray-200 border-2 border-gray-600 text-xl text-gray-700">U</span>
-                </button>
-                <div class="custom-dropdown-menu w-64">
+            </button>
+            <div class="custom-dropdown-menu w-64">
 
-                    <hr class="dark:border-gray-900 mb-0">
-                    <div class="p-5">
-                        <a href="#"
-                           class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary"><span
-                                class="la la-user-circle text-2xl leading-none mr-2"></span>管理员</a>
-                        <a href="#"
-                           class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary mt-5"><span
-                                class="la la-key text-2xl leading-none mr-2"></span>更改密码</a>
-                    </div>
-                    <hr class="dark:border-gray-900 mb-0">
-                    <div class="p-5">
-                        <a href="#"
-                           class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary"><span
-                                class="la la-power-off text-2xl leading-none mr-2"></span>退出</a>
-                    </div>
+                <hr class="dark:border-gray-900 mb-0">
+                <div class="p-5">
+                    <a href="#"
+                       class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary"><span
+                            class="la la-user-circle text-2xl leading-none mr-2"></span>管理员{{companyComputed}}</a>
+                    <a href="#"
+                       class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary mt-5"><span
+                            class="la la-key text-2xl leading-none mr-2"></span>更改密码</a>
+                </div>
+                <hr class="dark:border-gray-900 mb-0">
+                <div class="p-5">
+                    <a href="#"
+                       class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary"><span
+                            class="la la-power-off text-2xl leading-none mr-2"></span>退出</a>
                 </div>
             </div>
         </div>
-    </header >
+    </div>
+</header>
+
 
     <!-- Menu Bar -->
     <aside class="menu-bar" id=menu>
         <div class="menu menu-sticky">
             <div class="menu-items">
-                <a :href="tohome" data-toggle="tooltip-menu" data-tippy-content="Dashboard"><span
-                        class="icon la la-laptop"></span><span class="title">总览</span></a>
+                <template v-if="iscompany">
+                    <a :href="tohome" data-toggle="tooltip-menu" data-tippy-content="Dashboard"><span
+                            class="icon la la-laptop"></span><span class="title">总览</span></a>
 
-                <a href="./toforms" data-target="ui" data-toggle="tooltip-menu" data-tippy-content="UI"><span
-                        class="icon la la-cube"></span><span class="title">生产上链</span></a>
+                    <a :href="toforms" data-target="ui" data-toggle="tooltip-menu" data-tippy-content="UI"><span
+                            class="icon la la-cube"></span><span class="title">生产上链</span></a>
 
-                <a href="./toform" data-target="menu" data-toggle="tooltip-menu" data-tippy-content="Menu"><span
-                        class="icon la la-sitemap"></span><span class="title">经销上链</span></a>
+                    <a :href="toform" data-target="menu" data-toggle="tooltip-menu" data-tippy-content="Menu"><span
+                            class="icon la la-sitemap"></span><span class="title">经销上链</span></a>
 
-                <a href="./topeople" data-target="people" data-toggle="tooltip-menu" data-tippy-content="People"><span
-                        class="icon la la-user"></span><span class="title">人员上链</span></a>
+                    <a :href="topeople" data-target="people" data-toggle="tooltip-menu" data-tippy-content="People"><span
+                            class="icon la la-user"></span><span class="title">人员上链</span></a>
 
-                <a :href="todata" data-target="pages" data-toggle="tooltip-menu" data-tippy-content="Pages"><span
-                        class="icon la la-file-alt"></span><span class="title">数据总览</span></a>
+                    <a :href="todata" data-target="pages" data-toggle="tooltip-menu" data-tippy-content="Pages"><span
+                            class="icon la la-file-alt"></span><span class="title">数据总览</span></a>
 
-                <a href="./toauthlogin" data-toggle="tooltip-menu" data-tippy-content="Blank Page"><span
-                        class="icon la la-file"></span><span class="title">登录</span></a>
-
-                <a href="./tosearch" target="_blank" data-toggle="tooltip-menu"
+                    <a href="./toauthlogin" data-toggle="tooltip-menu" data-tippy-content="Blank Page"><span
+                            class="icon la la-file"></span><span class="title">登录</span></a>
+                </template>
+                <a href="./tosearch" target="_blank" data-toggle="tooltip-menu" v-if="!iscompany"
                    data-tippy-content="Docs"><span class="icon la la-book-open"></span><span class="title">消费者查询</span></a>
             </div>
 
         </div>
+        <span v-show="false" th:text="${company}" id="company" ></span>
     </aside>
+
 
     <!-- Workspace  -->
     <main class="workspace" id="root">
@@ -119,28 +123,25 @@
             <div>
                 <!-- Basic -->
                 <div class="card p-5">
-                    <h3>茶园</h3>
+                    <h3>茶区</h3>
                     <table class="table mt-3 w-full">
                         <thead>
                         <tr>
                             <th class="text-left uppercase">#</th>
-                            <th class="text-left uppercase">茶树区块号</th>
+                            <th class="text-left uppercase">茶区编号</th>
                             <th class="text-center uppercase">茶区名字</th>
                             <th class="text-center uppercase">茶区地址</th>
                             <th class="text-center uppercase">茶区面积</th>
-                            <th class="text-center uppercase">茶区晴天数</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="a in listarea">
-                            <td>{{i++}}</td>
-                            <td>{{a.teaAreaId1}}</td>
-                            <td>{{a.teaAreaName}}</td>
+                        <tr v-for="(a, index) in listArea">
+                            <td>{{index}}</td>
+                            <td>{{a.teaAreaId1}}</td> <!--茶区编号 -->
+                            <td>{{a.teaAreaName}}</td> <!--茶区名字-->
                             <td class="text-center">{{a.teaAreaAddress}}</td>
-                            <td class="text-center">{{a.teaAreaArea}}</td>
-                            <td class="text-center">{{a.teaAreaDay}}</td>
                             <td class="text-center">
-                                <div class="badge badge_outlined badge_secondary uppercase">湿润</div>
+                                <div class="badge badge_outlined badge_secondary uppercase">{{a.teaAreaArea}}</div>
                             </td>
                         </tr>
 
@@ -162,6 +163,51 @@
                                 <div class="badge badge_outlined badge_secondary uppercase">干燥</div>
                             </td>
                         </tr>-->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card mt-4 p-5">
+                    <h3>茶园</h3>
+                    <table class="table table_borderedvmt-3 w-full">
+                        <thead>
+                        <tr>
+                            <th class="text-left uppercase">#</th>
+                            <th class="text-left uppercase">茶园编号</th>
+                            <th class="text-center uppercase">茶园名字</th>
+                            <th class="text-center uppercase">茶园地址</th>
+                            <th class="text-center uppercase">茶园面积</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="(a, index) in listGarden">
+                            <td>{{index}}</td>
+                            <td>{{a.teaGardenId1}}</td> <!--茶区编号 -->
+                            <td>{{a.teaGardenName}}</td> <!--茶区名字-->
+                            <td class="text-center">{{a.teaGardenAddress}}</td>
+                            <td class="text-center">
+                                <div class="badge badge_outlined badge_secondary uppercase">{{a.teaGardenArea}}</div>
+                            </td>
+                        </tr>
+
+                        <!--                <tr>
+                                            <td>1</td>
+                                            <td>574e1bd4c24fb7b7b017c55bf97d16377f991d19e2c8d582f2b600876e01c9c0</td>
+                                            <td class="text-center">101</td>
+                                            <td class="text-center">合格</td>
+                                            <td class="text-center">
+                                                <div class="badge badge_outlined badge_secondary uppercase">湿润</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>2bdcf003d4c7714b5a008e0d53804741c1de578af28ffa453a0cc0153f2cc76f</td>
+                                            <td class="text-center">105</td>
+                                            <td class="text-center">合格</td>
+                                            <td class="text-center">
+                                                <div class="badge badge_outlined badge_secondary uppercase">干燥</div>
+                                            </td>
+                                        </tr>-->
                         </tbody>
                     </table>
                 </div>
@@ -629,7 +675,6 @@
             </div>
         </footer>
 
-        <span v-show="false" th:text="${company}" id="company" ></span>
     </main>
 
 

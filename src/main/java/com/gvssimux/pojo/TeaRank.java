@@ -14,6 +14,9 @@ public class TeaRank {
     // 定级时间
     private String teaRankTime;
 
+    // 定级月份
+    private String mouth;
+
     // 茶叶批编号
     private String teaRankId;
 

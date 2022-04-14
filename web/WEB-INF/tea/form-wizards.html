@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
   <meta charset="UTF-8" />
@@ -14,7 +14,7 @@
 <body>
 
     <!-- Top Bar  -->
-    <header class="top-bar">
+    <header class="top-bar" id="topbar">
 
         <!-- Menu Toggler -->
         <button type="button" class="menu-toggler la la-bars" data-toggle="menu"></button>
@@ -27,9 +27,9 @@
             <label class="form-control-addon-within rounded-full">
                 <input type="text" class="form-control border-none" placeholder="查找">
                 <span class="flex items-center pr-4">
-                    <button type="button"
-                        class="dark:text-gray-700 dark:hover:text-primary btn btn-link text-gray-300 hover:text-primary text-xl leading-none la la-search"></button>
-                </span>
+                        <button type="button"
+                                class="dark:text-gray-700 dark:hover:text-primary btn btn-link text-gray-300 hover:text-primary text-xl leading-none la la-search"></button>
+                    </span>
             </label>
         </form>
 
@@ -44,33 +44,33 @@
 
             <!-- Fullscreen -->
             <button type="button"
-                class="hidden lg:inline-block btn-link ml-3 px-2 text-2xl leading-none la la-expand-arrows-alt"
-                data-toggle="tooltip" data-tippy-content="Fullscreen" id="fullScreenToggler"></button>
+                    class="hidden lg:inline-block btn-link ml-3 px-2 text-2xl leading-none la la-expand-arrows-alt"
+                    data-toggle="tooltip" data-tippy-content="Fullscreen" id="fullScreenToggler"></button>
 
-           
-           
+
+
             <!-- User Menu -->
             <div class="dropdown">
                 <button class="flex items-center ml-4 text-gray-700 focus:outline-none" data-toggle="custom-dropdown-menu"
-                    data-tippy-arrow="true" data-tippy-placement="bottom-end">
-                    <span
-                        class="dark:bg-gray-900 dark:border-gray-600 dark:text-gray-500 flex items-center justify-center w-12 h-12 rounded-full bg-gray-200 border-2 border-gray-600 text-xl text-gray-700">U</span>
+                        data-tippy-arrow="true" data-tippy-placement="bottom-end">
+                        <span
+                                class="dark:bg-gray-900 dark:border-gray-600 dark:text-gray-500 flex items-center justify-center w-12 h-12 rounded-full bg-gray-200 border-2 border-gray-600 text-xl text-gray-700">U</span>
                 </button>
                 <div class="custom-dropdown-menu w-64">
-                  
+
                     <hr class="dark:border-gray-900 mb-0">
                     <div class="p-5">
                         <a href="#"
-                            class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary"><span
-                                class="la la-user-circle text-2xl leading-none mr-2"></span>管理员</a>
+                           class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary"><span
+                                class="la la-user-circle text-2xl leading-none mr-2"></span>管理员{{companyComputed}}</a>
                         <a href="#"
-                            class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary mt-5"><span
+                           class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary mt-5"><span
                                 class="la la-key text-2xl leading-none mr-2"></span>更改密码</a>
                     </div>
                     <hr class="dark:border-gray-900 mb-0">
                     <div class="p-5">
                         <a href="#"
-                            class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary"><span
+                           class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary"><span
                                 class="la la-power-off text-2xl leading-none mr-2"></span>退出</a>
                     </div>
                 </div>
@@ -78,37 +78,41 @@
         </div>
     </header>
 
+
     <!-- Menu Bar -->
-    <aside class="menu-bar">
+    <aside class="menu-bar" id=menu>
         <div class="menu menu-sticky">
             <div class="menu-items">
-                <a href="./tohome" data-toggle="tooltip-menu" data-tippy-content="Dashboard"><span
-                        class="icon la la-laptop"></span><span class="title">总览</span></a>
+                <template v-if="iscompany">
+                    <a :href="tohome" data-toggle="tooltip-menu" data-tippy-content="Dashboard"><span
+                            class="icon la la-laptop"></span><span class="title">总览</span></a>
 
-                <a href="./toforms" data-target="ui" data-toggle="tooltip-menu" data-tippy-content="UI"><span
-                        class="icon la la-cube"></span><span class="title">生产上链</span></a>
+                    <a :href="toforms" data-target="ui" data-toggle="tooltip-menu" data-tippy-content="UI"><span
+                            class="icon la la-cube"></span><span class="title">生产上链</span></a>
 
-                <a href="./toform" data-target="menu" data-toggle="tooltip-menu" data-tippy-content="Menu"><span
-                        class="icon la la-sitemap"></span><span class="title">经销上链</span></a>
+                    <a :href="toform" data-target="menu" data-toggle="tooltip-menu" data-tippy-content="Menu"><span
+                            class="icon la la-sitemap"></span><span class="title">经销上链</span></a>
 
-                <a href="./topeople" data-target="people" data-toggle="tooltip-menu" data-tippy-content="People"><span
-                        class="icon la la-user"></span><span class="title">人员上链</span></a>
+                    <a :href="topeople" data-target="people" data-toggle="tooltip-menu" data-tippy-content="People"><span
+                            class="icon la la-user"></span><span class="title">人员上链</span></a>
 
-                <a href="./todata" data-target="pages" data-toggle="tooltip-menu" data-tippy-content="Pages"><span
-                        class="icon la la-file-alt"></span><span class="title">数据总览</span></a>
+                    <a :href="todata" data-target="pages" data-toggle="tooltip-menu" data-tippy-content="Pages"><span
+                            class="icon la la-file-alt"></span><span class="title">数据总览</span></a>
 
-                <a href="./toauthlogin" data-toggle="tooltip-menu" data-tippy-content="Blank Page"><span
-                        class="icon la la-file"></span><span class="title">登录</span></a>
-
-                <a href="./tosearch" target="_blank" data-toggle="tooltip-menu"
+                    <a href="./toauthlogin" data-toggle="tooltip-menu" data-tippy-content="Blank Page"><span
+                            class="icon la la-file"></span><span class="title">登录</span></a>
+                </template>
+                <a href="./tosearch" target="_blank" data-toggle="tooltip-menu" v-if="!iscompany"
                    data-tippy-content="Docs"><span class="icon la la-book-open"></span><span class="title">消费者查询</span></a>
             </div>
 
         </div>
+        <span v-show="false" th:text="${company}" id="company" ></span>
     </aside>
 
+
     <!-- Workspace  -->
-    <main class="workspace">
+    <main class="workspace" id="root">
 
         <!-- Breadcrumb -->
         <section class="breadcrumb" >
@@ -327,6 +331,11 @@
                                             placeholder="">
                                     </div>
                                     <div class="mb-5">
+                                        <label class="label block mb-2" for="email-2">采摘时间</label>
+                                        <input type="text" class="form-control" id="email-2" name="month"
+                                               placeholder="">
+                                    </div>
+                                    <div class="mb-5">
                                         <label class="label block mb-2" for="email-2">茶叶批编号</label>
                                         <input type="text" class="form-control" id="email-2" name="tea_pick_id"
                                                placeholder="">
@@ -337,11 +346,6 @@
                                                placeholder="">
                                     </div>
                                     <div class="mb-5">
-                                        <label class="label block mb-2" for="email-2">公司</label>
-                                        <input type="text" class="form-control" id="email-2" name="companyName"
-                                               placeholder="">
-                                    </div>
-                                    <div class="mb-5">
                                         <label class="label block mb-2" for="email-2">产量</label>
                                         <input type="text" class="form-control" id="email-2" name="output"
                                                placeholder="">
@@ -349,6 +353,11 @@
                                     <div class="mb-5">
                                         <label class="label block mb-2" for="email-2">鲜叶质量</label>
                                         <input type="text" class="form-control" id="email-2" name="tea_pick_quality"
+                                               placeholder="">
+                                    </div>
+                                    <div class="mb-5">
+                                        <label class="label block mb-2" for="email-2">公司</label>
+                                        <input type="text" class="form-control" id="email-2" name="companyName"
                                                placeholder="">
                                     </div>
 
@@ -385,6 +394,11 @@
                                             placeholder="">
                                     </div>
                                     <div class="mb-5">
+                                        <label class="label block mb-2" for="email-2">制茶月份</label>
+                                        <input type="text" class="form-control" id="email-2" name="month"
+                                               placeholder="">
+                                    </div>
+                                    <div class="mb-5">
                                         <label class="label block mb-2" for="email-2">制茶工艺</label>
                                         <input type="text" class="form-control" id="email-2" name="tea_make_way"
                                                placeholder="">
@@ -392,6 +406,11 @@
                                     <div class="mb-5">
                                         <label class="label block mb-2" for="email-2">茶叶批编号</label>
                                         <input type="text" class="form-control" id="email-2" name="tea_make_id"
+                                               placeholder="">
+                                    </div>
+                                    <div class="mb-5">
+                                        <label class="label block mb-2" for="email-2">产量</label>
+                                        <input type="text" class="form-control" id="email-2" name="output"
                                                placeholder="">
                                     </div>
                                     <div class="mb-5">
@@ -428,6 +447,11 @@
                                     <div class="mb-5">
                                         <label class="label block mb-2" for="email-2">定级时间</label>
                                         <input type="text" class="form-control" id="email-2" name="tea_rank_time"
+                                               placeholder="">
+                                    </div>
+                                    <div class="mb-5">
+                                        <label class="label block mb-2" for="email-2">定级月份</label>
+                                        <input type="text" class="form-control" id="email-2" name="mouth"
                                                placeholder="">
                                     </div>
                                     <div class="mb-5">
@@ -649,9 +673,16 @@
         </footer>
     </main>
 
+
     <!-- Scripts -->
     <script src="assets/js/vendor.js"></script>
     <script src="assets/js/script.js"></script>
+    <!-- vue -->
+    <script src="assets/js/vue.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+
+    <script src="assets/js/topbar_shanzj.js"></script>
+    <script src="assets/js/menu_shanzj.js"></script>
 
 </body>
 

@@ -31,7 +31,7 @@ public class teatesting {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaGardenServiceImpl mapper = context.getBean("TeaGardenServiceImpl", TeaGardenServiceImpl.class);
         Contract contract = FabricUtil.getContract();
-        System.out.println(mapper.selectOffsetLimit(contract,0,1));
+        System.out.println(mapper.selectOffsetLimit(contract,"阿里巴巴",0,1));
 
     }
 

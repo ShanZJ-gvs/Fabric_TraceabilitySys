@@ -44,8 +44,9 @@ public class PageJumpController {
      * 跳转到people.html页面
      */
     @RequestMapping("/topeople")
-    public String topeople()throws JsonProcessingException{
-
+    public String topeople(@Param("companyName") String companyName ,Model model,HttpServletRequest request)throws JsonProcessingException{
+        companyName = request.getParameter("companyName");
+        model.addAttribute("company",companyName);
         return "people";
     }
 
@@ -72,8 +73,9 @@ public class PageJumpController {
      * 跳转到form-wizard.html页面
      */
     @RequestMapping("/toform")
-    public String toFormWizard()throws JsonProcessingException{
-
+    public String toFormWizard(@Param("companyName") String companyName ,Model model,HttpServletRequest request)throws JsonProcessingException{
+        companyName = request.getParameter("companyName");
+        model.addAttribute("company",companyName);
         return "form-wizard";
     }
 
@@ -81,8 +83,9 @@ public class PageJumpController {
      * 跳转到form-wizards.html页面
      */
     @RequestMapping("/toforms")
-    public String toFormWizards()throws JsonProcessingException{
-
+    public String toFormWizards(@Param("companyName") String companyName ,Model model,HttpServletRequest request)throws JsonProcessingException{
+        companyName = request.getParameter("companyName");
+        model.addAttribute("company",companyName);
         return "form-wizards";
     }
 

@@ -15,6 +15,28 @@ const menu_vm = new Vue({
             get(){
                 return "./todata?companyName="+this.company1
             }
+        },
+        toforms:{
+            get(){
+                return "./toforms?companyName="+this.company1
+            }
+        },
+        toform:{
+            get(){
+                return "./toform?companyName="+this.company1
+            }
+        },
+        topeople:{
+            get(){
+                return "./topeople?companyName="+this.company1
+            }
+        },
+        iscompany(){
+            if (this.company1!=""){/*有公司名，怎么说明已登录，不进行渲染消费者查询*/
+                return true
+            }else {
+                return false
+            }
         }
     },
     mounted () {

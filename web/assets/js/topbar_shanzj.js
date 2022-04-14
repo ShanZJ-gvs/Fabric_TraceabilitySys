@@ -643,6 +643,11 @@ new Vue({
         this.$nextTick(menu());
     },
     methods:{
+    },
+    computed:{
+        companyComputed(){
+            return ":"+this.company1;
+        }
     }
 
 })

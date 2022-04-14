@@ -6,6 +6,7 @@ import com.gvssimux.pojo.*;
 import com.gvssimux.pojo.fabquery.QueryResult;
 import com.gvssimux.pojo.fabquery.QueryResultList;
 import com.gvssimux.service.TeaAreaServiceImpl;
+import com.gvssimux.service.TeaGardenServiceImpl;
 import com.gvssimux.util.FabricUtil;
 import lombok.extern.java.Log;
 import org.apache.ibatis.annotations.Param;
@@ -100,10 +101,36 @@ public class DataController {
     }
 
 
+    @ResponseBody
+    @GetMapping("/gardens")
+    public String  gardens(@Param("companyName") String companyName,@RequestParam("offset") int offset,@RequestParam("limit")int limit, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        TeaGardenServiceImpl mapper = context.getBean("TeaGardenServiceImpl", TeaGardenServiceImpl.class);
+
+        Contract contract = FabricUtil.getContract();
+        companyName = request.getParameter("companyName");
+        offset = Integer.parseInt(request.getParameter("offset"));
+        limit = Integer.parseInt(request.getParameter("limit"));
+
+        QueryResultList resultList = mapper.selectOffsetLimit(contract,companyName,offset,limit); // 拿到数据
+
+        ArrayList<TeaGarden> listGarden = new ArrayList<>(); // 记录数据
+
+        List<QueryResult> resultList1 = resultList.getResultList(); // 提取数据
+        for ( QueryResult a :resultList1) { // 将数据中的json字符串转为实体对象，然后存入数组，给前端
+            String jsonData = a.getJson();
+            JSONObject jsonObject = JSONObject.parseObject(jsonData);
+            TeaGarden tempGarden = JSON.toJavaObject(jsonObject, TeaGarden.class);
+            listGarden.add(tempGarden);
+        }
+        return JSON.toJSONString(listGarden);
+    }
 
 
 
-  /*  *//**
+
+
+    /*  *//**
      * 数据总览data
      * 测试 菜园TeaGarden
      *//*
