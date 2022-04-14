@@ -21,7 +21,7 @@ public class Test06 {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaPickServiceImpl mapper = context.getBean("TeaPickServiceImpl", TeaPickServiceImpl.class);
         Contract contract = FabricUtil.getContract();
-        System.out.println(mapper.selectOffsetLimit(contract,"阿里巴巴","pick001",0,10));
+        System.out.println(mapper.selectOffsetLimit(contract,"阿里巴巴",0,10));
     }
 
     /*插入带公司标识的TeaPick*/

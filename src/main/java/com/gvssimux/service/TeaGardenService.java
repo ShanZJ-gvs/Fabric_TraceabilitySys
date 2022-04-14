@@ -11,7 +11,7 @@ import java.util.List;
 public interface TeaGardenService {
 
 
-    /*全部插入*/
+    /*插入*/
     String insertOne(Contract contract,TeaGarden record);
 
     /*查询全部*/

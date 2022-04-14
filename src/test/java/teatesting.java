@@ -57,7 +57,7 @@ public class teatesting {
     public void test05(){
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaPackServiceImpl mapper = context.getBean("TeaPackServiceImpl", TeaPackServiceImpl.class);
-        System.out.println(mapper.selectAll());
+
     }
 
     // 全部查询teaPick

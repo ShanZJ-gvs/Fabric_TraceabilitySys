@@ -57,17 +57,17 @@
 
     <!--定级service-->
     <bean id="TeaRankServiceImpl" class="com.gvssimux.service.TeaRankServiceImpl">
-        <property name="mapper" ref="teaRankDao"/>
+        <property name="k" value="Rank"/>
     </bean>
 
     <!--包装service-->
     <bean id="TeaPackServiceImpl" class="com.gvssimux.service.TeaPackServiceImpl">
-        <property name="mapper" ref="teaPackDao"/>
+        <property name="k" value="Pack"/>
     </bean>
 
     <!--质检service-->
     <bean id="TeaTestingServiceImpl" class="com.gvssimux.service.TeaTestingServiceImpl">
-        <property name="mapper" ref="teaTestingDao"/>
+        <property name="k" value="Testing"/>
     </bean>
 
     <!--仓储service-->

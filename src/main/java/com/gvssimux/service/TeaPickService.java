@@ -14,7 +14,7 @@ public interface TeaPickService {
     String insertOne(Contract contract, TeaPick record);
 
     /*限制查询*/
-    QueryResultList selectOffsetLimit(Contract contract,String companyName,String teaPickId, int offset, int limit) throws Exception;
+    QueryResultList selectOffsetLimit(Contract contract,String companyName, int offset, int limit) throws Exception;
 
 
 

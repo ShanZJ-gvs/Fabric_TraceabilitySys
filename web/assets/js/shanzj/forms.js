@@ -24,8 +24,43 @@ const vm = new Vue({
                 }]
             },
             value1: '',
-            value2: '',
-            value3: ''
+            datatime: '',
+            value3: '',
+            company1:document.getElementById("company").innerHTML,
+            employee:{ //
+                id:"test",
+                name:"test",
+                sex:"test"
+            },
+            pojo:{// 茶园茶区通用
+                id:"",
+                name:"",
+                address:"",
+                area:"",
+                altitude:"jinweidu1",
+                areaid2:"",
+                gardenid2:"",
+                height:"",
+                kind:"",
+                state:"",
+                cultivate:"",
+                genv:""
+
+            },
+            tea:{
+                id:"",//茶叶批id
+                id2:"",//所属茶树id
+                output:"0",//产量
+                quality:"合格", // 鲜叶质量
+                makeway:"炒制", //制茶工艺
+                rank:"优",  // 茶叶等级
+            },
+            pojo2:{
+                smallBoxId:"", //小盒编号
+                bigBoxId:"",   //大盒编号
+                testingId:"",  //质检编号
+                testingQ:"",   //质检结果
+            }
         };
     },
     method:{

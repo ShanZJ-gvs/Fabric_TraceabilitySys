@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.gvssimux.pojo.TeaMake;
 import com.gvssimux.pojo.fabquery.QueryResult;
 import com.gvssimux.pojo.fabquery.QueryResultList;
+import com.gvssimux.util.DataUtil;
 import org.hyperledger.fabric.gateway.Contract;
 import org.hyperledger.fabric.gateway.ContractException;
 
@@ -79,11 +80,12 @@ public class TeaMakeServiceImpl implements TeaMakeService{
         List<QueryResult> list = resultList.getResultList();
 
         HashMap<String, Integer> map = new HashMap<>();
-
+        
         for (QueryResult a : list) {
             jsonObject = JSONObject.parseObject( a.getJson() );
             TeaMake pojo = JSON.toJavaObject(jsonObject, TeaMake.class);
-            String key = pojo.getMonth(); // 月份作为key
+            String time = pojo.getTeaMakeTime(); // 时间
+            String key = DataUtil.getMouth(time);// 月份
             Integer value = pojo.getOutput(); // 数量作为value
             if (!map.containsKey(key)){ // key不在map中
                 map.put(key,value);

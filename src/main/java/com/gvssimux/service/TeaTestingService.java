@@ -1,17 +1,13 @@
 package com.gvssimux.service;
 
+import com.gvssimux.pojo.TeaRank;
 import com.gvssimux.pojo.TeaTesting;
 import org.apache.ibatis.annotations.Select;
+import org.hyperledger.fabric.gateway.Contract;
 
 import java.util.List;
 
 public interface TeaTestingService {
-    /*全部插入*/
-    int insert(TeaTesting record);
-
-    /*部分插入*/
-    int insertSelective(TeaTesting record);
-
-    /*全部查询*/
-    List<TeaTesting> selectAll();
+    /*插入*/
+    String insertOne(Contract contract, TeaTesting record);
 }

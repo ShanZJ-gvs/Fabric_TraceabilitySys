@@ -4,10 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.gvssimux.pojo.*;
-import com.gvssimux.service.TeaAreaServiceImpl;
-import com.gvssimux.service.TeaGardenServiceImpl;
-import com.gvssimux.service.TeaPickServiceImpl;
-import com.gvssimux.service.TeaTreeServiceImpl;
+import com.gvssimux.service.*;
 import com.gvssimux.util.FabricUtil;
 import com.gvssimux.util.JsonUtil;
 import lombok.extern.java.Log;
@@ -50,12 +47,12 @@ public class FormsController {
 
         // 将request中的数据拿给实体teaArea
         pojo.setTeaAreaId1(request.getParameter("tea_area_id1"));
+        pojo.setTeaAreaName(request.getParameter("tea_area_name"));
         pojo.setTeaAreaAddress(request.getParameter("tea_area_address"));
         pojo.setTeaAreaArea(request.getParameter("tea_area_area"));
         pojo.setTeaAreaLongitude(request.getParameter("tea_area_longitude"));
         pojo.setTeaAreaId2(request.getParameter("tea_area_id2"));
         pojo.setTeaGardenId2(request.getParameter("tea_garden_id2"));
-        pojo.setTeaAreaName(request.getParameter("tea_area_name"));
         pojo.setCompany(request.getParameter("companyName"));
         request.getParameter("key");
 
@@ -91,11 +88,11 @@ public class FormsController {
         TeaGarden pojo = new TeaGarden();
         // 将request中的数据拿给实体teaArea
         pojo.setTeaGardenId1(request.getParameter("tea_garden_id1"));
+        pojo.setTeaGardenName(request.getParameter("tea_garden_name"));
         pojo.setTeaGardenAddress(request.getParameter("tea_garden_address"));
         pojo.setTeaGardenArea(request.getParameter("tea_garden_area"));
         pojo.setTeaGardenLongitude(request.getParameter("tea_garden_longitude"));
         pojo.setTeaAreaId2(request.getParameter("tea_area_id2"));
-        pojo.setTeaGardenName(request.getParameter("tea_garden_name"));
         pojo.setTeaGardenId2(request.getParameter("tea_garden_id2"));
         pojo.setCompany(request.getParameter("companyName"));
         request.getParameter("key");
@@ -169,12 +166,7 @@ public class FormsController {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaPickServiceImpl mapper = context.getBean("TeaPickServiceImpl", TeaPickServiceImpl.class);
 
-        /**
-         * 给采摘实体添加数据
-         *
-         * 采摘时间是data类型，还未解决问题
-         *  pojo.setTeaPickTime(request.getParameter("tea_pick_time"));
-         * */
+
         TeaPick pojo = new TeaPick();
         pojo.setTeaPickTime(request.getParameter("tea_pick_time"));
         pojo.setTeaPickId(request.getParameter("tea_pick_id"));// 用teaPickId充当茶叶批id，因为一批茶叶的是同时采摘的
@@ -229,6 +221,8 @@ public class FormsController {
     @ResponseBody
     @PostMapping("/teamake")
     public String teamake(HttpServletRequest request,HttpServletResponse response) throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        TeaMakeServiceImpl mapper = context.getBean("TeaMakeServiceImpl", TeaMakeServiceImpl.class);
         /**
          * 给制茶师添加数据
          * */
@@ -242,29 +236,14 @@ public class FormsController {
          * */
         TeaMake teaMake = new TeaMake();
         teaMake.setTeaMakePer(employee);// 制茶师
-        request.getParameter("tea_make_time");
+        teaMake.setTeaMakeTime(request.getParameter("tea_make_time"));
         teaMake.setTeaMakeWay(request.getParameter("tea_make_way"));// 制茶方式
         teaMake.setTeaMakeId(request.getParameter("tea_make_id"));// 茶叶批编号
+        teaMake.setCompany(request.getParameter("companyName"));  //公司
+        teaMake.setOutput(Integer.valueOf(request.getParameter("output")));  //产量
 
 
-        /*往区块中加数据*/
-        String  CCP = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com" +
-                "/connection-org1.yaml";
-        Path walletPath = Paths.get("/usr/software/Fabric_TraceabilitySys/wallet");
-
-        Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
-        log.info("===>开始提交区块链交易===>");
-
-        byte[] bytes = contract.submitTransaction("createData",request.getParameter("key"),
-                request.getParameter("tea_make_per_id"),request.getParameter("tea_make_per_name"),request.getParameter("tea_make_per_sex"),
-                request.getParameter("tea_make_time"),request.getParameter("tea_make_way"),request.getParameter("tea_make_id"));
-
-        String s = new String(bytes);
-        if (bytes!=null){
-            log.info("===>交易提交成功===>");
-        }
-
-        return s;// 返回字符串
+        return mapper.insertOne(FabricUtil.getContract(), teaMake);// 返回字符串
     }
 
 
@@ -275,6 +254,10 @@ public class FormsController {
     @ResponseBody
     @PostMapping("/tearank")
     public String  tearank(HttpServletRequest request,HttpServletResponse response) throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        TeaRankServiceImpl mapper = context.getBean("TeaRankServiceImpl", TeaRankServiceImpl.class);
+
+
         /**
          * 定级人
          * */
@@ -288,31 +271,16 @@ public class FormsController {
          * */
         TeaRank teaRank = new TeaRank();
         teaRank.setTeaRankPer(employee);// 定级人
-        request.getParameter("tea_rank_time"); // 定级时间
+        teaRank.setTeaRankTime(request.getParameter("tea_rank_time")); // 定级时间
         teaRank.setTeaRankId(request.getParameter("tea_rank_id"));// 茶叶批编号
         teaRank.setTeaRankRank(request.getParameter("tea_rank_rank"));// 茶叶等级
+        teaRank.setCompany(request.getParameter("companyName"));// 公司
 
         request.getParameter("key");// ssl密钥
 
-        /*往区块中加数据*/
-        String  CCP = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com" +
-                "/connection-org1.yaml";
-        Path walletPath = Paths.get("/usr/software/Fabric_TraceabilitySys/wallet");
 
-        Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
-        log.info("===>开始提交区块链交易===>");
 
-        byte[] bytes = contract.submitTransaction("createData",request.getParameter("key"),
-                request.getParameter("tea_rank_per_id"),request.getParameter("tea_rank_per_name"),request.getParameter("tea_rank_per_sex"),
-                request.getParameter("tea_rank_time"),request.getParameter("tea_rank_id"),request.getParameter("tea_rank_rank"));
-
-        String s = new String(bytes);
-
-        if (bytes!=null){
-            log.info("===>交易提交成功===>");
-        }
-
-        return s;// 返回字符串
+        return mapper.insertOne(FabricUtil.getContract(),teaRank);// 返回字符串
     }
 
 
@@ -323,6 +291,9 @@ public class FormsController {
     @ResponseBody
     @PostMapping("/teapack")
     public String teapack(HttpServletRequest request,HttpServletResponse response) throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        TeaPackServiceImpl mapper = context.getBean("TeaPackServiceImpl", TeaPackServiceImpl.class);
+
         /**
          * 包装人
          * */
@@ -336,33 +307,15 @@ public class FormsController {
          * */
         TeaPack teaPack = new TeaPack();
         teaPack.setTeaPackPer(employee);// 包装人
-        request.getParameter("tea_pack_time"); // 包装时间
+        teaPack.setTeaPackTime(request.getParameter("tea_pack_time")); // 包装时间
         teaPack.setTeaPackBigBoxId(request.getParameter("tea_pack_big_box_id"));// 小盒编号
         teaPack.setTeaPackSmllBoxId(request.getParameter("tea_pack_smll_box_id"));// 大盒编号
-        teaPack.setTeaPackID(request.getParameter("tea_pack_id"));
+        teaPack.setTeaPackID(request.getParameter("tea_pack_id")); //包装id
+        teaPack.setCompany(request.getParameter("companyName")); // 公司
 
-        request.getParameter("key");// ssl密钥
 
-        /*往区块中加数据*/
-        String  CCP = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com" +
-                "/connection-org1.yaml";
-        Path walletPath = Paths.get("/usr/software/Fabric_TraceabilitySys/wallet");
 
-        Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
-        log.info("===>开始提交区块链交易===>");
-
-        byte[] bytes = contract.submitTransaction("createData",request.getParameter("key"),
-                request.getParameter("tea_pack_per_id"),request.getParameter("tea_pack_per_name"),request.getParameter("tea_pack_per_sex"),
-                request.getParameter("tea_pack_time"),request.getParameter("tea_pack_smll_box_id"),request.getParameter("tea_pack_big_box_id"),
-                request.getParameter("tea_pack_id"));
-
-        String s = new String(bytes);
-
-        if (bytes!=null){
-            log.info("===>交易提交成功===>");
-        }
-
-        return s;// 返回字符串
+        return mapper.insertOne(FabricUtil.getContract(),teaPack);// 返回字符串
     }
 
 
@@ -373,6 +326,9 @@ public class FormsController {
     @ResponseBody
     @PostMapping("/teatesting")
     public String teatesting(HttpServletRequest request,HttpServletResponse response) throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        TeaTestingServiceImpl mapper = context.getBean("TeaTestingServiceImpl", TeaTestingServiceImpl.class);
+
         /**
          * 质检人
          * */
@@ -386,7 +342,7 @@ public class FormsController {
          * */
         TeaTesting pojo = new TeaTesting();
         pojo.setTeaTestingPer(employee); // 质检人
-        request.getParameter("tea_testing_time");// 质检时间
+        pojo.setTeaTestingTime(request.getParameter("tea_testing_time"));// 质检时间
         pojo.setTeaTestingId(request.getParameter("tea_testing_id"));// 质检批次id
         pojo.setTeaTestingResult(request.getParameter("tea_testing_result"));// 质检结果
         pojo.setTeaTestingSmllBoxId(request.getParameter("tea_testing_smll_box_id"));// 小盒编号
@@ -394,26 +350,7 @@ public class FormsController {
         request.getParameter("key");// ssl密钥
 
 
-        /*往区块中加数据*/
-        String  CCP = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com" +
-                "/connection-org1.yaml";
-        Path walletPath = Paths.get("/usr/software/Fabric_TraceabilitySys/wallet");
-
-        Contract contract = FabricUtil.createContract(walletPath,CCP,"mychannel","teaArea-java-demo");
-        log.info("===>开始提交区块链交易===>");
-
-        byte[] bytes = contract.submitTransaction("createData",request.getParameter("key"),
-                request.getParameter("tea_testing_per_id"),request.getParameter("tea_testing_per_name"),request.getParameter("tea_testing_per_sex"),
-                request.getParameter("tea_testing_id"),request.getParameter("tea_testing_result"),request.getParameter("tea_testing_time")
-                ,request.getParameter("tea_testing_smll_box_id"),request.getParameter("tea_testing_big_box_id"));
-
-        String s = new String(bytes);
-
-        if (bytes!=null){
-            log.info("===>交易提交成功===>");
-        }
-
-        return s;// 返回字符串
+        return mapper.insertOne(FabricUtil.getContract(),pojo);// 返回字符串
     }
 
 

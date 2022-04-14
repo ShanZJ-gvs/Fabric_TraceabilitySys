@@ -7,6 +7,7 @@ import com.gvssimux.pojo.TeaPick;
 import com.gvssimux.pojo.TeaTree;
 import com.gvssimux.pojo.fabquery.QueryResult;
 import com.gvssimux.pojo.fabquery.QueryResultList;
+import com.gvssimux.util.DataUtil;
 import com.gvssimux.util.JsonUtil;
 import org.hyperledger.fabric.gateway.Contract;
 import org.hyperledger.fabric.gateway.ContractException;
@@ -55,10 +56,10 @@ public class TeaPickServiceImpl implements TeaPickService{
 
     }
 
-    /*根据公司 限制查询 打包信息*/
-    public QueryResultList selectOffsetLimit(Contract contract, String companyName,String teaPickId,int offset, int limit) throws Exception{
+    /*根据公司 限制查询*/
+    public QueryResultList selectOffsetLimit(Contract contract, String companyName,int offset, int limit) throws Exception{
         byte[] bytes;
-        String str = "{\"selector\":{\"company\":\""+companyName+"\",\"teaPickId\":\""+teaPickId+"\",\"type\":\"TeaPick\"}, \"use_index\":[]}";// 富查询字符串
+        String str = "{\"selector\":{\"company\":\""+companyName+"\",\"type\":\"TeaPick\"}, \"use_index\":[]}";// 富查询字符串
         try {
             bytes = contract.submitTransaction("richQuery", str);
         } catch (ContractException e) {
@@ -128,7 +129,8 @@ public class TeaPickServiceImpl implements TeaPickService{
         for (QueryResult a : list) {
             jsonObject = JSONObject.parseObject( a.getJson() );
             TeaPick teaPick = JSON.toJavaObject(jsonObject, TeaPick.class);
-            String key = teaPick.getMonth(); // 时间作为key
+            String time = teaPick.getTeaPickTime(); // 时间
+            String key = DataUtil.getMouth(time);
             Integer value = teaPick.getOutput(); // 产量作为value
             if (!map.containsKey(key)){ // key不在map中
                 map.put(key,value);
