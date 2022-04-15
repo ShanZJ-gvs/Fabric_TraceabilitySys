@@ -6,13 +6,16 @@ const vm = new Vue({
         kinds:[],
         kinds2:[],
         perkey:["一月", "二月", "三月", "四月", "五月", "六月","七月","八月","九月","十月","十一月","十二月"],
+        rankkey:["特级", "1级", "2级", "3级", "4级", "5级","6级","7级","8级","9级"],
         pickpersumvalue:[],
         makepersumvalue:[],
+        rankpersumvalue:[],
         kindsum:-1,
         areasum:-1,
         gardensum:-1,
         treesum:-1,
-        company1:document.getElementById("company").innerHTML
+        company1:document.getElementById("company").innerHTML,
+
     },
     mounted () {
         axios.get('/Fabric_TraceabilitySys_war_exploded/kinds',
@@ -103,6 +106,31 @@ const vm = new Vue({
                         this.makepersumvalue[i] = jsonData[this.perkey[i]];
                     }else {
                         this.makepersumvalue[i] = 0;
+                    }
+                };
+
+            }, function (error) {
+                console.log(error);
+            });
+
+        axios.get('/Fabric_TraceabilitySys_war_exploded/rankper',  // 获取当前公司各级茶叶的量
+            {
+                params: {
+                    companyName:document.getElementById("company").innerHTML
+                }
+            })
+            .then((response) =>{ // 这里如果不用箭头函数的话，this指的Windows
+
+                const jsonData = JSON.parse(JSON.stringify(response.data));
+                console.log("rankper 返回数据的json===》",jsonData);
+
+                this.company1 = document.getElementById("company").innerHTML;
+
+                for (let i = 0; i < this.rankkey.length; i++) {
+                    if (jsonData[this.rankpersumvalue[i]] !== 0){
+                        this.rankpersumvalue[i] = jsonData[this.rankkey[i]];
+                    }else {
+                        this.rankpersumvalue[i] = 0;
                     }
                 };
 
@@ -709,7 +737,7 @@ function canvas2(){
             });
         }
 
-        ctx = document.getElementById("barWithShadowChart");
+        ctx = document.getElementById("barWithShadowChart"); // 茶区产量
         if (ctx) {
             ctx.getContext("2d");
             const barWithShadowChart = new Chart(ctx, {
@@ -734,6 +762,63 @@ function canvas2(){
                             borderWidth: 2,
                             data: vm.pickpersumvalue,
                         },
+                    ],
+                },
+
+                // Configuration options go here
+                options: {
+                    legend: {
+                        position: "bottom",
+                        labels: {
+                            usePointStyle: true,
+                            padding: 20,
+                        },
+                    },
+                    tooltips: tooltips,
+                    scales: {
+                        yAxes: [
+                            {
+                                gridLines: {
+                                    display: true,
+                                    drawBorder: false,
+                                },
+                                ticks: {
+                                    stepSize: 1000,
+                                    min: 0,
+                                    max: 5000,
+                                },
+                            },
+                        ],
+                        xAxes: [
+                            {
+                                gridLines: {
+                                    display: false,
+                                },
+                            },
+                        ],
+                    },
+                },
+            });
+        }
+
+        ctx = document.getElementById("barWithShadowChartRank"); // 茶叶等级per量
+        if (ctx) {
+            ctx.getContext("2d");
+            const barWithShadowChart = new Chart(ctx, {
+                // The type of chart we want to create
+                type: "barWithShadow",
+
+                // The data for our dataset
+                data: {
+                    labels: vm.rankkey,
+                    datasets: [
+                        {
+                            label: "等级",
+                            backgroundColor: "rgba(" + colors.primary + ", .1)",
+                            borderColor: "rgba(" + colors.primary + ")",
+                            borderWidth: 2,
+                            data: vm.rankpersumvalue,
+                        }
                     ],
                 },
 
@@ -887,7 +972,7 @@ function canvas2(){
                 },
             });
         }
-        ctx = document.getElementById("doughnutWithShadowChart");
+        ctx = document.getElementById("doughnutWithShadowChart"); //茶叶合格率
         if (ctx) {
             ctx.getContext("2d");
             const doughnutWithShadowChart = new Chart(ctx, {
@@ -1257,7 +1342,7 @@ function canvas2(){
             });
         }
 
-        ctx = document.getElementById("visitorsChart");
+        ctx = document.getElementById("visitorsChart"); // 茶区营收
         if (ctx) {
             ctx.getContext("2d");
             const visitorsChart = new Chart(ctx, {
@@ -1315,7 +1400,7 @@ function canvas2(){
             });
         }
 
-        ctx = document.getElementById("categoriesChart");
+        ctx = document.getElementById("categoriesChart"); // 茶树种类
         if (ctx) {
             ctx.getContext("2d");
             const categoriesChart = new Chart(ctx, {

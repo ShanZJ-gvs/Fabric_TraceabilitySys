@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/element/index.css">
+
 </head>
 
 <body>
@@ -484,8 +485,28 @@
                                     <div class="mb-5">
                                         <label class="label block mb-2">茶叶等级</label>
                                         <input type="text" class="form-control" name="tea_rank_rank"
-                                            v-model:placeholder="tea.rank">
+                                           v-show="false"    v-model="tea.rank">
+                                        <div style="margin-top: 10px; width:100%">
+                                            <el-radio-group v-model="tea.rank" size="small"  name="tea_rank_rank">
+                                                <el-radio-button :label="rankkey[0]"></el-radio-button>
+                                                <el-radio-button :label="rankkey[1]" disabled ></el-radio-button>
+                                                <el-radio-button :label="rankkey[2]"></el-radio-button>
+                                                <el-radio-button :label="rankkey[3]"></el-radio-button>
+                                                <el-radio-button :label="rankkey[4]"></el-radio-button>
+                                                <el-radio-button :label="rankkey[5]"></el-radio-button>
+                                                <el-radio-button :label="rankkey[6]"></el-radio-button>
+                                                <el-radio-button :label="rankkey[7]"></el-radio-button>
+                                                <el-radio-button :label="rankkey[8]"></el-radio-button>
+                                                <el-radio-button :label="rankkey[9]"></el-radio-button>
+                                            </el-radio-group>
+                                        </div>
+
                                     </div>
+
+
+
+
+
                                     <div class="mb-5">
                                         <label class="label block mb-2">公司</label>
                                         <input type="text" class="form-control" name="companyName"

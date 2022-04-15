@@ -53,6 +53,20 @@ public class Test06 {
         System.out.println("前端接收的数据====》"+JsonUtil.getJson(map));
     }
 
+    /* 查询当前公司指定id的采摘量*/
+    @Test
+    public void test06() throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        TeaPickServiceImpl mapper = context.getBean("TeaPickServiceImpl", TeaPickServiceImpl.class);
+        Contract contract = FabricUtil.getContract();
+
+        int output = mapper.getPickOutputByPickId(contract, "阿里巴巴","test01");
+
+
+        System.out.println("每月的采摘量====》"+output);
+        System.out.println("前端接收的数据====》"+JsonUtil.getJson(output));
+    }
+
 
 
     /* 测试前端的json格式*/

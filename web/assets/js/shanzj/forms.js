@@ -26,6 +26,7 @@ const vm = new Vue({
             value1: '',
             datatime: '',
             value3: '',
+            rankkey:["特级", "1级", "2级", "3级", "4级", "5级","6级","7级","8级","9级"],
             company1:document.getElementById("company").innerHTML,
             employee:{ //
                 id:"",

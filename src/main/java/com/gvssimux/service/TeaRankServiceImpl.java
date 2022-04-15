@@ -7,15 +7,23 @@ import com.gvssimux.pojo.TeaPick;
 import com.gvssimux.pojo.TeaRank;
 import com.gvssimux.pojo.fabquery.QueryResult;
 import com.gvssimux.pojo.fabquery.QueryResultList;
+import com.gvssimux.util.DataUtil;
+import com.gvssimux.util.FabricUtil;
 import org.hyperledger.fabric.gateway.Contract;
+import org.hyperledger.fabric.gateway.ContractException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 public class TeaRankServiceImpl implements TeaRankService{
     private String k;
 
 
     /*插入*/
+    @Override
     public String insertOne(Contract contract, TeaRank record){
 
         byte[] bytes = new byte[0];
@@ -49,6 +57,60 @@ public class TeaRankServiceImpl implements TeaRankService{
         return s;
 
     }
+
+
+    /*获取公司下各级茶叶有多少量*/
+    public HashMap getRankPerSum(Contract contract,String companyName) {
+        byte[] bytes;
+        String str = "{\"selector\":{\"company\":\""+companyName+"\",\"type\":\"TeaRank\"}, \"use_index\":[]}";// 富查询字符串
+        try {
+            bytes = contract.submitTransaction("richQuery", str);
+        } catch (ContractException e) {
+            e.printStackTrace();
+            return null;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        String s = new String(bytes);
+        //System.out.println("提交交易" + s);
+        JSONObject jsonObject = JSONObject.parseObject(s);
+        QueryResultList resultList = JSON.toJavaObject(jsonObject, QueryResultList.class);
+        List<QueryResult> list = resultList.getResultList();
+
+        HashMap<String, Integer> map = new HashMap<>();
+
+        for (QueryResult a : list) {
+            String jsonStr = a.getJson();
+            JSONObject jsonObject2 = JSONObject.parseObject(jsonStr);
+            TeaRank rank = JSON.toJavaObject(jsonObject2, TeaRank.class);// 拿到TeaRank对象
+            String teaRankRank = rank.getTeaRankRank();// 获取茶叶等级
+            String teaRankId = rank.getTeaRankId();// 获取这是哪批茶叶
+
+            ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+            TeaPickServiceImpl mapper = context.getBean("TeaPickServiceImpl", TeaPickServiceImpl.class);
+
+            Integer output = mapper.getPickOutputByPickId(contract, companyName, teaRankId);// 查询这批茶叶的output
+
+            if (!map.containsKey(teaRankRank)){ // key不在map中
+                map.put(teaRankRank,output);
+            }else {  // key在map中
+                Integer temp = map.get(teaRankRank);  // 当前output
+                Integer newValue = temp + output;// 增加output
+                map.replace(teaRankRank, newValue);
+            }
+        }
+
+        return map;
+    }
+
+
 
     /*spring 注入k */
     public void setK(String k) {

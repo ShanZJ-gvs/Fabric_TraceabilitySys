@@ -143,6 +143,38 @@ public class TeaPickServiceImpl implements TeaPickService{
         return map;
     }
 
+    /*获取指定批次菜叶的采摘量*/
+    public Integer getPickOutputByPickId(Contract contract, String companyName,String teaPickId) {
+        byte[] bytes;
+        String str = "{\"selector\":{\"company\":\""+companyName+"\",\"type\":\"TeaPick\",\"teaPickId\":\""+teaPickId+"\"}, \"use_index\":[]}";// 富查询字符串
+        try {
+            bytes = contract.submitTransaction("richQuery", str);
+        } catch (ContractException e) {
+            e.printStackTrace();
+            return null;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        String s = new String(bytes);
+        //System.out.println("提交交易" + s);
+        JSONObject jsonObject = JSONObject.parseObject(s);
+        QueryResultList resultList = JSON.toJavaObject(jsonObject, QueryResultList.class);// 获取结果集
+        QueryResult queryResult = resultList.getResultList().get(0); // 获取结果
+        String jsonStr = queryResult.getJson(); // 提取jsonStr
+        JSONObject jsonObject2 = JSONObject.parseObject(jsonStr);
+        TeaPick teaPick = JSON.toJavaObject(jsonObject2, TeaPick.class);
+        Integer output = teaPick.getOutput();
+
+        return output;
+    }
+
     public void setK(String k) {
         this.k = k;
     }

@@ -21,10 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.json.Json;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.nio.channels.Pipe;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.concurrent.TimeoutException;
+
 
 
 @Log
@@ -165,15 +162,7 @@ public class FormsController {
     public String teapick(HttpServletRequest request,HttpServletResponse response) throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaPickServiceImpl mapper = context.getBean("TeaPickServiceImpl", TeaPickServiceImpl.class);
-
-
-        TeaPick pojo = new TeaPick();
-        pojo.setTeaPickTime(request.getParameter("tea_pick_time"));
-        pojo.setTeaPickId(request.getParameter("tea_pick_id"));// 用teaPickId充当茶叶批id，因为一批茶叶的是同时采摘的
-        pojo.setTeaTreeId2(request.getParameter("tea_tree_id2"));
-        pojo.setTeaPickQuality(request.getParameter("tea_pick_quality"));
-        pojo.setCompany(request.getParameter("companyName"));// 公司
-        pojo.setOutput(Integer.valueOf(request.getParameter("output"))); //产量
+        Contract contract = FabricUtil.getContract();
 
 
         /**
@@ -186,11 +175,22 @@ public class FormsController {
         employee.setEsex(request.getParameter("tea_pick_per_sex"));// 采茶师性别
         employee.setCompany(request.getParameter("companyName"));// 采茶师公司
         employee.setStatus("采茶师");// 员工身份
+        postPeople(contract,employee);
+
+        TeaPick pojo = new TeaPick();
+        pojo.setTeaPickTime(request.getParameter("tea_pick_time"));
+        pojo.setTeaPickId(request.getParameter("tea_pick_id"));// 用teaPickId充当茶叶批id，因为一批茶叶的是同时采摘的
+        pojo.setTeaTreeId2(request.getParameter("tea_tree_id2"));
+        pojo.setTeaPickQuality(request.getParameter("tea_pick_quality"));
+        pojo.setCompany(request.getParameter("companyName"));// 公司
+        pojo.setOutput(Integer.valueOf(request.getParameter("output"))); //产量
+
+        pojo.setTeaPickPer(employee);
 
 
         request.getParameter("key");
 
-        Contract contract = FabricUtil.getContract();
+
 
         /*
          往区块中加数据
@@ -225,6 +225,9 @@ public class FormsController {
     public String teamake(HttpServletRequest request,HttpServletResponse response) throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaMakeServiceImpl mapper = context.getBean("TeaMakeServiceImpl", TeaMakeServiceImpl.class);
+        Contract contract = FabricUtil.getContract();
+
+
         /**
          * 给制茶师添加数据
          * */
@@ -234,6 +237,7 @@ public class FormsController {
         employee.setEsex(request.getParameter("tea_make_per_sex"));
         employee.setCompany(request.getParameter("companyName"));
         employee.setStatus("制茶师");
+        postPeople(contract,employee);
 
         /**
          * 给制茶实体添加数据
@@ -247,7 +251,7 @@ public class FormsController {
         teaMake.setOutput(Integer.valueOf(request.getParameter("output")));  //产量
 
 
-        return mapper.insertOne(FabricUtil.getContract(), teaMake);// 返回字符串
+        return mapper.insertOne(contract, teaMake);// 返回字符串
     }
 
 
@@ -260,7 +264,7 @@ public class FormsController {
     public String  tearank(HttpServletRequest request,HttpServletResponse response) throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaRankServiceImpl mapper = context.getBean("TeaRankServiceImpl", TeaRankServiceImpl.class);
-
+        Contract contract = FabricUtil.getContract();
 
         /**
          * 定级人
@@ -271,6 +275,7 @@ public class FormsController {
         employee.setEsex(request.getParameter("tea_rank_per_sex"));
         employee.setCompany(request.getParameter("companyName"));
         employee.setStatus("定级人");
+        postPeople(contract,employee);
 
         /**
          * 定级实体
@@ -286,7 +291,7 @@ public class FormsController {
 
 
 
-        return mapper.insertOne(FabricUtil.getContract(),teaRank);// 返回字符串
+        return mapper.insertOne(contract,teaRank);// 返回字符串
     }
 
 
@@ -300,6 +305,7 @@ public class FormsController {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaPackServiceImpl mapper = context.getBean("TeaPackServiceImpl", TeaPackServiceImpl.class);
 
+        Contract contract = FabricUtil.getContract();
         /**
          * 包装人
          * */
@@ -309,6 +315,7 @@ public class FormsController {
         employee.setEsex(request.getParameter("tea_pack_per_sex"));
         employee.setCompany(request.getParameter("companyName"));
         employee.setStatus("包装人");
+        postPeople(contract,employee);
 
         /**
          * 包装实体
@@ -323,7 +330,7 @@ public class FormsController {
 
 
 
-        return mapper.insertOne(FabricUtil.getContract(),teaPack);// 返回字符串
+        return mapper.insertOne(contract,teaPack);// 返回字符串
     }
 
 
@@ -337,6 +344,7 @@ public class FormsController {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaTestingServiceImpl mapper = context.getBean("TeaTestingServiceImpl", TeaTestingServiceImpl.class);
 
+        Contract contract = FabricUtil.getContract();
         /**
          * 质检人
          * */
@@ -346,6 +354,8 @@ public class FormsController {
         employee.setEsex(request.getParameter("tea_testing_per_sex"));
         employee.setCompany(request.getParameter("companyName"));
         employee.setStatus("质检人");
+        postPeople(contract,employee);
+
 
         /**
          * 质检实体
@@ -360,7 +370,7 @@ public class FormsController {
         request.getParameter("key");// ssl密钥
 
 
-        return mapper.insertOne(FabricUtil.getContract(),pojo);// 返回字符串
+        return mapper.insertOne(contract,pojo);// 返回字符串
     }
 
 
@@ -386,6 +396,20 @@ public class FormsController {
 
 
         return mapper.insertOne(FabricUtil.getContract(),employee);// 返回字符串
+    }
+
+
+
+    /**
+     * 用于给生产上链的页面调用，用于添加员工
+     * 2022年3月17日16:50:56
+     * */
+    public String postPeople(Contract contract,Employee employee) throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        EmployeeServiceImpl mapper = context.getBean("EmployeeServiceImpl", EmployeeServiceImpl.class);
+
+
+        return mapper.insertOne(contract,employee);// 返回字符串
     }
 
 

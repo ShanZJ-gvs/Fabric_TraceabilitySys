@@ -120,6 +120,24 @@ public class DataOverview {
     }
 
 
+    /* 查询当前公司各级茶叶的量*/
+    @ResponseBody
+    @GetMapping("/rankper")
+    public String rankper(@Param("companyName") String companyName, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        TeaRankServiceImpl mapper = context.getBean("TeaRankServiceImpl", TeaRankServiceImpl.class);
+        Contract contract = FabricUtil.getContract();
+
+        HashMap map = mapper.getRankPerSum(contract, companyName);
+
+
+        System.out.println("各级茶叶的量====》"+map);
+        System.out.println("各级茶叶的量--前端接收的数据====》"+ JsonUtil.getJson(map));
+
+        return JsonUtil.getJson(map);
+    }
+
+
 
 
 
