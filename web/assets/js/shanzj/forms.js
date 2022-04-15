@@ -28,16 +28,16 @@ const vm = new Vue({
             value3: '',
             company1:document.getElementById("company").innerHTML,
             employee:{ //
-                id:"test",
-                name:"test",
-                sex:"test"
+                id:"",
+                name:"",
+                sex:""
             },
             pojo:{// 茶园茶区通用
                 id:"",
                 name:"",
                 address:"",
                 area:"",
-                altitude:"jinweidu1",
+                altitude:"",
                 areaid2:"",
                 gardenid2:"",
                 height:"",
@@ -63,8 +63,10 @@ const vm = new Vue({
             }
         };
     },
-    method:{
-
+    methods: {
+        handleChange(value) {
+            console.log(value);
+        }
     }
 });
 

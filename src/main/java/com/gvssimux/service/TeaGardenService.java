@@ -14,7 +14,7 @@ public interface TeaGardenService {
     /*插入*/
     String insertOne(Contract contract,TeaGarden record);
 
-    /*查询全部*/
+    /*查询*/
     QueryResultList selectOffsetLimit(Contract contract,String companyName,int offset,int limit) throws Exception;
 
 

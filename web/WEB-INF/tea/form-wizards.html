@@ -355,9 +355,11 @@
                                     </div>
                                     <div class="mb-5">
                                         <label class="label block mb-2">产量</label>
-                                        <input type="text" class="form-control" name="output"
-                                               v-model:placeholder="tea.output">
+                                        <el-input-number v-model="tea.output" name="output" @change="handleChange" :min="1" :max="99999" label="描述文字">
+                                        </el-input-number>
                                     </div>
+
+
                                     <div class="mb-5">
                                         <label class="label block mb-2">鲜叶质量</label>
                                         <input type="text" class="form-control" name="tea_pick_quality"
@@ -424,8 +426,8 @@
                                     </div>
                                     <div class="mb-5">
                                         <label class="label block mb-2">产量</label>
-                                        <input type="text" class="form-control" name="output"
-                                               v-model:placeholder="tea.output">
+                                        <el-input-number v-model="tea.output" name="output" @change="handleChange" :min="1" :max="99999" label="描述文字">
+                                        </el-input-number>
                                     </div>
                                     <div class="mb-5">
                                         <label class="label block mb-2">公司</label>

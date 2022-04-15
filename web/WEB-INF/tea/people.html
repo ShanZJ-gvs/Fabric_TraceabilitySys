@@ -7,6 +7,7 @@
     <title>茶叶溯源管理后台 </title>
 
     <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/element/index.css">
 </head>
 <body>
 
@@ -109,7 +110,7 @@
 
 
     <!-- Workspace  -->
-    <main class="workspace">
+    <main class="workspace"  id="root">
 
         <!-- Breadcrumb -->
         <section class="breadcrumb" >
@@ -129,137 +130,226 @@
                             <a href="#" class="h5 active" data-toggle="tab" data-target="#tab-2">制茶师<small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</small></a>
                             <a href="#" class="h5 active" data-toggle="tab" data-target="#tab-3">定级人<small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</small></a>
                             <a href="#" class="h5 active" data-toggle="tab" data-target="#tab-4">包装人<small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</small></a>
+                            <a href="#" class="h5 active" data-toggle="tab" data-target="#tab-5">质检人<small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</small></a>
 
 
                         </nav>
                         <div class="tab-content mt-5">
                             <div class="collapse open" id="tab-1">
-                                <form>
+                                <form action="/Fabric_TraceabilitySys_war_exploded/people" method="post">
                                     <div class="mb-5">
-                                        <label class="label block mb-2" for="email-2">采茶师编号</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <label class="label block mb-2">采茶师编号</label>
+                                        <input type="text" class="form-control" name="eid"
                                                placeholder="">
                                     </div>
                                     <div class="mb-5">
-                                        <label class="label block mb-2" for="email-2">采茶师姓名</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <label class="label block mb-2">采茶师姓名</label>
+                                        <input type="text" class="form-control" name="ename"
                                                placeholder="">
                                     </div>
                                     <div class="mb-5">
-                                        <label class="label block mb-2" for="email-2">采茶师性别</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <label class="label block mb-2">采茶师性别</label>
+                                        <el-radio name="esex" v-model="employee.sex" label="男">男</el-radio>
+                                        <el-radio name="esex" v-model="employee.sex" label="女">女</el-radio>
+                                    </div>
+                                    <div class="mb-5">
+                                        <label class="label block mb-2">所属公司</label>
+                                        <input type="text" class="form-control" name="companyName"
                                                placeholder="">
+                                    </div>
+                                    <div class="mb-5" v-show="false">
+                                        <label class="label block mb-2">身份</label>
+                                        <input type="text" class="form-control" name="status"
+                                              value="采茶师" placeholder="采茶师">
                                     </div>
 
                                     <div class="mb-5">
                                         <label class="label block mb-2" for="password-2">密码</label>
-                                        <input type="password" class="form-control" id="password-2" value="">
+                                        <input type="password" class="form-control" value="">
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn btn_primary uppercase">提交</button>
                                     </div>
                                 </form>
                             </div>
                             <div class="collapse" id="tab-2">
-                                <form>
+                                <form action="/Fabric_TraceabilitySys_war_exploded/people" method="post">
 
                                     <div class="mb-5">
-                                        <label class="label block mb-2" for="email-2">制茶师编号</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <label class="label block mb-2">制茶师编号</label>
+                                        <input type="text" class="form-control" name="eid"
                                                placeholder="">
                                     </div>
                                     <div class="mb-5">
-                                        <label class="label block mb-2" for="email-2">制茶师姓名</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <label class="label block mb-2">制茶师姓名</label>
+                                        <input type="text" class="form-control" name="ename"
                                                placeholder="">
                                     </div>
                                     <div class="mb-5">
-                                        <label class="label block mb-2" for="email-2">制茶师性别</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <label class="label block mb-2">制茶师性别</label>
+                                        <el-radio name="esex" v-model="employee.sex" label="男">男</el-radio>
+                                        <el-radio name="esex" v-model="employee.sex" label="女">女</el-radio>
+                                    </div>
+                                    <div class="mb-5">
+                                        <label class="label block mb-2">所属公司</label>
+                                        <input type="text" class="form-control" name="companyName"
                                                placeholder="">
+                                    </div>
+                                    <div class="mb-5" v-show="false">
+                                        <label class="label block mb-2">身份</label>
+                                        <input type="text" class="form-control" name="status"
+                                               value="制茶师"  placeholder="制茶师">
                                     </div>
 
                                     <div class="mb-5">
                                         <label class="label block mb-2" for="password-2">密码</label>
-                                        <input type="password" class="form-control" id="password-2" value="">
+                                        <input type="password" class="form-control" value="">
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn btn_primary uppercase">提交</button>
                                     </div>
                                 </form>
                             </div>
                             <div class="collapse" id="tab-3">
-                                <form>
+                                <form action="/Fabric_TraceabilitySys_war_exploded/people" method="post">
                                     <div class="mb-5">
-                                        <label class="label block mb-2" for="email-2">定级人编号</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <label class="label block mb-2">定级人编号</label>
+                                        <input type="text" class="form-control" name="eid"
                                                placeholder="">
                                     </div>
                                     <div class="mb-5">
-                                        <label class="label block mb-2" for="email-2">定级人姓名</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <label class="label block mb-2">定级人姓名</label>
+                                        <input type="text" class="form-control" name="ename"
                                                placeholder="">
                                     </div>
                                     <div class="mb-5">
-                                        <label class="label block mb-2" for="email-2">定级人性别</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <label class="label block mb-2">定级人性别</label>
+                                        <el-radio name="esex" v-model="employee.sex" label="男">男</el-radio>
+                                        <el-radio name="esex" v-model="employee.sex" label="女">女</el-radio>
+                                    </div>
+                                    <div class="mb-5">
+                                        <label class="label block mb-2">所属公司</label>
+                                        <input type="text" class="form-control" name="companyName"
                                                placeholder="">
                                     </div>
-
+                                    <div class="mb-5" v-show="false">
+                                        <label class="label block mb-2">身份</label>
+                                        <input type="text" class="form-control" name="status"
+                                               value="定级人"  placeholder="定级人">
+                                    </div>
 
                                     <div class="mb-5">
                                         <label class="label block mb-2" for="password-2">密码</label>
-                                        <input type="password" class="form-control" id="password-2" value="">
+                                        <input type="password" class="form-control" value="">
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn btn_primary uppercase">提交</button>
                                     </div>
                                 </form>
                             </div>
                             <div class="collapse" id="tab-4">
-                                <form>
+                                <form action="/Fabric_TraceabilitySys_war_exploded/people" method="post">
 
                                     <div class="mb-5">
-                                        <label class="label block mb-2" for="email-2">包装人编号</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <label class="label block mb-2">包装人编号</label>
+                                        <input type="text" class="form-control" name="eid"
                                                placeholder="">
                                     </div>
                                     <div class="mb-5">
-                                        <label class="label block mb-2" for="email-2">包装人姓名</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <label class="label block mb-2">包装人姓名</label>
+                                        <input type="text" class="form-control" name="ename"
                                                placeholder="">
                                     </div>
                                     <div class="mb-5">
-                                        <label class="label block mb-2" for="email-2">包装人性别</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <label class="label block mb-2">包装人性别</label>
+                                        <el-radio name="esex" v-model="employee.sex" label="男">男</el-radio>
+                                        <el-radio name="esex" v-model="employee.sex" label="女">女</el-radio>
+                                    </div>
+                                    <div class="mb-5">
+                                        <label class="label block mb-2">所属公司</label>
+                                        <input type="text" class="form-control" name="companyName"
                                                placeholder="">
                                     </div>
-
+                                    <div class="mb-5" v-show="false">
+                                        <label class="label block mb-2">身份</label>
+                                        <input type="text" class="form-control" name="status"
+                                               value="包装人" placeholder="包装人">
+                                    </div>
 
                                     <div class="mb-5">
                                         <label class="label block mb-2" for="password-2">密码</label>
-                                        <input type="password" class="form-control" id="password-2" value="">
+                                        <input type="password" class="form-control" value="">
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn btn_primary uppercase">提交</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="collapse" id="tab-5">
+                                <form action="/Fabric_TraceabilitySys_war_exploded/people" method="post">
+
+                                    <div class="mb-5">
+                                        <label class="label block mb-2">质检人编号</label>
+                                        <input type="text" class="form-control" name="eid"
+                                               placeholder="">
+                                    </div>
+                                    <div class="mb-5">
+                                        <label class="label block mb-2">质检人姓名</label>
+                                        <input type="text" class="form-control" name="ename"
+                                               placeholder="">
+                                    </div>
+                                    <div class="mb-5">
+                                        <label class="label block mb-2">质检人性别</label>
+                                        <el-radio name="esex" v-model="employee.sex" label="男">男</el-radio>
+                                        <el-radio name="esex" v-model="employee.sex" label="女">女</el-radio>
+                                    </div>
+                                    <div class="mb-5">
+                                        <label class="label block mb-2">所属公司</label>
+                                        <input type="text" class="form-control" name="companyName"
+                                               placeholder="">
+                                    </div>
+                                    <div class="mb-5" v-show="false">
+                                        <label class="label block mb-2">身份</label>
+                                        <input type="text" class="form-control" name="status"
+                                               value="质检人"  placeholder="质检人">
+                                    </div>
+
+                                    <div class="mb-5">
+                                        <label class="label block mb-2">密码</label>
+                                        <input type="password" class="form-control" value="">
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn btn_primary uppercase">提交</button>
                                     </div>
                                 </form>
                             </div>
 
-                            <div class="collapse" id="tab-5">
+                <!--            <div class="collapse" id="tab-5">
                                 <form>
                                     <div class="mb-5">
-                                        <label class="label block mb-2" for="email-2">仓库编号</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <label class="label block mb-2">仓库编号</label>
+                                        <input type="text" class="form-control"
                                                placeholder="">
                                     </div>
                                     <div class="mb-5">
-                                        <label class="label block mb-2" for="email-2">仓库名</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <label class="label block mb-2">仓库名</label>
+                                        <input type="text" class="form-control"
                                                placeholder="">
                                     </div>
                                     <div class="mb-5">
-                                        <label class="label block mb-2" for="email-2">仓库地址</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <label class="label block mb-2">仓库地址</label>
+                                        <input type="text" class="form-control"
                                                placeholder="">
                                     </div>
 
                                     <div class="mb-5">
-                                        <label class="label block mb-2" for="email-2">管理员编号</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <label class="label block mb-2">管理员编号</label>
+                                        <input type="text" class="form-control"
                                                placeholder="">
                                     </div>
                                     <div class="mb-5">
-                                        <label class="label block mb-2" for="email-2">管理员姓名</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <label class="label block mb-2">管理员姓名</label>
+                                        <input type="text" class="form-control"
                                                placeholder="">
                                     </div>
 
@@ -274,18 +364,18 @@
                             <div class="collapse" id="tab-6">
                                 <form>
                                     <div class="mb-5">
-                                        <label class="label block mb-2" for="email-2">物流公司</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <label class="label block mb-2">物流公司</label>
+                                        <input type="text" class="form-control"
                                                placeholder="">
                                     </div>
                                     <div class="mb-5">
-                                        <label class="label block mb-2" for="email-2">公司地址</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <label class="label block mb-2">公司地址</label>
+                                        <input type="text" class="form-control"
                                                placeholder="">
                                     </div>
                                     <div class="mb-5">
-                                        <label class="label block mb-2" for="email-2">联系电话</label>
-                                        <input type="text" class="form-control" id="email-2"
+                                        <label class="label block mb-2">联系电话</label>
+                                        <input type="text" class="form-control"
                                                placeholder="">
                                     </div>
 
@@ -294,18 +384,12 @@
                                         <input type="password" class="form-control" id="password-2" value="">
                                     </div>
                                 </form>
-                            </div>
-
+                            </div>-->
 
 
 
                         </div>
-                        <div class="mt-5">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn_primary uppercase">提交</button>
 
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -394,6 +478,10 @@
     <script src="assets/js/vue.js"></script>
     <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
 
+    <!--element-->
+    <script src="assets/js/element/index.js"></script>
+
+    <script src="assets/js/shanzj/people.js"></script>
     <script src="assets/js/topbar_shanzj.js"></script>
     <script src="assets/js/menu_shanzj.js"></script>
 

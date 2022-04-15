@@ -70,6 +70,11 @@
         <property name="k" value="Testing"/>
     </bean>
 
+    <!--人员service-->
+    <bean id="EmployeeServiceImpl" class="com.gvssimux.service.EmployeeServiceImpl">
+        <property name="k" value="Employee"/>
+    </bean>
+
     <!--仓储service-->
     <bean id="TeaWarehouseServiceImpl" class="com.gvssimux.service.TeaWarehouseServiceImpl">
         <property name="mapper" ref="teaWarehouseDao"/>

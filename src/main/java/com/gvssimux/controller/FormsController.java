@@ -177,13 +177,15 @@ public class FormsController {
 
 
         /**
-         * 给采摘师添加数据
+         * 给采茶师添加数据
          *
          * */
-        Employee employee = new Employee();// 采摘师
-        employee.setEid(request.getParameter("tea_pick_per_id"));// 采摘师编号
-        employee.setEname(request.getParameter("tea_pick_per_name"));// 采摘师姓名
-        employee.setEsex(request.getParameter("tea_pick_per_sex"));// 采摘师性别
+        Employee employee = new Employee();// 采茶师
+        employee.setEid(request.getParameter("tea_pick_per_id"));// 采茶师编号
+        employee.setEname(request.getParameter("tea_pick_per_name"));// 采茶师姓名
+        employee.setEsex(request.getParameter("tea_pick_per_sex"));// 采茶师性别
+        employee.setCompany(request.getParameter("companyName"));// 采茶师公司
+        employee.setStatus("采茶师");// 员工身份
 
 
         request.getParameter("key");
@@ -230,6 +232,8 @@ public class FormsController {
         employee.setEid(request.getParameter("tea_make_per_id"));
         employee.setEname(request.getParameter("tea_make_per_name"));
         employee.setEsex(request.getParameter("tea_make_per_sex"));
+        employee.setCompany(request.getParameter("companyName"));
+        employee.setStatus("制茶师");
 
         /**
          * 给制茶实体添加数据
@@ -265,6 +269,8 @@ public class FormsController {
         employee.setEid(request.getParameter("tea_rank_per_id"));
         employee.setEname(request.getParameter("tea_rank_per_name"));
         employee.setEsex(request.getParameter("tea_rank_per_sex"));
+        employee.setCompany(request.getParameter("companyName"));
+        employee.setStatus("定级人");
 
         /**
          * 定级实体
@@ -301,6 +307,8 @@ public class FormsController {
         employee.setEid(request.getParameter("tea_pack_per_id"));
         employee.setEname(request.getParameter("tea_pack_per_name"));
         employee.setEsex(request.getParameter("tea_pack_per_sex"));
+        employee.setCompany(request.getParameter("companyName"));
+        employee.setStatus("包装人");
 
         /**
          * 包装实体
@@ -336,6 +344,8 @@ public class FormsController {
         employee.setEid(request.getParameter("tea_testing_per_id"));
         employee.setEname(request.getParameter("tea_testing_per_name"));
         employee.setEsex(request.getParameter("tea_testing_per_sex"));
+        employee.setCompany(request.getParameter("companyName"));
+        employee.setStatus("质检人");
 
         /**
          * 质检实体
@@ -352,6 +362,32 @@ public class FormsController {
 
         return mapper.insertOne(FabricUtil.getContract(),pojo);// 返回字符串
     }
+
+
+    /**
+     * 人员上链
+     * 2022年3月17日16:50:56
+     * */
+    @ResponseBody
+    @PostMapping("/people")
+    public String people(HttpServletRequest request,HttpServletResponse response) throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        EmployeeServiceImpl mapper = context.getBean("EmployeeServiceImpl", EmployeeServiceImpl.class);
+
+        /**
+         * 质检人
+         * */
+        Employee employee = new Employee();
+        employee.setEid(request.getParameter("eid"));
+        employee.setEname(request.getParameter("ename"));
+        employee.setEsex(request.getParameter("esex"));
+        employee.setCompany(request.getParameter("companyName"));
+        employee.setStatus(request.getParameter("status"));
+
+
+        return mapper.insertOne(FabricUtil.getContract(),employee);// 返回字符串
+    }
+
 
 
 }

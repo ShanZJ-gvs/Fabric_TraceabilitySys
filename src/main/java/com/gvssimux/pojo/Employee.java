@@ -18,4 +18,15 @@ public class Employee {
     // 员工性别
     private String esex;
 
+    // 员工类别 如：制茶师
+    private String status;
+
+    // 所属公司
+    private String company;
+
+    /**
+     * 用于在富查询时标识查询类型的实体对象
+     * */
+    private final String type = "Employee";
+
 }
