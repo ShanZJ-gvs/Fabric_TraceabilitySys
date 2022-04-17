@@ -42,7 +42,7 @@
 
     <!--茶叶service-->
     <bean id="TeaLeafServiceImpl" class="com.gvssimux.service.TeaLeafServiceImpl">
-        <property name="mapper" ref="teaLeafDao"/>
+
     </bean>
 
     <!--采摘service-->

@@ -8,6 +8,23 @@
    <title>数据总览 </title> 
 
   <link rel="stylesheet" href="assets/css/style.css" />
+    <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.8/theme-chalk/index.css" rel="stylesheet">
+    <style>
+        .demo-table-expand {
+            font-size: 0;
+        }
+        .demo-table-expand label {
+            width: 90px;
+            color: #99a9bf;
+        }
+        .demo-table-expand .el-form-item {
+            margin-right: 0;
+            margin-bottom: 0;
+            width: 50%;
+        }
+    </style>
+
+
 </head>
 
 <body>
@@ -165,7 +182,7 @@
                         </tr>-->
                         </tbody>
                     </table>
-                </div>
+                </div>   <!--茶区-->
 
                 <div class="card mt-4 p-5">
                     <h3>茶园</h3>
@@ -210,27 +227,27 @@
                                         </tr>-->
                         </tbody>
                     </table>
-                </div>
+                </div>  <!--茶园-->
 
                 <!-- Bordered -->
                 <div class="card mt-5 p-5">
                     <h3>采摘</h3>
-                    <table class="table table_bordered mt-3 w-full">
+                <!--    <table class="table table_bordered mt-3 w-full">
                         <thead>
                         <tr>
                             <th class="text-left uppercase">#</th>
-                            <th class="text-left uppercase">茶树区块号</th>
-                            <th class="text-center uppercase">采茶师编号</th>
-
+                            <th class="text-left uppercase">茶叶批编号</th>
                             <th class="text-center uppercase">采摘时间</th>
-                            <th class="text-center uppercase">鲜叶编号</th>
+
+                            <th class="text-center uppercase">所属茶树编号</th>
+                            <th class="text-center uppercase">产量</th>
                             <th class="text-center uppercase">鲜叶质量</th>
 
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
+                        <tr v-for="(a,index) in listPick">
+                            <td>{{index}}</td>
                             <td>574e1bd4c24fb7b7b017c55bf97d16377f991d19e2c8d582f2b600876e01c9c0</td>
                             <td class="text-center">096</td>
                             <td class="text-center">2021/04/26</td>
@@ -238,32 +255,167 @@
                                 C2
                             </td>
                             <td class="text-center">合格</td>
-
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>2bdcf003d4c7714b5a008e0d53804741c1de578af28ffa453a0cc0153f2cc76f</td>
-                            <td class="text-center">065</td>
-                            <td class="text-center">2021/03/20</td>
-                            <td class="text-center">
-                                A5
-                            </td>
-                            <td class="text-center">合格</td>
-
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>ff3b1074f6247628cd842266e32e04a170c258352e28fbda670b5797f733094a</td>
-                            <td class="text-center">078</td>
-                            <td class="text-center">2021/03/26</td>
-                            <td class="text-center">
-                                D9
-                            </td>
-                            <td class="text-center">合格</td>
-
                         </tr>
                         </tbody>
-                    </table>
+                    </table>  -->  <!--采摘-->
+                    <div>
+                        <el-button @click="resetDateFilter">清除日期过滤器</el-button>
+                        <el-button @click="clearFilter">清除所有过滤器</el-button>
+                        <el-table
+                                ref="filterTable"
+                                :data="listLeft2"
+                                stripe
+                                border
+                                :header-cell-style="{color:'rgba(20, 83, 136, var(--tw-text-opacity))'}"
+                                style="width: 100%">
+                            <el-table-column type="expand">
+                                <template slot-scope="props">
+                                    <el-form label-position="left" inline class="demo-table-expand">
+                                        <el-form-item label="茶叶批编号">
+                                            <span>{{ props.row.teaPick.teaPickId }}</span>
+                                        </el-form-item>
+                                        <el-form-item label="产量">
+                                            <span>{{ props.row.teaPick.output }}</span>
+                                        </el-form-item>
+                                        <el-form-item label="采茶师编号">
+                                            <span>{{ props.row.teaPick.teaPickPer.eid }}</span>
+                                        </el-form-item>
+                                        <el-form-item label="采茶师姓名">
+                                            <span>{{ props.row.teaPick.teaPickPer.ename }}</span>
+                                        </el-form-item>
+                                        <el-form-item label="采茶师性别">
+                                            <span>{{ props.row.teaPick.teaPickPer.esex }}</span>
+                                        </el-form-item>
+                                        <el-form-item label="采摘时间">
+                                            <span>{{ props.row.teaPick.teaPickTime }}</span>
+                                        </el-form-item>
+                                        <el-form-item label="所属茶树编号">
+                                            <span>{{ props.row.teaPick.teaTreeId2 }}</span>
+                                        </el-form-item>
+                                        <el-form-item label="鲜叶质量">
+                                            <span>{{ props.row.teaPick.teaPickQuality }}</span>
+                                        </el-form-item>
+                                        <el-form-item label="采茶公司">
+                                            <span>{{ props.row.teaPick.teaPickPer.company }}</span>
+                                        </el-form-item>
+
+                                        <el-form-item label="">
+                                            <span></span>
+                                        </el-form-item>
+
+                                        <el-form-item label="制茶师编号">
+                                            <span>{{ props.row.teaMake.teaMakePer.eid }}</span>
+                                        </el-form-item>
+                                        <el-form-item label="制茶师姓名">
+                                            <span>{{ props.row.teaMake.teaMakePer.ename }}</span>
+                                        </el-form-item>
+                                        <el-form-item label="制茶师性别">
+                                            <span>{{ props.row.teaMake.teaMakePer.esex }}</span>
+                                        </el-form-item>
+                                        <el-form-item label="制茶时间">
+                                            <span>{{ props.row.teaMake.teaMakeTime }}</span>
+                                        </el-form-item>
+                                        <el-form-item label="制茶工艺">
+                                            <span>{{ props.row.teaMake.teaMakeWay }}</span>
+                                        </el-form-item>
+                                        <el-form-item label="制茶公司">
+                                            <span>{{ props.row.teaMake.teaMakePer.company }}</span>
+                                        </el-form-item>
+
+                                        <el-form-item label="">
+                                            <span></span>
+                                        </el-form-item>
+
+                                        <el-form-item label="定级人编号">
+                                            <span>{{ props.row.teaRank.teaRankPer.eid }}</span>
+                                        </el-form-item>
+                                        <el-form-item label="定级人姓名">
+                                            <span>{{ props.row.teaRank.teaRankPer.ename }}</span>
+                                        </el-form-item>
+                                        <el-form-item label="定级人性别">
+                                            <span>{{ props.row.teaRank.teaRankPer.esex }}</span>
+                                        </el-form-item>
+                                        <el-form-item label="定级时间">
+                                            <span>{{ props.row.teaRank.teaRankTime }}</span>
+                                        </el-form-item>
+                                        <el-form-item label="茶叶等级">
+                                            <span>{{ props.row.teaRank.teaRankRank }}</span>
+                                        </el-form-item>
+                                        <el-form-item label="公司">
+                                            <span>{{ props.row.teaRank.teaRankPer.company }}</span>
+                                        </el-form-item>
+
+                                    </el-form>
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    prop="teaPick.teaPickId"
+                                    label="茶叶批编号"
+                                    width="120">
+                            </el-table-column>
+                            <el-table-column
+                                    label="茶区/茶园编号"
+                                    prop="AGId">
+                            </el-table-column>
+                            <el-table-column
+                                    label="产量"
+                                    prop="teaPick.output">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="teaPick.teaPickTime"
+                                    label="采摘日期"
+                                    sortable
+                                    width="180"
+                                    column-key="date"
+                                    :filters="[{text: '2016-05-01', value: '2016-05-01'}, {text: '2016-05-02', value: '2016-05-02'}, {text: '2016-05-03', value: '2016-05-03'}, {text: '2016-05-04', value: '2016-05-04'}]"
+                                    :filter-method="filterHandler"
+                            >
+                            </el-table-column>
+                            <el-table-column
+                                    prop="teaMake.teaMakeTime"
+                                    label="制茶日期"
+                                    sortable
+                                    width="180"
+                                    column-key="date"
+                                    :filters="[{text: '2016-05-01', value: '2016-05-01'}, {text: '2016-05-02', value: '2016-05-02'}, {text: '2016-05-03', value: '2016-05-03'}, {text: '2016-05-04', value: '2016-05-04'}]"
+                                    :filter-method="filterHandler"
+                            >
+                            </el-table-column>
+                            <el-table-column
+                                    prop="teaRank.teaRankTime"
+                                    label="定级时间"
+                                    sortable
+                                    width="180"
+                                    column-key="date"
+                                    :filters="[{text: '2016-05-01', value: '2016-05-01'}, {text: '2016-05-02', value: '2016-05-02'}, {text: '2016-05-03', value: '2016-05-03'}, {text: '2016-05-04', value: '2016-05-04'}]"
+                                    :filter-method="filterHandler"
+                            >
+                            </el-table-column>
+
+                            <el-table-column
+                                    prop="teaRank.teaRankRank"
+                                    label="等级"
+                                    width="100"
+                                    :filters="[{ text: '特级', value: '特级' },{ text: '1级', value: '1级' },
+                                    { text: '2级', value: '2级' },{ text: '3级', value: '3级' },
+                                    { text: '4级', value: '4级' },{ text: '5级', value: '5级' },
+                                    { text: '6级', value: '6级' },{ text: '7级', value: '7级' },
+                                    { text: '8级', value: '8级' },{ text: '9级', value: '9级' },]"
+                                    :filter-method="filterTag"
+                                    filter-placement="bottom-end">
+                                <template slot-scope="scope">
+                                    <el-tag
+                                            :type="scope.row.teaRank.teaRankRank === '特级' ? 'primary' : 'success'"
+                                            disable-transitions>{{scope.row.teaRank.teaRankRank}}</el-tag>
+                                </template>
+                            </el-table-column>
+
+
+
+                        </el-table>
+
+                    </div>
+
                 </div>
 
                 <!-- Hoverable -->
@@ -685,6 +837,8 @@
     <script src="assets/js/vue.js"></script>
     <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
 
+    <!--element-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.8/index.js"></script>
 
     <script src="assets/js/datas_shanzj.js"></script>
     <script src="assets/js/topbar_shanzj.js"></script>

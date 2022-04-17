@@ -31,5 +31,10 @@ public class TeaRank {
      * */
     private final String type = "TeaRank";
 
+    /**
+     * 用于在富查询时标识查询类型的实体对象
+     * */
+    private final String type2 = "TeaLeft";
+
 
 }

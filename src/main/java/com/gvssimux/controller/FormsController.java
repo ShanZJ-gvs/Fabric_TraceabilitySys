@@ -8,6 +8,7 @@ import com.gvssimux.service.*;
 import com.gvssimux.util.FabricUtil;
 import com.gvssimux.util.JsonUtil;
 import lombok.extern.java.Log;
+import org.apache.ibatis.annotations.Param;
 import org.hyperledger.fabric.gateway.Contract;
 import org.hyperledger.fabric.gateway.ContractException;
 import org.junit.Test;
@@ -159,7 +160,7 @@ public class FormsController {
      * */
     @ResponseBody
     @PostMapping("teapick")
-    public String teapick(HttpServletRequest request,HttpServletResponse response) throws Exception {
+    public String teapick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaPickServiceImpl mapper = context.getBean("TeaPickServiceImpl", TeaPickServiceImpl.class);
         Contract contract = FabricUtil.getContract();
@@ -173,7 +174,7 @@ public class FormsController {
         employee.setEid(request.getParameter("tea_pick_per_id"));// 采茶师编号
         employee.setEname(request.getParameter("tea_pick_per_name"));// 采茶师姓名
         employee.setEsex(request.getParameter("tea_pick_per_sex"));// 采茶师性别
-        employee.setCompany(request.getParameter("companyName"));// 采茶师公司
+        employee.setCompany(request.getParameter("companyNameToEm"));// 采茶师公司
         employee.setStatus("采茶师");// 员工身份
         postPeople(contract,employee);
 
@@ -235,7 +236,7 @@ public class FormsController {
         employee.setEid(request.getParameter("tea_make_per_id"));
         employee.setEname(request.getParameter("tea_make_per_name"));
         employee.setEsex(request.getParameter("tea_make_per_sex"));
-        employee.setCompany(request.getParameter("companyName"));
+        employee.setCompany(request.getParameter("companyNameToEm"));
         employee.setStatus("制茶师");
         postPeople(contract,employee);
 
@@ -273,7 +274,7 @@ public class FormsController {
         employee.setEid(request.getParameter("tea_rank_per_id"));
         employee.setEname(request.getParameter("tea_rank_per_name"));
         employee.setEsex(request.getParameter("tea_rank_per_sex"));
-        employee.setCompany(request.getParameter("companyName"));
+        employee.setCompany(request.getParameter("companyNameToEm"));
         employee.setStatus("定级人");
         postPeople(contract,employee);
 
@@ -313,7 +314,7 @@ public class FormsController {
         employee.setEid(request.getParameter("tea_pack_per_id"));
         employee.setEname(request.getParameter("tea_pack_per_name"));
         employee.setEsex(request.getParameter("tea_pack_per_sex"));
-        employee.setCompany(request.getParameter("companyName"));
+        employee.setCompany(request.getParameter("companyNameToEm"));
         employee.setStatus("包装人");
         postPeople(contract,employee);
 
@@ -352,7 +353,7 @@ public class FormsController {
         employee.setEid(request.getParameter("tea_testing_per_id"));
         employee.setEname(request.getParameter("tea_testing_per_name"));
         employee.setEsex(request.getParameter("tea_testing_per_sex"));
-        employee.setCompany(request.getParameter("companyName"));
+        employee.setCompany(request.getParameter("companyNameToEm"));
         employee.setStatus("质检人");
         postPeople(contract,employee);
 

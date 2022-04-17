@@ -4,21 +4,11 @@ import lombok.Data;
 
 @Data
 public class TeaLeaf {
-    private String teaPickId;
 
-    private String teaMakingId;
+    private TeaPick teaPick;
 
-    private String teaRankId;
+    private TeaMake teaMake;
 
-    private String teaPackagingId;
-
-    private String teaTestingId;
-
-    private String teaWarehouseId;
-
-    private String teaTransportId;
-
-    private String teaShopId;
-
+    private TeaRank teaRank;
 
 }

@@ -15,6 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 public class PageJumpController {
 
 
+    @RequestMapping("/totest03")
+    public String topeople()throws JsonProcessingException{
+        return "test03";
+    }
 
 
 

@@ -10,7 +10,7 @@
     <title>茶叶溯源管理后台 </title>
 
     <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="assets/css/element/index.css">
+    <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.8/theme-chalk/index.css" rel="stylesheet">
 
 </head>
 
@@ -336,6 +336,7 @@
                                     <div class="mb-5 block">
                                         <span class="label block mb-2 demonstration">采摘时间</span>
                                         <el-date-picker
+                                                style="width:100%"
                                                 v-model="datatime"
                                                 type="datetime"
                                                 placeholder="选择日期时间"
@@ -356,7 +357,7 @@
                                     </div>
                                     <div class="mb-5">
                                         <label class="label block mb-2">产量</label>
-                                        <el-input-number v-model="tea.output" name="output" @change="handleChange" :min="1" :max="99999" label="描述文字">
+                                        <el-input-number style="width:100%" v-model="tea.output" name="output" @change="handleChange" :min="1" :max="99999" label="描述文字">
                                         </el-input-number>
                                     </div>
 
@@ -367,10 +368,12 @@
                                                v-model:placeholder="tea.quality">
                                     </div>
                                     <div class="mb-5">
-                                        <label class="label block mb-2">公司</label>
-                                        <input type="text" class="form-control" name="companyName"
+                                        <label class="label block mb-2">采茶公司</label>
+                                        <input type="text" class="form-control" name="companyNameToEm"
                                                placeholder="">
                                     </div>
+                                    <input v-show="false" v-model="company1" type="text" class="form-control" name="companyName">
+
 
                                     <div class="mb-5">
                                         <label class="label block mb-2">密码</label>
@@ -407,6 +410,7 @@
                                     <div class="mb-5 block">
                                         <span class="label block mb-2 demonstration">制茶时间</span>
                                         <el-date-picker
+                                                style="width:100%"
                                                 v-model="datatime"
                                                 type="datetime"
                                                 placeholder="选择日期时间"
@@ -427,14 +431,19 @@
                                     </div>
                                     <div class="mb-5">
                                         <label class="label block mb-2">产量</label>
-                                        <el-input-number v-model="tea.output" name="output" @change="handleChange" :min="1" :max="99999" label="描述文字">
+                                        <el-input-number  style="width:100%" v-model="tea.output" name="output" @change="handleChange" :min="1" :max="99999" label="描述文字">
                                         </el-input-number>
                                     </div>
+
                                     <div class="mb-5">
-                                        <label class="label block mb-2">公司</label>
-                                        <input type="text" class="form-control" name="companyName"
+                                        <label class="label block mb-2">制茶公司</label>
+                                        <input type="text" class="form-control" name="companyNameToEm"
                                                placeholder="">
                                     </div>
+                                    <input v-show="false" v-model="company1" type="text" class="form-control" name="companyName">
+
+
+
                                     <div class="mb-5">
                                         <label class="label block mb-2">密码</label>
                                         <input type="password" class="form-control" value="" name="key">
@@ -469,6 +478,7 @@
                                     <div class="mb-5 block">
                                         <span class="label block mb-2 demonstration">定级时间</span>
                                         <el-date-picker
+                                                style="width:100%"
                                                 v-model="datatime"
                                                 type="datetime"
                                                 placeholder="选择日期时间"
@@ -487,7 +497,7 @@
                                         <input type="text" class="form-control" name="tea_rank_rank"
                                            v-show="false"    v-model="tea.rank">
                                         <div style="margin-top: 10px; width:100%">
-                                            <el-radio-group v-model="tea.rank" size="small"  name="tea_rank_rank">
+                                            <el-radio-group  style="width:100%" v-model="tea.rank" size="small"  name="tea_rank_rank">
                                                 <el-radio-button :label="rankkey[0]"></el-radio-button>
                                                 <el-radio-button :label="rankkey[1]" disabled ></el-radio-button>
                                                 <el-radio-button :label="rankkey[2]"></el-radio-button>
@@ -503,15 +513,14 @@
 
                                     </div>
 
-
-
-
-
                                     <div class="mb-5">
-                                        <label class="label block mb-2">公司</label>
-                                        <input type="text" class="form-control" name="companyName"
+                                        <label class="label block mb-2">定级公司</label>
+                                        <input type="text" class="form-control" name="companyNameToEm"
                                                placeholder="">
                                     </div>
+                                    <input v-show="false" v-model="company1" type="text" class="form-control" name="companyName">
+
+
                                     <div class="mb-5">
                                         <label class="label block mb-2">密码</label>
                                         <input type="password" class="form-control" value="" name="key">
@@ -546,6 +555,7 @@
                                     <div class="mb-5 block">
                                         <span class="label block mb-2 demonstration">包装时间</span>
                                         <el-date-picker
+                                                style="width:100%"
                                                 v-model="datatime"
                                                 type="datetime"
                                                 placeholder="选择日期时间"
@@ -570,10 +580,12 @@
                                                v-model:placeholder="tea.id">
                                     </div>
                                     <div class="mb-5">
-                                        <label class="label block mb-2">公司</label>
-                                        <input type="text" class="form-control" name="companyName"
+                                        <label class="label block mb-2">包装公司</label>
+                                        <input type="text" class="form-control" name="companyNameToEm"
                                                placeholder="">
                                     </div>
+                                    <input v-show="false" v-model="company1" type="text" class="form-control" name="companyName">
+
                                     <div class="mb-5">
                                         <label class="label block mb-2">密码</label>
                                         <input type="password" class="form-control" value="" name="key">
@@ -618,6 +630,7 @@
                                     <div class="mb-5 block">
                                         <span class="label block mb-2 demonstration">质检时间</span>
                                         <el-date-picker
+                                                style="width:100%"
                                                 v-model="datatime"
                                                 type="datetime"
                                                 placeholder="选择日期时间"
@@ -636,11 +649,15 @@
                                         <input type="text" class="form-control" name="tea_testing_big_box_id"
                                                v-model:placeholder="pojo2.bigBoxId">
                                     </div>
+
                                     <div class="mb-5">
-                                        <label class="label block mb-2">公司</label>
-                                        <input type="text" class="form-control" name="companyName"
+                                        <label class="label block mb-2">质检公司</label>
+                                        <input type="text" class="form-control" name="companyNameToEm"
                                                placeholder="">
                                     </div>
+                                    <input v-show="false" v-model="company1" type="text" class="form-control" name="companyName">
+
+
                                     <div class="mb-5">
                                         <label class="label block mb-2">密码</label>
                                         <input type="password" class="form-control" value="" name="key">
@@ -745,7 +762,7 @@
     <script src="assets/js/vue.js"></script>
     <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
     <!--element-->
-    <script src="assets/js/element/index.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.8/index.js"></script>
 
     <script src="assets/js/shanzj/forms.js"></script>
     <script src="assets/js/topbar_shanzj.js"></script>

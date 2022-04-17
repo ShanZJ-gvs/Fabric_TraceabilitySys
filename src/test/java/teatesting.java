@@ -49,7 +49,7 @@ public class teatesting {
     public void test04(){
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TeaLeafServiceImpl mapper = context.getBean("TeaLeafServiceImpl", TeaLeafServiceImpl.class);
-        System.out.println(mapper.selectAll());
+
     }
 
     // 全部查询teaPack
