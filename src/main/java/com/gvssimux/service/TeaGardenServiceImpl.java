@@ -8,8 +8,7 @@ import com.gvssimux.pojo.TeaGarden;
 import com.gvssimux.pojo.fabquery.QueryResult;
 import com.gvssimux.pojo.fabquery.QueryResultList;
 import com.gvssimux.util.FabricUtil;
-import org.hyperledger.fabric.gateway.Contract;
-import org.hyperledger.fabric.gateway.ContractException;
+import org.hyperledger.fabric.client.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,24 +52,22 @@ public class TeaGardenServiceImpl implements TeaGardenService{
 
     /*限制查询*/
     @Override
-    public QueryResultList selectOffsetLimit(Contract contract,String companyName,int offset,int limit) {
-        byte[] bytes;
+    public QueryResultList selectOffsetLimit(Contract contract, String companyName, int offset, int limit) {
+        byte[] bytes = new byte[0];
         String str = "{\"selector\":{\"company\":\""+companyName+"\",\"type\":\"TeaGarden\"}, \"use_index\":[]}";// 富查询字符串
+
         try {
             bytes = contract.submitTransaction("richQuery", str);
-        } catch (ContractException e) {
+        } catch (EndorseException e) {
             e.printStackTrace();
-            return null;
-        } catch (InterruptedException e) {
+        } catch (SubmitException e) {
             e.printStackTrace();
-            return null;
-        } catch (TimeoutException e) {
+        } catch (CommitStatusException e) {
             e.printStackTrace();
-            return null;
-        } catch (Exception e) {
+        } catch (CommitException e) {
             e.printStackTrace();
-            return null;
         }
+
         String s = new String(bytes);
         //System.out.println("提交交易" + s);
         JSONObject jsonObject = JSONObject.parseObject(s);
@@ -97,17 +94,19 @@ public class TeaGardenServiceImpl implements TeaGardenService{
    public int getSum(Contract contract){
 
        byte[] bytes = new byte[0];
+
        try {
            bytes = contract.submitTransaction("queryAllByKey", k);
-       } catch (ContractException e) {
+       } catch (EndorseException e) {
            e.printStackTrace();
-       } catch (InterruptedException e) {
+       } catch (SubmitException e) {
            e.printStackTrace();
-       } catch (TimeoutException e) {
+       } catch (CommitStatusException e) {
            e.printStackTrace();
-       } catch (Exception e) {
+       } catch (CommitException e) {
            e.printStackTrace();
        }
+
        JSONObject jsonObject = JSONObject.parseObject(new String(bytes));
        QueryResultList resultList = JSON.toJavaObject(jsonObject, QueryResultList.class);
        List<QueryResult> teaAreas = resultList.getResultList();

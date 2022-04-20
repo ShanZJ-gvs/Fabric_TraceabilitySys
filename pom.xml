@@ -24,6 +24,11 @@
             <version>2.6.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.hyperledger.fabric</groupId>
+            <artifactId>fabric-gateway</artifactId>
+            <version>1.0.1</version>
+        </dependency>
 
 
         <!--fabric-sdk -->
@@ -36,12 +41,11 @@
 
         <!-- fabric-gateway -->
         <!-- https://mvnrepository.com/artifact/org.hyperledger.fabric/fabric-gateway-java -->
-        <dependency>
+       <!-- <dependency>
             <groupId>org.hyperledger.fabric</groupId>
             <artifactId>fabric-gateway-java</artifactId>
             <version>2.2.3</version>
-        </dependency>
-
+        </dependency>-->
 
         <!--lombok-->
         <dependency>

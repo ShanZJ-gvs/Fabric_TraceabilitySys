@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.gvssimux.pojo.*;
 import com.gvssimux.util.FabricUtil;
 import com.gvssimux.util.JsonUtil;
-import org.hyperledger.fabric.gateway.Contract;
+import org.hyperledger.fabric.client.Contract;
 
 
 public class CreateUserCode {

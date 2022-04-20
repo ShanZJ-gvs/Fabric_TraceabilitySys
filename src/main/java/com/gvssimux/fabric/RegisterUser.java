@@ -1,6 +1,5 @@
 package com.gvssimux.fabric;
 
-import org.hyperledger.fabric.gateway.*;
 import org.hyperledger.fabric.sdk.Enrollment;
 import org.hyperledger.fabric.sdk.User;
 import org.hyperledger.fabric.sdk.security.CryptoSuite;
@@ -22,12 +21,12 @@ public class RegisterUser {
         System.setProperty("org.hyperledger.fabric.sdk.service_discovery.as_localhost", "true");
     }
 
-    public static void get() throws Exception {
+  /*  public static void get() throws Exception {
 
         // Create a CA client for interacting with the CA.
         Properties props = new Properties();
-        /*String certificatePath = "D:/JavaProject/fabric-tea-app-java-demo/src/main/resources/com/shanzj/fabric/app/java/" +
-                "peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem";*/
+        *//*String certificatePath = "D:/JavaProject/fabric-tea-app-java-demo/src/main/resources/com/shanzj/fabric/app/java/" +
+                "peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem";*//*
 
         String certificatePath = "D:/JavaProject/fabric-tea-app-java-demo/src/main/resources/" +
                 "ca.org1.example.com-cert.pem";
@@ -115,8 +114,8 @@ public class RegisterUser {
 
         // Create a CA client for interacting with the CA.
         Properties props = new Properties();
-        /*String certificatePath = "D:/JavaProject/fabric-tea-app-java-demo/src/main/resources/com/shanzj/fabric/app/java/" +
-                "peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem";*/
+        *//*String certificatePath = "D:/JavaProject/fabric-tea-app-java-demo/src/main/resources/com/shanzj/fabric/app/java/" +
+                "peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem";*//*
 
         String certificatePath = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem";
 
@@ -198,6 +197,6 @@ public class RegisterUser {
         Identity user = Identities.newX509Identity("Org1MSP", enrollment);
         wallet.put("appUser", user);
         System.out.println("Successfully enrolled user \"appUser\" and imported it into the wallet");
-    }
+    }*/
 
 }

@@ -5,17 +5,17 @@ import com.alibaba.fastjson.JSONObject;
 import com.gvssimux.pojo.TeaArea;
 import com.gvssimux.pojo.fabquery.QueryResult;
 import com.gvssimux.pojo.fabquery.QueryResultList;
-import org.hyperledger.fabric.gateway.Contract;
-import org.hyperledger.fabric.gateway.ContractException;
+import org.hyperledger.fabric.client.*;
+
 import java.util.List;
-import java.util.concurrent.TimeoutException;
+
 
 
 
 public class TeaAreaServiceImpl implements TeaAreaService {
     private String k;
 
-    public String insertOne(Contract contract,TeaArea record) {
+    public String insertOne(Contract contract, TeaArea record) {
         byte[] bytes = new byte[0];
         byte[] bytes2 = new byte[0];
         int size = 0;
@@ -50,23 +50,21 @@ public class TeaAreaServiceImpl implements TeaAreaService {
     /*限制查询*/
     @Override
     public QueryResultList selectOffsetLimit(Contract contract,String companyName,int offset,int limit) {
-        byte[] bytes;
+        byte[] bytes = new byte[0];
         String str = "{\"selector\":{\"company\":\""+companyName+"\",\"type\":\"TeaArea\"}, \"use_index\":[]}";// 富查询字符串
+
         try {
             bytes = contract.submitTransaction("richQuery", str);
-        } catch (ContractException e) {
+        } catch (EndorseException e) {
             e.printStackTrace();
-            return null;
-        } catch (InterruptedException e) {
+        } catch (SubmitException e) {
             e.printStackTrace();
-            return null;
-        } catch (TimeoutException e) {
+        } catch (CommitStatusException e) {
             e.printStackTrace();
-            return null;
-        } catch (Exception e) {
+        } catch (CommitException e) {
             e.printStackTrace();
-            return null;
         }
+
         String s = new String(bytes);
         //System.out.println("提交交易" + s);
         JSONObject jsonObject = JSONObject.parseObject(s);

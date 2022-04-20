@@ -4,7 +4,7 @@ import com.gvssimux.pojo.TeaGarden;
 import com.gvssimux.service.TeaGardenServiceImpl;
 
 import com.gvssimux.util.FabricUtil;
-import org.hyperledger.fabric.gateway.Contract;
+import org.hyperledger.fabric.client.Contract;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

@@ -2,12 +2,11 @@ package com.gvssimux.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.gvssimux.dao.TeaTestingDao;
-import com.gvssimux.pojo.TeaRank;
+
 import com.gvssimux.pojo.TeaTesting;
 import com.gvssimux.pojo.fabquery.QueryResult;
 import com.gvssimux.pojo.fabquery.QueryResultList;
-import org.hyperledger.fabric.gateway.Contract;
+import org.hyperledger.fabric.client.Contract;
 
 import java.util.List;
 

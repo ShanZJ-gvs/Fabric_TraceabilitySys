@@ -3,9 +3,8 @@ package com.gvssimux.service;
 import com.gvssimux.pojo.TeaArea;
 import com.gvssimux.pojo.TeaPick;
 import com.gvssimux.pojo.fabquery.QueryResultList;
-import org.hyperledger.fabric.gateway.Contract;
+import org.hyperledger.fabric.client.Contract;
 
-import java.util.List;
 
 public interface TeaPickService {
 

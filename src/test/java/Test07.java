@@ -4,7 +4,7 @@ import com.gvssimux.service.TeaMakeServiceImpl;
 import com.gvssimux.service.TeaPickServiceImpl;
 import com.gvssimux.util.FabricUtil;
 import com.gvssimux.util.JsonUtil;
-import org.hyperledger.fabric.gateway.Contract;
+import org.hyperledger.fabric.client.Contract;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

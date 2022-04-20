@@ -31,8 +31,13 @@ const menu_vm = new Vue({
                 return "./topeople?companyName="+this.company1
             }
         },
+        toauthlogin:{
+            get(){
+                return "./toauthlogin"
+            }
+        },
         iscompany(){
-            if (this.company1!=""){/*有公司名，怎么说明已登录，不进行渲染消费者查询*/
+            if (this.company1!=""){/*有公司名，怎么说明已登录*/
                 return true
             }else {
                 return false

@@ -10,8 +10,9 @@ import com.gvssimux.pojo.TeaRank;
 import com.gvssimux.pojo.fabquery.QueryResult;
 import com.gvssimux.pojo.fabquery.QueryResultList;
 import com.gvssimux.util.JsonUtil;
-import org.hyperledger.fabric.gateway.Contract;
-import org.hyperledger.fabric.gateway.ContractException;
+import org.hyperledger.fabric.client.Contract;
+import org.hyperledger.fabric.client.EndorseException;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,13 +30,7 @@ public class TeaLeafServiceImpl implements TeaLeafService{
         String str = "{\"selector\":{\"company\":\""+companyName+"\",\"type2\":\"TeaLeft\"}, \"use_index\":[]}";// 富查询字符串
         try {
             bytes = contract.submitTransaction("richQuery", str);
-        } catch (ContractException e) {
-            e.printStackTrace();
-            return null;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return null;
-        } catch (TimeoutException e) {
+        } catch (EndorseException e) {
             e.printStackTrace();
             return null;
         } catch (Exception e) {

@@ -6,8 +6,9 @@ import com.gvssimux.pojo.TeaMake;
 import com.gvssimux.pojo.fabquery.QueryResult;
 import com.gvssimux.pojo.fabquery.QueryResultList;
 import com.gvssimux.util.DataUtil;
-import org.hyperledger.fabric.gateway.Contract;
-import org.hyperledger.fabric.gateway.ContractException;
+import org.hyperledger.fabric.client.Contract;
+import org.hyperledger.fabric.client.EndorseException;
+
 
 import java.util.HashMap;
 import java.util.List;
@@ -59,13 +60,7 @@ public class TeaMakeServiceImpl implements TeaMakeService{
         String str = "{\"selector\":{\"company\":\""+companyName+"\",\"type\":\"TeaMake\"}, \"use_index\":[]}";// 富查询字符串
         try {
             bytes = contract.submitTransaction("richQuery", str);
-        } catch (ContractException e) {
-            e.printStackTrace();
-            return null;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return null;
-        } catch (TimeoutException e) {
+        } catch (EndorseException e) {
             e.printStackTrace();
             return null;
         } catch (Exception e) {

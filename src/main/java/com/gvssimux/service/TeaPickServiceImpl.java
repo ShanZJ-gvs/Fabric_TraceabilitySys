@@ -8,9 +8,8 @@ import com.gvssimux.pojo.TeaTree;
 import com.gvssimux.pojo.fabquery.QueryResult;
 import com.gvssimux.pojo.fabquery.QueryResultList;
 import com.gvssimux.util.DataUtil;
-import com.gvssimux.util.JsonUtil;
-import org.hyperledger.fabric.gateway.Contract;
-import org.hyperledger.fabric.gateway.ContractException;
+import org.hyperledger.fabric.client.*;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,21 +59,9 @@ public class TeaPickServiceImpl implements TeaPickService{
     public QueryResultList selectOffsetLimit(Contract contract, String companyName,int offset, int limit) throws Exception{
         byte[] bytes;
         String str = "{\"selector\":{\"company\":\""+companyName+"\",\"type\":\"TeaPick\"}, \"use_index\":[]}";// 富查询字符串
-        try {
-            bytes = contract.submitTransaction("richQuery", str);
-        } catch (ContractException e) {
-            e.printStackTrace();
-            return null;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return null;
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-            return null;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+
+        bytes = contract.submitTransaction("richQuery", str);
+
         String s = new String(bytes);
         //System.out.println("提交交易" + s);
         JSONObject jsonObject = JSONObject.parseObject(s);
@@ -103,13 +90,7 @@ public class TeaPickServiceImpl implements TeaPickService{
         String str = "{\"selector\":{\"company\":\""+companyName+"\",\"type\":\"TeaPick\"}, \"use_index\":[]}";// 富查询字符串
         try {
             bytes = contract.submitTransaction("richQuery", str);
-        } catch (ContractException e) {
-            e.printStackTrace();
-            return null;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return null;
-        } catch (TimeoutException e) {
+        } catch (EndorseException e) {
             e.printStackTrace();
             return null;
         } catch (Exception e) {
@@ -145,23 +126,23 @@ public class TeaPickServiceImpl implements TeaPickService{
 
     /*获取指定批次菜叶的采摘量*/
     public Integer getPickOutputByPickId(Contract contract, String companyName,String teaPickId) {
-        byte[] bytes;
+        byte[] bytes = new byte[0];
         String str = "{\"selector\":{\"company\":\""+companyName+"\",\"type\":\"TeaPick\",\"teaPickId\":\""+teaPickId+"\"}, \"use_index\":[]}";// 富查询字符串
+
+
         try {
             bytes = contract.submitTransaction("richQuery", str);
-        } catch (ContractException e) {
+        } catch (EndorseException e) {
             e.printStackTrace();
-            return null;
-        } catch (InterruptedException e) {
+        } catch (SubmitException e) {
             e.printStackTrace();
-            return null;
-        } catch (TimeoutException e) {
+        } catch (CommitStatusException e) {
             e.printStackTrace();
-            return null;
-        } catch (Exception e) {
+        } catch (CommitException e) {
             e.printStackTrace();
-            return null;
         }
+
+
         String s = new String(bytes);
         //System.out.println("提交交易" + s);
         JSONObject jsonObject = JSONObject.parseObject(s);
@@ -178,4 +159,6 @@ public class TeaPickServiceImpl implements TeaPickService{
     public void setK(String k) {
         this.k = k;
     }
+
+
 }

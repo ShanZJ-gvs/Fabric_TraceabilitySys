@@ -1,7 +1,7 @@
 package com.gvssimux.fabric;
 
 import lombok.extern.java.Log;
-import org.hyperledger.fabric.gateway.*;
+
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,6 +13,7 @@ public class ClientApp {
     }
 
 
+/*
 
     public  String get(String s1,String s2) throws Exception {
         // Load a file system based wallet for managing identities.
@@ -97,7 +98,8 @@ public class ClientApp {
             result = contract.evaluateTransaction(s1,s2);
             System.out.println(new String(result));
 
-           /* System.out.println("--------------------");
+           */
+/* System.out.println("--------------------");
             result = contract.evaluateTransaction("queryAllCars");
             System.out.println(new String(result));
 
@@ -110,7 +112,8 @@ public class ClientApp {
 
             System.out.println("--------------------");
             result = contract.evaluateTransaction("queryAllCars");
-            System.out.println(new String(result));*/
+            System.out.println(new String(result));*//*
+
 
             //contract.submitTransaction("changeCarOwner", "CAR10", "Archie");
 
@@ -119,6 +122,7 @@ public class ClientApp {
         }
     }
 
+*/
 
 
 

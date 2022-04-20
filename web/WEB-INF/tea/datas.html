@@ -33,67 +33,67 @@
     <!-- Top Bar  -->
     <header class="top-bar" id="topbar">
 
-    <!-- Menu Toggler -->
-    <button type="button" class="menu-toggler la la-bars" data-toggle="menu"></button>
+        <!-- Menu Toggler -->
+        <button type="button" class="menu-toggler la la-bars" data-toggle="menu"></button>
 
-    <!-- Brand -->
-    <span class="brand">茶叶溯源管理后台</span>
+        <!-- Brand -->
+        <span class="brand">茶叶溯源管理后台</span>
 
-    <!-- Search -->
-    <form class="hidden md:block ml-10" action="#">
-        <label class="form-control-addon-within rounded-full">
-            <input type="text" class="form-control border-none" placeholder="查找">
-            <span class="flex items-center pr-4">
-                    <button type="button"
-                            class="dark:text-gray-700 dark:hover:text-primary btn btn-link text-gray-300 hover:text-primary text-xl leading-none la la-search"></button>
-                </span>
-        </label>
-    </form>
+        <!-- Search -->
+        <form class="hidden md:block ml-10" action="#">
+            <label class="form-control-addon-within rounded-full">
+                <input type="text" class="form-control border-none" placeholder="查找">
+                <span class="flex items-center pr-4">
+                        <button type="button"
+                                class="dark:text-gray-700 dark:hover:text-primary btn btn-link text-gray-300 hover:text-primary text-xl leading-none la la-search"></button>
+                    </span>
+            </label>
+        </form>
 
-    <!-- Right -->
-    <div class="flex items-center ml-auto">
+        <!-- Right -->
+        <div class="flex items-center ml-auto">
 
-        <!-- Dark Mode -->
-        <label class="switch switch_outlined" data-toggle="tooltip" data-tippy-content="Toggle Dark Mode">
-            <input id="darkModeToggler" type="checkbox">
-            <span></span>
-        </label>
+            <!-- Dark Mode -->
+            <label class="switch switch_outlined" data-toggle="tooltip" data-tippy-content="Toggle Dark Mode">
+                <input id="darkModeToggler" type="checkbox">
+                <span></span>
+            </label>
 
-        <!-- Fullscreen -->
-        <button type="button"
-                class="hidden lg:inline-block btn-link ml-3 px-2 text-2xl leading-none la la-expand-arrows-alt"
-                data-toggle="tooltip" data-tippy-content="Fullscreen" id="fullScreenToggler"></button>
+            <!-- Fullscreen -->
+            <button type="button"
+                    class="hidden lg:inline-block btn-link ml-3 px-2 text-2xl leading-none la la-expand-arrows-alt"
+                    data-toggle="tooltip" data-tippy-content="Fullscreen" id="fullScreenToggler"></button>
 
 
 
-        <!-- User Menu -->
-        <div class="dropdown">
-            <button class="flex items-center ml-4 text-gray-700 focus:outline-none" data-toggle="custom-dropdown-menu"
-                    data-tippy-arrow="true" data-tippy-placement="bottom-end">
-                    <span
-                            class="dark:bg-gray-900 dark:border-gray-600 dark:text-gray-500 flex items-center justify-center w-12 h-12 rounded-full bg-gray-200 border-2 border-gray-600 text-xl text-gray-700">U</span>
-            </button>
-            <div class="custom-dropdown-menu w-64">
+            <!-- User Menu -->
+            <div class="dropdown">
+                <button class="flex items-center ml-4 text-gray-700 focus:outline-none" data-toggle="custom-dropdown-menu"
+                        data-tippy-arrow="true" data-tippy-placement="bottom-end">
+                        <span
+                                class="dark:bg-gray-900 dark:border-gray-600 dark:text-gray-500 flex items-center justify-center w-12 h-12 rounded-full bg-gray-200 border-2 border-gray-600 text-xl text-gray-700">U</span>
+                </button>
+                <div class="custom-dropdown-menu w-64">
 
-                <hr class="dark:border-gray-900 mb-0">
-                <div class="p-5">
-                    <a href="#"
-                       class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary"><span
-                            class="la la-user-circle text-2xl leading-none mr-2"></span>管理员{{companyComputed}}</a>
-                    <a href="#"
-                       class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary mt-5"><span
-                            class="la la-key text-2xl leading-none mr-2"></span>更改密码</a>
-                </div>
-                <hr class="dark:border-gray-900 mb-0">
-                <div class="p-5">
-                    <a href="#"
-                       class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary"><span
-                            class="la la-power-off text-2xl leading-none mr-2"></span>退出</a>
+                    <hr class="dark:border-gray-900 mb-0">
+                    <div class="p-5">
+                        <a href="#"
+                           class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary"><span
+                                class="la la-user-circle text-2xl leading-none mr-2"></span>管理员{{companyComputed}}</a>
+                        <a href="#"
+                           class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary mt-5"><span
+                                class="la la-key text-2xl leading-none mr-2"></span>更改密码</a>
+                    </div>
+                    <hr class="dark:border-gray-900 mb-0">
+                    <div class="p-5">
+                        <a href="./toauthlogin"
+                           class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary"><span
+                                class="la la-power-off text-2xl leading-none mr-2"></span>退出</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
 
 
     <!-- Menu Bar -->
@@ -231,7 +231,7 @@
 
                 <!-- Bordered -->
                 <div class="card mt-5 p-5">
-                    <h3>采摘</h3>
+                    <h3>茶叶</h3>
                 <!--    <table class="table table_bordered mt-3 w-full">
                         <thead>
                         <tr>
@@ -416,10 +416,10 @@
 
                     </div>
 
-                </div>
+                </div>  <!--采摘-->
 
                 <!-- Hoverable -->
-                <div class="card mt-5 p-5">
+                <!--  <div class="card mt-5 p-5">
                     <h3>制茶</h3>
                     <table class="table table_hoverable mt-3 w-full">
                         <thead>
@@ -477,11 +477,13 @@
                         </tr>
                         </tbody>
                     </table>
-                </div>
+                </div>  -->
+
             </div>
+
             <br>
             <!-- Striped -->
-            <div >
+            <!-- <div >
                 <div class="card p-5">
                     <h3>定级</h3>
                     <table class="table table_striped mt-3 w-full">
@@ -527,7 +529,7 @@
                     </table>
                 </div>
 
-                <!-- Borderless -->
+                &lt;!&ndash; Borderless &ndash;&gt;
                 <div class="card mt-5 p-5">
                     <h3>包装</h3>
                     <table class="table table_borderless mt-3 w-full">
@@ -583,14 +585,15 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div>   -->
+
         </div>
 
         <br>
 
-        <div>
+      <!--  <div>
             <div>
-                <!-- Basic -->
+                &lt;!&ndash; Basic &ndash;&gt;
                 <div class="card p-5">
                     <h3>质检</h3>
                     <table class="table mt-3 w-full">
@@ -643,7 +646,7 @@
                     </table>
                 </div>
 
-                <!-- Bordered -->
+                &lt;!&ndash; Bordered &ndash;&gt;
                 <div class="card mt-5 p-5">
                     <h3>仓储</h3>
                     <table class="table table_bordered mt-3 w-full">
@@ -695,7 +698,7 @@
                     </table>
                 </div>
 
-                <!-- Hoverable -->
+                &lt;!&ndash; Hoverable &ndash;&gt;
                 <div class="card mt-5 p-5">
                     <h3>销售</h3>
                     <table class="table table_hoverable mt-3 w-full">
@@ -753,7 +756,7 @@
                 </div>
             </div>
             <br>
-            <!-- Striped -->
+            &lt;!&ndash; Striped &ndash;&gt;
             <div>
                 <div class="card p-5">
                     <h3>物流</h3>
@@ -814,6 +817,7 @@
 
             </div>
         </div>
+-->
 
         <!-- Footer  -->
         <footer class="flex mt-auto">

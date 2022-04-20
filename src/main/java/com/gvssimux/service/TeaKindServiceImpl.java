@@ -8,8 +8,7 @@ import com.gvssimux.pojo.TeaTree;
 import com.gvssimux.pojo.fabquery.QueryResult;
 import com.gvssimux.util.FabricUtil;
 import com.gvssimux.util.JsonUtil;
-import org.hyperledger.fabric.gateway.Contract;
-import org.hyperledger.fabric.gateway.ContractException;
+import org.hyperledger.fabric.client.*;
 
 
 import java.util.ArrayList;
@@ -38,14 +37,15 @@ public class TeaKindServiceImpl implements TeaKindService{
         }
 
 
-
         try {
             result = contract.submitTransaction("queryData", k);
-        } catch (ContractException e) {
+        } catch (EndorseException e) {
             e.printStackTrace();
-        } catch (TimeoutException e) {
+        } catch (SubmitException e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (CommitStatusException e) {
+            e.printStackTrace();
+        } catch (CommitException e) {
             e.printStackTrace();
         }
 
@@ -68,13 +68,10 @@ public class TeaKindServiceImpl implements TeaKindService{
                 }
                 result = contract.submitTransaction("updateData", k, JSON.toJSONString(list1));
                 return new String(result);
-            } catch (ContractException e) {
+            } catch (EndorseException e) {
                 e.printStackTrace();
                 return null;
-            } catch (TimeoutException e) {
-                e.printStackTrace();
-                return null;
-            } catch (InterruptedException e) {
+            } catch (SubmitException | CommitStatusException | CommitException e) {
                 e.printStackTrace();
                 return null;
             }
@@ -82,11 +79,9 @@ public class TeaKindServiceImpl implements TeaKindService{
             try {
                 byte[] createData = contract.submitTransaction("createData", k, JSON.toJSONString(record));
                 return new String(createData);
-            } catch (ContractException e) {
+            } catch (EndorseException e) {
                 e.printStackTrace();
-            } catch (TimeoutException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
+            } catch (SubmitException | CommitStatusException | CommitException e) {
                 e.printStackTrace();
             }
         }
@@ -101,9 +96,7 @@ public class TeaKindServiceImpl implements TeaKindService{
         byte[] result = new byte[0];
         try {
             result = contract.submitTransaction("queryData", k);
-        } catch (ContractException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
+        } catch (EndorseException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();

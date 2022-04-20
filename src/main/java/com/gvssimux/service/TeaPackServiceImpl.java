@@ -7,7 +7,8 @@ import com.gvssimux.pojo.TeaPack;
 import com.gvssimux.pojo.TeaRank;
 import com.gvssimux.pojo.fabquery.QueryResult;
 import com.gvssimux.pojo.fabquery.QueryResultList;
-import org.hyperledger.fabric.gateway.Contract;
+import org.hyperledger.fabric.client.Contract;
+
 
 import java.util.List;
 
@@ -16,7 +17,6 @@ public class TeaPackServiceImpl implements TeaPackService{
 
     /*插入*/
     public String insertOne(Contract contract, TeaPack record){
-
         byte[] bytes = new byte[0];
         byte[] bytes2 = new byte[0];
         int size = 0;
@@ -31,8 +31,6 @@ public class TeaPackServiceImpl implements TeaPackService{
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
         try {
             bytes = contract.submitTransaction("createData", k+(size+1),JSON.toJSONString(record));
 

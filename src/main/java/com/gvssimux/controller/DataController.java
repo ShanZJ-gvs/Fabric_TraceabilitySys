@@ -12,7 +12,7 @@ import com.gvssimux.service.TeaPickServiceImpl;
 import com.gvssimux.util.FabricUtil;
 import lombok.extern.java.Log;
 import org.apache.ibatis.annotations.Param;
-import org.hyperledger.fabric.gateway.Contract;
+import org.hyperledger.fabric.client.Contract;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;

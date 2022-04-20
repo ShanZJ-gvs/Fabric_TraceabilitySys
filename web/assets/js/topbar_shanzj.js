@@ -647,6 +647,13 @@ new Vue({
     computed:{
         companyComputed(){
             return ":"+this.company1;
+        },
+        iscompany(){
+            if (this.company1!=""){/*有公司名，怎么说明已登录*/
+                return true
+            }else {
+                return false
+            }
         }
     }
 
