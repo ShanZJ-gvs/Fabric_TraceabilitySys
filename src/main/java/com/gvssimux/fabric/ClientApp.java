@@ -12,58 +12,7 @@ public class ClientApp {
         System.setProperty("org.hyperledger.fabric.sdk.service_discovery.as_localhost", "true");
     }
 
-
 /*
-
-    public  String get(String s1,String s2) throws Exception {
-        // Load a file system based wallet for managing identities.
-        Path walletPath = Paths.get("wallet");
-        walletPath = Paths.get("../../../../wallet/");
-        walletPath = Paths.get("../../../../wallet");
-        walletPath = Paths.get("wallet");
-        walletPath = Paths.get("../../../../../wallet/");
-
-        walletPath = Paths.get("/usr/local/tomcat/webapps/Fabric_TraceabilitySys-1.0-SNAPSHOT/wallet");
-        walletPath = Paths.get("D:\\JavaProject\\Fabric_TraceabilitySys\\src\\main\\java\\com\\gvssimux\\wallet");
-
-
-        Wallet wallet = Wallets.newFileSystemWallet(walletPath);
-        // load a CCP
-        String CCP = "D:/JavaProject/Fabric_TraceabilitySys/src/main/resources/com/shanzj/fabric/app/java/" +
-                "peerOrganizations/org1.example.com/connection-org1.yaml";
-
-
-        CCP = "/usr/local/tomcat/webapps/Fabric_TraceabilitySys-1.0-SNAPSHOT/WEB-INF/classes/com/shanzj/fabric/app/java/" +
-                "peerOrganizations/org1.example.com/connection-org1.yaml";
-        CCP = "D:/JavaProject/Fabric_TraceabilitySys/src/main/resources/com/shanzj/fabric/app/java/" +
-                "peerOrganizations/org1.example.com/connection-org1.yaml";
-
-
-        //Path networkConfigPath = Paths.get("..", "..", "test-network", "organizations", "peerOrganizations", "org1.example.com", "connection-org1.yaml");
-        Path networkConfigPath = Paths.get(CCP);
-
-        Gateway.Builder builder = Gateway.createBuilder();
-        builder.identity(wallet, "appUser").networkConfig(networkConfigPath).discovery(true);
-        String sr;
-        // create a gateway connection
-        try (Gateway gateway = builder.connect()) {
-
-            // get the network and contract
-            Network network = gateway.getNetwork("mychannel");
-
-            Contract contract = network.getContract("teaArea-java-demo");
-            byte[] result;
-
-            //result = contract.evaluateTransaction("getTeaArea","茶区");
-            log.info("执行到了查询区块了----");
-            result = contract.evaluateTransaction(s1,s2);
-            sr = new String(result);
-
-        }
-        return sr;
-    }
-
-
     public static void main(String[] args) throws Exception {
         // Load a file system based wallet for managing identities.
         Path walletPath = Paths.get("wallet");

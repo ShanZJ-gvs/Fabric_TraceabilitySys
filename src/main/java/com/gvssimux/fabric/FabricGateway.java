@@ -30,9 +30,17 @@ public class FabricGateway {
     //String privateKeyPath="/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/priv_sk";
     //String certificatePath="/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/User1@org1.example.com-cert.pem";
 
-    String tlsCertPath = "src/main/resources/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt";
-    String certificatePath="src/main/resources/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/User1@org1.example.com-cert.pem";
-    String privateKeyPath="src/main/resources/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/priv_sk";
+//    String tlsCertPath = "src/main/resources/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt";
+//    String certificatePath="src/main/resources/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/User1@org1.example.com-cert.pem";
+//    String privateKeyPath="src/main/resources/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/priv_sk";
+
+
+    String tlsCertPath = "D:\\JavaProject\\Fabric_TraceabilitySys\\src\\main\\resources\\peerOrganizations\\org1.example.com\\peers\\peer0.org1.example.com\\tls\\ca.crt";
+    String certificatePath="D:\\JavaProject\\Fabric_TraceabilitySys\\src\\main\\resources\\peerOrganizations\\org1.example.com\\users\\User1@org1.example.com\\msp\\signcerts\\User1@org1.example.com-cert.pem";
+    String privateKeyPath="D:\\JavaProject\\Fabric_TraceabilitySys\\src\\main\\resources\\peerOrganizations\\org1.example.com\\users\\User1@org1.example.com\\msp\\keystore\\priv_sk";
+
+
+
 
     String mspId="Org1MSP";
     String channel="mychannel";
