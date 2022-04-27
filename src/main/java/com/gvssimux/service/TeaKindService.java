@@ -2,8 +2,8 @@ package com.gvssimux.service;
 
 
 
-import org.hyperledger.fabric.gateway.Contract;
-import org.hyperledger.fabric.gateway.ContractException;
+
+import org.hyperledger.fabric.client.Contract;
 
 import java.util.List;
 import java.util.concurrent.TimeoutException;

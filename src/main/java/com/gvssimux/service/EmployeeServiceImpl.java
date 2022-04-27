@@ -8,8 +8,7 @@ import com.gvssimux.pojo.TeaRank;
 import com.gvssimux.pojo.fabquery.QueryResult;
 import com.gvssimux.pojo.fabquery.QueryResultList;
 import com.gvssimux.util.JsonUtil;
-import org.hyperledger.fabric.gateway.Contract;
-import org.hyperledger.fabric.gateway.ContractException;
+import org.hyperledger.fabric.client.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 
     /*限制插入，区块链中的key会根据总数自增,但是同一公司下不能出现相同编号的人*/
-    public String insertOne(Contract contract,Employee record) {
+    public String insertOne(Contract contract, Employee record) {
 
         byte[] bytes = new byte[0];
         byte[] bytes2 = new byte[0];
@@ -74,23 +73,21 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     /*限制查询，一个公司下的全部员工*/
     public QueryResultList selectOffsetLimit(Contract contract,String companyName,int offset,int limit) {
-        byte[] bytes;
+        byte[] bytes = new byte[0];
         String str = "{\"selector\":{\"company\":\""+companyName+"\",\"type\":\"Employee\"}, \"use_index\":[]}";// 富查询字符串
+
         try {
             bytes = contract.submitTransaction("richQuery", str);
-        } catch (ContractException e) {
+        } catch (EndorseException e) {
             e.printStackTrace();
-            return null;
-        } catch (InterruptedException e) {
+        } catch (SubmitException e) {
             e.printStackTrace();
-            return null;
-        } catch (TimeoutException e) {
+        } catch (CommitStatusException e) {
             e.printStackTrace();
-            return null;
-        } catch (Exception e) {
+        } catch (CommitException e) {
             e.printStackTrace();
-            return null;
         }
+
         String s = new String(bytes);
         //System.out.println("提交交易" + s);
         JSONObject jsonObject = JSONObject.parseObject(s);
@@ -115,22 +112,19 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     /*全部查询，一个公司下的全部员工*/
     public QueryResultList selectAllEmployee(Contract contract,String companyName) {
-        byte[] bytes;
+        byte[] bytes = new byte[0];
         String str = "{\"selector\":{\"company\":\""+companyName+"\",\"type\":\"Employee\"}, \"use_index\":[]}";// 富查询字符串
+
         try {
             bytes = contract.submitTransaction("richQuery", str);
-        } catch (ContractException e) {
+        } catch (EndorseException e) {
             e.printStackTrace();
-            return null;
-        } catch (InterruptedException e) {
+        } catch (SubmitException e) {
             e.printStackTrace();
-            return null;
-        } catch (TimeoutException e) {
+        } catch (CommitStatusException e) {
             e.printStackTrace();
-            return null;
-        } catch (Exception e) {
+        } catch (CommitException e) {
             e.printStackTrace();
-            return null;
         }
         String s = new String(bytes);
         //System.out.println("提交交易" + s);
@@ -141,23 +135,21 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     /*查询，一个公司下的某个员工 根据编号*/
     public QueryResultList selectEmployeeById(Contract contract,String companyName,String id) {
-        byte[] bytes;
+        byte[] bytes = new byte[0];
         String str = "{\"selector\":{\"company\":\""+companyName+"\",\"eid\":\""+id+"\",\"type\":\"Employee\"}, \"use_index\":[]}";// 富查询字符串
+
         try {
             bytes = contract.submitTransaction("richQuery", str);
-        } catch (ContractException e) {
+        } catch (EndorseException e) {
             e.printStackTrace();
-            return null;
-        } catch (InterruptedException e) {
+        } catch (SubmitException e) {
             e.printStackTrace();
-            return null;
-        } catch (TimeoutException e) {
+        } catch (CommitStatusException e) {
             e.printStackTrace();
-            return null;
-        } catch (Exception e) {
+        } catch (CommitException e) {
             e.printStackTrace();
-            return null;
         }
+
         String s = new String(bytes);
         //System.out.println("提交交易" + s);
         JSONObject jsonObject = JSONObject.parseObject(s);

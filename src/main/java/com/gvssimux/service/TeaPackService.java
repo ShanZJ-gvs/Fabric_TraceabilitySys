@@ -1,10 +1,8 @@
 package com.gvssimux.service;
 
 import com.gvssimux.pojo.TeaPack;
-import com.gvssimux.pojo.TeaRank;
-import org.hyperledger.fabric.gateway.Contract;
+import org.hyperledger.fabric.client.Contract;
 
-import java.util.List;
 
 public interface TeaPackService{
     /*插入*/

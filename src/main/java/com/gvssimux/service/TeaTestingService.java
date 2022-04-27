@@ -1,11 +1,9 @@
 package com.gvssimux.service;
 
-import com.gvssimux.pojo.TeaRank;
-import com.gvssimux.pojo.TeaTesting;
-import org.apache.ibatis.annotations.Select;
-import org.hyperledger.fabric.gateway.Contract;
 
-import java.util.List;
+import com.gvssimux.pojo.TeaTesting;
+import org.hyperledger.fabric.client.Contract;
+
 
 public interface TeaTestingService {
     /*插入*/

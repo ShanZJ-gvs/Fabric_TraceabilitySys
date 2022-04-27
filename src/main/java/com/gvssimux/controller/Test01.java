@@ -10,7 +10,7 @@ import com.gvssimux.pojo.fabquery.QueryResultList;
 import com.gvssimux.util.FabricUtil;
 import com.gvssimux.util.JsonUtil;
 import org.apache.ibatis.annotations.Param;
-import org.hyperledger.fabric.gateway.Contract;
+import org.hyperledger.fabric.client.Contract;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

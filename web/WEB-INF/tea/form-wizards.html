@@ -72,7 +72,7 @@
                     </div>
                     <hr class="dark:border-gray-900 mb-0">
                     <div class="p-5">
-                        <a href="#"
+                        <a href="./toauthlogin"
                            class="dark:text-gray-500 dark:hover:text-primary flex items-center text-gray-700 hover:text-primary"><span
                                 class="la la-power-off text-2xl leading-none mr-2"></span>退出</a>
                     </div>
@@ -325,8 +325,8 @@
                                     </div>
                                     <div class="mb-5">
                                         <label class="label block mb-2">采茶师性别</label>
-                                        <input type="text" class="form-control" name="tea_pick_per_sex"
-                                            v-model:placeholder="employee.sex">
+                                        <el-radio name="tea_pick_per_sex" v-model="employee.sex" label="男">男</el-radio>
+                                        <el-radio name="tea_pick_per_sex" v-model="employee.sex" label="女">女</el-radio>
                                     </div>
                                     <div class="mb-5" v-show="false">
                                         <label class="label block mb-2">采摘时间</label>
@@ -399,8 +399,8 @@
                                     </div>
                                     <div class="mb-5">
                                         <label class="label block mb-2">制茶师性别</label>
-                                        <input type="text" class="form-control" name="tea_make_per_sex"
-                                            v-model:placeholder="employee.sex">
+                                        <el-radio name="tea_make_per_sex" v-model="employee.sex" label="男">男</el-radio>
+                                        <el-radio name="tea_make_per_sex" v-model="employee.sex" label="女">女</el-radio>
                                     </div>
                                     <div class="mb-5" v-show="false">
                                         <label class="label block mb-2">制茶时间</label>
@@ -467,8 +467,8 @@
                                     </div>
                                     <div class="mb-5">
                                         <label class="label block mb-2">定级人性别</label>
-                                        <input type="text" class="form-control" name="tea_rank_per_sex"
-                                               v-model:placeholder="employee.sex">
+                                        <el-radio name="tea_rank_per_sex" v-model="employee.sex" label="男">男</el-radio>
+                                        <el-radio name="tea_rank_per_sex" v-model="employee.sex" label="女">女</el-radio>
                                     </div>
                                     <div class="mb-5" v-show="false">
                                         <label class="label block mb-2">定级时间</label>
@@ -544,8 +544,8 @@
                                     </div>
                                     <div class="mb-5">
                                         <label class="label block mb-2">包装人性别</label>
-                                        <input type="text" class="form-control" name="tea_pack_per_sex"
-                                            v-model:placeholder="employee.sex">
+                                        <el-radio name="tea_pack_per_sex" v-model="employee.sex" label="男">男</el-radio>
+                                        <el-radio name="tea_pack_per_sex" v-model="employee.sex" label="女">女</el-radio>
                                     </div>
                                     <div class="mb-5" v-show="false">
                                         <label class="label block mb-2">包装时间</label>
@@ -609,8 +609,8 @@
                                     </div>
                                     <div class="mb-5">
                                         <label class="label block mb-2">质检人性别</label>
-                                        <input type="text" class="form-control" name="tea_testing_per_sex"
-                                               v-model:placeholder="employee.sex">
+                                        <el-radio name="tea_testing_per_sex" v-model="employee.sex" label="男">男</el-radio>
+                                        <el-radio name="tea_testing_per_sex" v-model="employee.sex" label="女">女</el-radio>
                                     </div>
                                     <div class="mb-5">
                                         <label class="label block mb-2">质检批次ID</label>

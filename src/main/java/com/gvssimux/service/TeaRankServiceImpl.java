@@ -2,15 +2,12 @@ package com.gvssimux.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.gvssimux.dao.TeaRankDao;
-import com.gvssimux.pojo.TeaPick;
+
 import com.gvssimux.pojo.TeaRank;
 import com.gvssimux.pojo.fabquery.QueryResult;
 import com.gvssimux.pojo.fabquery.QueryResultList;
-import com.gvssimux.util.DataUtil;
-import com.gvssimux.util.FabricUtil;
-import org.hyperledger.fabric.gateway.Contract;
-import org.hyperledger.fabric.gateway.ContractException;
+
+import org.hyperledger.fabric.client.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -61,23 +58,21 @@ public class TeaRankServiceImpl implements TeaRankService{
 
     /*获取公司下各级茶叶有多少量*/
     public HashMap getRankPerSum(Contract contract,String companyName) {
-        byte[] bytes;
+        byte[] bytes = new byte[0];
         String str = "{\"selector\":{\"company\":\""+companyName+"\",\"type\":\"TeaRank\"}, \"use_index\":[]}";// 富查询字符串
+
         try {
             bytes = contract.submitTransaction("richQuery", str);
-        } catch (ContractException e) {
+        } catch (EndorseException e) {
             e.printStackTrace();
-            return null;
-        } catch (InterruptedException e) {
+        } catch (SubmitException e) {
             e.printStackTrace();
-            return null;
-        } catch (TimeoutException e) {
+        } catch (CommitStatusException e) {
             e.printStackTrace();
-            return null;
-        } catch (Exception e) {
+        } catch (CommitException e) {
             e.printStackTrace();
-            return null;
         }
+
         String s = new String(bytes);
         //System.out.println("提交交易" + s);
         JSONObject jsonObject = JSONObject.parseObject(s);

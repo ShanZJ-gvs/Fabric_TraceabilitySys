@@ -785,7 +785,7 @@ function canvas2(){
                                 ticks: {
                                     stepSize: 1000,
                                     min: 0,
-                                    max: 5000,
+                                    max: 1000000,
                                 },
                             },
                         ],
@@ -840,9 +840,9 @@ function canvas2(){
                                     drawBorder: false,
                                 },
                                 ticks: {
-                                    stepSize: 1000,
+                                    stepSize: 3000,
                                     min: 0,
-                                    max: 5000,
+                                    max: 150000,
                                 },
                             },
                         ],

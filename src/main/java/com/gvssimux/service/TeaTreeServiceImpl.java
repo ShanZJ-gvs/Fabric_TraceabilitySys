@@ -9,9 +9,8 @@ import com.gvssimux.pojo.fabquery.QueryResult;
 import com.gvssimux.pojo.fabquery.QueryResultList;
 import com.gvssimux.util.FabricUtil;
 import com.gvssimux.util.JsonUtil;
-import org.hyperledger.fabric.gateway.Contract;
-import org.hyperledger.fabric.gateway.ContractException;
-import sun.reflect.generics.tree.Tree;
+import org.hyperledger.fabric.client.*;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +21,7 @@ public class TeaTreeServiceImpl implements TeaTreeService{
     private String k;
 
 
-    public String insertOne(Contract contract,TeaTree record) {
+    public String insertOne(Contract contract, TeaTree record) {
         byte[] bytes = new byte[0];
         byte[] bytes2 = new byte[0];
         int size = 0;
@@ -61,22 +60,20 @@ public class TeaTreeServiceImpl implements TeaTreeService{
     /*全部查询*/
     @Override
     public QueryResultList selectOffsetLimit(Contract contract,int offset,int limit) {
-        byte[] bytes;
+        byte[] bytes = new byte[0];
+
         try {
             bytes = contract.submitTransaction("queryAllByKey", k);
-        } catch (ContractException e) {
+        } catch (EndorseException e) {
             e.printStackTrace();
-            return null;
-        } catch (InterruptedException e) {
+        } catch (SubmitException e) {
             e.printStackTrace();
-            return null;
-        } catch (TimeoutException e) {
+        } catch (CommitStatusException e) {
             e.printStackTrace();
-            return null;
-        } catch (Exception e) {
+        } catch (CommitException e) {
             e.printStackTrace();
-            return null;
         }
+
         String s = new String(bytes);
         //System.out.println("提交交易" + s);
         JSONObject jsonObject = JSONObject.parseObject(s);
@@ -103,17 +100,19 @@ public class TeaTreeServiceImpl implements TeaTreeService{
     public int getSum(Contract contract){
 
         byte[] bytes = new byte[0];
+
         try {
             bytes = contract.submitTransaction("queryAllByKey", k);
-        } catch (ContractException e) {
+        } catch (EndorseException e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (SubmitException e) {
             e.printStackTrace();
-        } catch (TimeoutException e) {
+        } catch (CommitStatusException e) {
             e.printStackTrace();
-        } catch (Exception e) {
+        } catch (CommitException e) {
             e.printStackTrace();
         }
+
         JSONObject jsonObject = JSONObject.parseObject(new String(bytes));
         QueryResultList resultList = JSON.toJavaObject(jsonObject, QueryResultList.class);
         List<QueryResult> list = resultList.getResultList();

@@ -1,18 +1,16 @@
 package com.gvssimux.service;
 
-import com.gvssimux.pojo.TeaArea;
+
 import com.gvssimux.pojo.TeaGarden;
 import com.gvssimux.pojo.fabquery.QueryResultList;
-import org.apache.ibatis.annotations.Select;
-import org.hyperledger.fabric.gateway.Contract;
+import org.hyperledger.fabric.client.Contract;
 
-import java.util.List;
 
 public interface TeaGardenService {
 
 
     /*插入*/
-    String insertOne(Contract contract,TeaGarden record);
+    String insertOne(Contract contract, TeaGarden record);
 
     /*查询*/
     QueryResultList selectOffsetLimit(Contract contract,String companyName,int offset,int limit) throws Exception;
