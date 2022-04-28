@@ -23,21 +23,41 @@ import java.util.concurrent.TimeUnit;
 
 
 public class FabricGateway {
-    String networkConnectionConfigPath = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/connection-org1.json";
-    String networkConnectionConfigPathRemote = "src/main/resources/peerOrganizations/org1.example.com/connection-org1.json";
+    // String networkConnectionConfigPath = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/connection-org1.json";
+    // String networkConnectionConfigPathRemote = "src/main/resources/peerOrganizations/org1.example.com/connection-org1.json";
 
-    //String tlsCertPath = "/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt";
-    //String privateKeyPath="/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/priv_sk";
-    //String certificatePath="/usr/software/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/User1@org1.example.com-cert.pem";
+//    String tlsCertPath = "/home/server/gaojian/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt";
+//    String privateKeyPath="/home/server/gaojian/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/priv_sk";
+//    String certificatePath="/home/server/gaojian/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/User1@org1.example.com-cert.pem";
+
+//    String tlsCertPath = "D:\\GithubProject\\GeneralChainCode-App\\src\\main\\resources\\ca.crt";
+//    String certificatePath="D:\\GithubProject\\GeneralChainCode-App\\src\\main\\resources\\User1@org1.example.com-cert.pem";
+//    String privateKeyPath="D:\\GithubProject\\GeneralChainCode-App\\src\\main\\resources\\priv_sk";
+
+//   String tlsCertPath = "/home/server/gaojian/tomcat9.0/webapps/Fabric_TraceabilitySys_war_exploded/WEB-INF/classes/ca.crt";
+//    String certificatePath="/home/server/gaojian/tomcat9.0/webapps/Fabric_TraceabilitySys_war_exploded/WEB-INF/classes/User1@org1.example.com-cert.pem";
+//    String privateKeyPath="/home/server/gaojian/tomcat9.0/webapps/Fabric_TraceabilitySys_war_exploded/WEB-INF/classes/priv_sk";
+
+//    String tlsCertPath = "src/main/resources/test/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt";
+//    String certificatePath="src/main/resources/test/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/User1@org1.example.com-cert.pem";
+//    String privateKeyPath="src/main/resources/test/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/priv_sk";
+
+
+    String tlsCertPath = "D:\\JavaProject\\Fabric_TraceabilitySys\\src\\main\\resources\\test\\ca.crt";
+    String certificatePath="D:\\JavaProject\\Fabric_TraceabilitySys\\src\\main\\resources\\test\\User1@org1.example.com-cert.pem";
+    String privateKeyPath="D:\\JavaProject\\Fabric_TraceabilitySys\\src\\main\\resources\\test\\priv_sk";
+
+
 
 //    String tlsCertPath = "src/main/resources/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt";
 //    String certificatePath="src/main/resources/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/User1@org1.example.com-cert.pem";
 //    String privateKeyPath="src/main/resources/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/priv_sk";
 
 
-    String tlsCertPath = "D:\\JavaProject\\Fabric_TraceabilitySys\\src\\main\\resources\\peerOrganizations\\org1.example.com\\peers\\peer0.org1.example.com\\tls\\ca.crt";
-    String certificatePath="D:\\JavaProject\\Fabric_TraceabilitySys\\src\\main\\resources\\peerOrganizations\\org1.example.com\\users\\User1@org1.example.com\\msp\\signcerts\\User1@org1.example.com-cert.pem";
-    String privateKeyPath="D:\\JavaProject\\Fabric_TraceabilitySys\\src\\main\\resources\\peerOrganizations\\org1.example.com\\users\\User1@org1.example.com\\msp\\keystore\\priv_sk";
+//    String tlsCertPath = "D:\\JavaProject\\Fabric_TraceabilitySys\\src\\main\\resources\\peerOrganizations\\org1.example.com\\peers\\peer0.org1.example.com\\tls\\ca.crt";
+//    String certificatePath="D:\\JavaProject\\Fabric_TraceabilitySys\\src\\main\\resources\\peerOrganizations\\org1.example.com\\users\\User1@org1.example.com\\msp\\signcerts\\User1@org1.example.com-cert.pem";
+//    String privateKeyPath="D:\\JavaProject\\Fabric_TraceabilitySys\\src\\main\\resources\\peerOrganizations\\org1.example.com\\users\\User1@org1.example.com\\msp\\keystore\\priv_sk";
+//
 
 
 
@@ -80,7 +100,7 @@ public class FabricGateway {
                 .sslContext(GrpcSslContexts.forClient().trustManager(tlsCert).build())
                 .overrideAuthority("peer0.org1.example.com")
                 .build();*/
-        return NettyChannelBuilder.forTarget("192.168.0.119:7051")
+        return NettyChannelBuilder.forTarget("www.gvssimux.com:7051")
                 .sslContext(GrpcSslContexts.forClient().trustManager(tlsCert).build())
                 .overrideAuthority("peer0.org1.example.com")
                 .build();
@@ -127,4 +147,5 @@ public class FabricGateway {
     public void getContractTest() throws Exception {
         Contract contract = FabricGatewayUtil.getContract();
     }
+
 }

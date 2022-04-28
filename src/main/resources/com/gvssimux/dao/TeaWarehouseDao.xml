@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gvssimux.dao.TeaWarehouseDao">
+  <resultMap id="BaseResultMap" type="com.gvssimux.pojo.TeaWarehouse">
+    <result column="tea_warehouse_id" jdbcType="VARCHAR" property="teaWarehouseId" />
+    <result column="tea_warehouse_perid" jdbcType="VARCHAR" property="teaWarehousePerid" />
+    <result column="tea_warehouse_intime" jdbcType="TIMESTAMP" property="teaWarehouseIntime" />
+    <result column="tea_warehouse_outtime" jdbcType="TIMESTAMP" property="teaWarehouseOuttime" />
+  </resultMap>
+  <insert id="insert" parameterType="com.gvssimux.pojo.TeaWarehouse">
+    insert into tea_warehouse (tea_warehouse_id, tea_warehouse_perid, 
+      tea_warehouse_intime, tea_warehouse_outtime
+      )
+    values (#{teaWarehouseId,jdbcType=VARCHAR}, #{teaWarehousePerid,jdbcType=VARCHAR}, 
+      #{teaWarehouseIntime,jdbcType=TIMESTAMP}, #{teaWarehouseOuttime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gvssimux.pojo.TeaWarehouse">
+    insert into tea_warehouse
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="teaWarehouseId != null">
+        tea_warehouse_id,
+      </if>
+      <if test="teaWarehousePerid != null">
+        tea_warehouse_perid,
+      </if>
+      <if test="teaWarehouseIntime != null">
+        tea_warehouse_intime,
+      </if>
+      <if test="teaWarehouseOuttime != null">
+        tea_warehouse_outtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="teaWarehouseId != null">
+        #{teaWarehouseId,jdbcType=VARCHAR},
+      </if>
+      <if test="teaWarehousePerid != null">
+        #{teaWarehousePerid,jdbcType=VARCHAR},
+      </if>
+      <if test="teaWarehouseIntime != null">
+        #{teaWarehouseIntime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="teaWarehouseOuttime != null">
+        #{teaWarehouseOuttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>
