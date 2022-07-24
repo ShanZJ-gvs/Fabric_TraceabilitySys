@@ -6,7 +6,7 @@ import com.gvssimux.pojo.UserBasic;
 import java.util.List;
 
 
-public class UserLoginServiceImpl {
+public class UserLoginServiceImpl implements UserLoginService {
     private UserLoginDao mapper;
 
 

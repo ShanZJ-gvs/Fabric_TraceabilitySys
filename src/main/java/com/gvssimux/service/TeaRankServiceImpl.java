@@ -58,6 +58,8 @@ public class TeaRankServiceImpl implements TeaRankService{
 
     /*获取公司下各级茶叶有多少量*/
     public HashMap getRankPerSum(Contract contract,String companyName) {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        TeaPickServiceImpl mapper = context.getBean("TeaPickServiceImpl", TeaPickServiceImpl.class);
         byte[] bytes = new byte[0];
         String str = "{\"selector\":{\"company\":\""+companyName+"\",\"type\":\"TeaRank\"}, \"use_index\":[]}";// 富查询字符串
 
@@ -87,13 +89,12 @@ public class TeaRankServiceImpl implements TeaRankService{
             TeaRank rank = JSON.toJavaObject(jsonObject2, TeaRank.class);// 拿到TeaRank对象
             String teaRankRank = rank.getTeaRankRank();// 获取茶叶等级
             String teaRankId = rank.getTeaRankId();// 获取这是哪批茶叶
+            System.out.println("=====>茶叶批次ID"+teaRankId);
 
-            ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-            TeaPickServiceImpl mapper = context.getBean("TeaPickServiceImpl", TeaPickServiceImpl.class);
 
             Integer output = mapper.getPickOutputByPickId(contract, companyName, teaRankId);// 查询这批茶叶的output
 
-            if (!map.containsKey(teaRankRank)){ // key不在map中
+            if (!map.containsKey(teaRankRank)&&output!=0){ // key不在map中
                 map.put(teaRankRank,output);
             }else {  // key在map中
                 Integer temp = map.get(teaRankRank);  // 当前output
@@ -103,6 +104,49 @@ public class TeaRankServiceImpl implements TeaRankService{
         }
 
         return map;
+    }
+
+
+    /*限制查询*/
+    public QueryResultList selectOffsetLimit(Contract contract,String companyName,int offset,int limit) {
+        byte[] bytes = new byte[0];
+        String str = "{\"selector\":{\"company\":\""+companyName+"\",\"type\":\"TeaRank\"}, \"use_index\":[]}";// 富查询字符串
+
+        try {
+            bytes = contract.submitTransaction("richQuery", str);
+        } catch (EndorseException e) {
+            e.printStackTrace();
+        } catch (SubmitException e) {
+            e.printStackTrace();
+        } catch (CommitStatusException e) {
+            e.printStackTrace();
+        } catch (CommitException e) {
+            e.printStackTrace();
+        }
+
+        String s = new String(bytes);
+        //System.out.println("提交交易" + s);
+        JSONObject jsonObject = JSONObject.parseObject(s);
+        QueryResultList resultList = JSON.toJavaObject(jsonObject, QueryResultList.class);
+        //System.out.println(resultList);
+        List<QueryResult> teaMakes = resultList.getResultList();
+        int size = teaMakes.size();
+        System.out.println("try前"+resultList);
+        try {
+            List<QueryResult> QueryResults = teaMakes.subList(offset, offset + limit);
+            resultList.setResultList(QueryResults);
+            System.out.println("try中"+resultList);
+        } catch (IndexOutOfBoundsException e) {
+            List<QueryResult> QueryResults = teaMakes.subList(offset,size);
+            resultList.setResultList(QueryResults);
+            System.out.println("开始下标小于 0 或大于数组的长度，");
+            e.printStackTrace();
+        }catch (IllegalArgumentException e){
+            System.out.println("结束下标大于 toIndex 的值");
+            e.printStackTrace();
+        }
+        System.out.println("try后"+resultList);
+        return resultList;
     }
 
 

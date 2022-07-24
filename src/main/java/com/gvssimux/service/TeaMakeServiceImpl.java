@@ -6,8 +6,7 @@ import com.gvssimux.pojo.TeaMake;
 import com.gvssimux.pojo.fabquery.QueryResult;
 import com.gvssimux.pojo.fabquery.QueryResultList;
 import com.gvssimux.util.DataUtil;
-import org.hyperledger.fabric.client.Contract;
-import org.hyperledger.fabric.client.EndorseException;
+import org.hyperledger.fabric.client.*;
 
 
 import java.util.HashMap;
@@ -53,6 +52,48 @@ public class TeaMakeServiceImpl implements TeaMakeService{
 
     }
 
+    /*限制查询*/
+    public QueryResultList selectOffsetLimit(Contract contract,String companyName,int offset,int limit) {
+        byte[] bytes = new byte[0];
+        String str = "{\"selector\":{\"company\":\""+companyName+"\",\"type\":\"TeaMake\"}, \"use_index\":[]}";// 富查询字符串
+
+        try {
+            bytes = contract.submitTransaction("richQuery", str);
+        } catch (EndorseException e) {
+            e.printStackTrace();
+        } catch (SubmitException e) {
+            e.printStackTrace();
+        } catch (CommitStatusException e) {
+            e.printStackTrace();
+        } catch (CommitException e) {
+            e.printStackTrace();
+        }
+
+        String s = new String(bytes);
+        //System.out.println("提交交易" + s);
+        JSONObject jsonObject = JSONObject.parseObject(s);
+        QueryResultList resultList = JSON.toJavaObject(jsonObject, QueryResultList.class);
+        //System.out.println(resultList);
+        List<QueryResult> teaMakes = resultList.getResultList();
+        int size = teaMakes.size();
+        System.out.println("try前"+resultList);
+        try {
+            List<QueryResult> QueryResults = teaMakes.subList(offset, offset + limit);
+            resultList.setResultList(QueryResults);
+            System.out.println("try中"+resultList);
+        } catch (IndexOutOfBoundsException e) {
+            List<QueryResult> QueryResults = teaMakes.subList(offset,size);
+            resultList.setResultList(QueryResults);
+            System.out.println("开始下标小于 0 或大于数组的长度，");
+            e.printStackTrace();
+        }catch (IllegalArgumentException e){
+            System.out.println("结束下标大于 toIndex 的值");
+            e.printStackTrace();
+        }
+        System.out.println("try后"+resultList);
+        return resultList;
+    }
+
 
     /*获取每月的制茶量*/
     public HashMap getMakePerSumByCompany(Contract contract, String companyName) {
@@ -81,6 +122,10 @@ public class TeaMakeServiceImpl implements TeaMakeService{
             TeaMake pojo = JSON.toJavaObject(jsonObject, TeaMake.class);
             String time = pojo.getTeaMakeTime(); // 时间
             String key = DataUtil.getMouth(time);// 月份
+            if (time==null||key==null){
+                System.out.println("====>从区块链中查出来的数据中时间无法解析");
+                continue;
+            }
             Integer value = pojo.getOutput(); // 数量作为value
             if (!map.containsKey(key)){ // key不在map中
                 map.put(key,value);

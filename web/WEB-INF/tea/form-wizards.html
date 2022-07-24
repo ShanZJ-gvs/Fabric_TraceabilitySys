@@ -102,7 +102,7 @@
                     <a :href="todata" data-target="pages" data-toggle="tooltip-menu" data-tippy-content="Pages"><span
                             class="icon la la-file-alt"></span><span class="title">数据总览</span></a>
 
-                    <a href="./toauthlogin" data-toggle="tooltip-menu" data-tippy-content="Blank Page"><span
+                    <a href="./" data-toggle="tooltip-menu" data-tippy-content="Blank Page"><span
                             class="icon la la-file"></span><span class="title">登录</span></a>
                 </template>
                 <a href="./tosearch" target="_blank" data-toggle="tooltip-menu" v-if="!iscompany"
@@ -164,7 +164,7 @@
                                         <input type="text" class="form-control" name="tea_area_area"
                                                v-model:placeholder="pojo.area">
                                     </div>
-                                    <div class="mb-5">
+                                    <div class="mb-5" v-show="false">
                                         <label class="label block mb-2">茶区经纬度</label>
                                         <input type="text" class="form-control" name="tea_area_longitude"
                                                v-model:placeholder="pojo.altitude">
@@ -179,12 +179,12 @@
                                         <input type="text" class="form-control" name="tea_garden_id2"
                                                v-model:placeholder="pojo.gardenid2">
                                     </div>
-                                    <div class="mb-5">
+                                    <div class="mb-5" v-show="false">
                                         <label class="label block mb-2">所属公司</label>
-                                        <input type="text" class="form-control" name="companyName"
+                                        <input type="text" v-model="company1" class="form-control" name="companyName"
                                                placeholder="">
                                     </div>
-                                    <div class="mb-5">
+                                    <div class="mb-5" v-show="false">
                                         <label class="label block mb-2">密码</label>
                                         <input type="password" class="form-control" value="" name="key">
                                     </div>
@@ -216,7 +216,7 @@
                                         <input type="text" class="form-control" name="tea_garden_area"
                                                v-model:placeholder="pojo.area">
                                     </div>
-                                    <div class="mb-5">
+                                    <div class="mb-5" v-show="false">
                                         <label class="label block mb-2">茶园经纬度</label>
                                         <input type="text" class="form-control" name="tea_garden_longitude"
                                                v-model:placeholder="pojo.altitude">
@@ -231,12 +231,12 @@
                                         <input type="text" class="form-control" name="tea_garden_id2"
                                                v-model:placeholder="pojo.garden2">
                                     </div>
-                                    <div class="mb-5">
+                                    <div class="mb-5" v-show="false">
                                         <label class="label block mb-2">所属公司</label>
-                                        <input type="text" class="form-control" name="companyName"
+                                        <input type="text" class="form-control" v-model="company1" name="companyName"
                                                placeholder="">
                                     </div>
-                                    <div class="mb-5">
+                                    <div class="mb-5" v-show="false">
                                         <label class="label block mb-2">密码</label>
                                         <input type="password" class="form-control" value="" name="key">
                                     </div>
@@ -257,7 +257,7 @@
                                         <input type="text" class="form-control" name="tea_tree_address"
                                                v-model:placeholder="pojo.address">
                                     </div>
-                                    <div class="mb-5">
+                                    <div class="mb-5" v-show="false">
                                         <label class="label block mb-2">茶树经纬度</label>
                                         <input type="text" class="form-control" name="tea_tree_longitude"
                                                v-model:placeholder="pojo.altitude">
@@ -297,12 +297,12 @@
                                         <input type="text" class="form-control" name="tea_garden_id2"
                                                v-model:placeholder="pojo.gardenid2">
                                     </div>
-                                    <div class="mb-5">
+                                    <div class="mb-5" v-show="false">
                                         <label class="label block mb-2">所属公司</label>
-                                        <input type="text" class="form-control" name="companyName"
+                                        <input type="text" class="form-control" v-model="company1" name="companyName"
                                                placeholder="">
                                     </div>
-                                    <div class="mb-5">
+                                    <div class="mb-5" v-show="false">
                                         <label class="label block mb-2">密码</label>
                                         <input type="password" class="form-control" value="" name="key">
                                     </div>
@@ -375,7 +375,7 @@
                                     <input v-show="false" v-model="company1" type="text" class="form-control" name="companyName">
 
 
-                                    <div class="mb-5">
+                                    <div class="mb-5" v-show="false">
                                         <label class="label block mb-2">密码</label>
                                         <input type="password" class="form-control" value="" name="key">
                                     </div>
@@ -444,7 +444,7 @@
 
 
 
-                                    <div class="mb-5">
+                                    <div class="mb-5" v-show="false">
                                         <label class="label block mb-2">密码</label>
                                         <input type="password" class="form-control" value="" name="key">
                                     </div>
@@ -499,7 +499,7 @@
                                         <div style="margin-top: 10px; width:100%">
                                             <el-radio-group  style="width:100%" v-model="tea.rank" size="small"  name="tea_rank_rank">
                                                 <el-radio-button :label="rankkey[0]"></el-radio-button>
-                                                <el-radio-button :label="rankkey[1]" disabled ></el-radio-button>
+                                                <el-radio-button :label="rankkey[1]"></el-radio-button>
                                                 <el-radio-button :label="rankkey[2]"></el-radio-button>
                                                 <el-radio-button :label="rankkey[3]"></el-radio-button>
                                                 <el-radio-button :label="rankkey[4]"></el-radio-button>
@@ -521,7 +521,7 @@
                                     <input v-show="false" v-model="company1" type="text" class="form-control" name="companyName">
 
 
-                                    <div class="mb-5">
+                                    <div class="mb-5" v-show="false">
                                         <label class="label block mb-2">密码</label>
                                         <input type="password" class="form-control" value="" name="key">
                                     </div>
@@ -586,7 +586,7 @@
                                     </div>
                                     <input v-show="false" v-model="company1" type="text" class="form-control" name="companyName">
 
-                                    <div class="mb-5">
+                                    <div class="mb-5" v-show="false">
                                         <label class="label block mb-2">密码</label>
                                         <input type="password" class="form-control" value="" name="key">
                                     </div>
@@ -619,8 +619,8 @@
                                     </div>
                                     <div class="mb-5">
                                         <label class="label block mb-2">质检结果</label>
-                                        <input type="text" class="form-control" name="tea_testing_result"
-                                               v-model:placeholder="pojo2.testingQ">
+                                        <el-radio name="tea_testing_result" v-model="tea_testing_result" label="通过">通过</el-radio>
+                                        <el-radio name="tea_testing_result" v-model="tea_testing_result" label="不通过">不通过</el-radio>
                                     </div>
                                     <div class="mb-5" v-show="false">
                                         <label class="label block mb-2">质检时间</label>
@@ -658,7 +658,7 @@
                                     <input v-show="false" v-model="company1" type="text" class="form-control" name="companyName">
 
 
-                                    <div class="mb-5">
+                                    <div class="mb-5" v-show="false">
                                         <label class="label block mb-2">密码</label>
                                         <input type="password" class="form-control" value="" name="key">
                                     </div>
@@ -744,7 +744,7 @@
         <!-- Footer  -->
         <footer class="flex mt-auto">
             <div class="footer">
-                <span class='uppercase'>&copy; 2021 茶叶溯源管理后台</span>
+                <span class='uppercase'>&copy; 2022 茶叶溯源管理后台</span>
                 <nav class="ml-auto">
                     <a href="">支持</a>
                     <span class="divider mx-2">|</span>

@@ -8,6 +8,7 @@ import org.hyperledger.fabric.client.Contract;
 
 
 public class CreateUserCode {
+/*
 
     public static String CreateUserCode(String key,String value) throws Exception {
         Contract contract = FabricUtil.getContract();
@@ -62,14 +63,16 @@ public class CreateUserCode {
         json = FabricUtil.fz1("teaTreeId","t356",0);
         jsonObj = JSONObject.parseObject(json);//转JSONObject对象
         TeaTree tree = jsonObj.toJavaObject(TeaTree.class);
-            /*TeaTree tree = new TeaTree();
+            */
+/*TeaTree tree = new TeaTree();
             tree.setTeaGardenId2("gt23");
             tree.setTeaAreaId2("a676");
             tree.setTeaTreeCultivate("wadad");
             tree.setTeaTreeState("好！！");
             tree.setTeaTreeKind("毛峰");
             tree.setTeaTreeLongitude("wafwafa");
-            tree.setTeaTreeGrowingEnv("潮湿");*/
+            tree.setTeaTreeGrowingEnv("潮湿");*//*
+
         allPojo.setTeaTree(tree);
         System.out.println("成功获取tree");
 
@@ -91,6 +94,7 @@ public class CreateUserCode {
         System.out.println(s);
         return s;
     }
+*/
 
 
 }

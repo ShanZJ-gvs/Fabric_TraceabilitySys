@@ -47,6 +47,10 @@ public class FabricGateway {
     String certificatePath="D:\\JavaProject\\Fabric_TraceabilitySys\\src\\main\\resources\\test\\User1@org1.example.com-cert.pem";
     String privateKeyPath="D:\\JavaProject\\Fabric_TraceabilitySys\\src\\main\\resources\\test\\priv_sk";
 
+//    String tlsCertPath = "/usr/software/tomcat8.5/webapps/Fabric_TraceabilitySys-1.0-SNAPSHOT/WEB-INF/classesca.crt";
+//    String certificatePath="/usr/software/tomcat8.5/webapps/Fabric_TraceabilitySys-1.0-SNAPSHOT/WEB-INF/classesUser1@org1.example.com-cert.pem";
+//    String privateKeyPath="/usr/software/tomcat8.5/webapps/Fabric_TraceabilitySys-1.0-SNAPSHOT/WEB-INF/classespriv_sk";
+
 
 
 //    String tlsCertPath = "src/main/resources/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt";

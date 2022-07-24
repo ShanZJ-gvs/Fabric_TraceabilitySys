@@ -103,11 +103,12 @@
 
                     <a :href="todata" data-target="pages" data-toggle="tooltip-menu" data-tippy-content="Pages"><span
                             class="icon la la-file-alt"></span><span class="title">数据总览</span></a>
-                </template>
-                    <a href="./toauthlogin" data-toggle="tooltip-menu" data-tippy-content="Blank Page"><span
+
+                    <a href="./" data-toggle="tooltip-menu" data-tippy-content="Blank Page"><span
                             class="icon la la-file"></span><span class="title">登录</span></a>
-                    <a href="./tosearch" target="_blank" data-toggle="tooltip-menu"
-                            data-tippy-content="Docs"><span class="icon la la-book-open"></span><span class="title">消费者查询</span></a>
+                </template>
+                <a href="./tosearch" target="_blank" data-toggle="tooltip-menu" v-if="!iscompany"
+                   data-tippy-content="Docs"><span class="icon la la-book-open"></span><span class="title">消费者查询</span></a>
             </div>
 
         </div>
@@ -128,11 +129,12 @@
                     <a href="#" class="btn btn-icon btn-icon_large btn_outlined btn_primary">
                         <span class="la la-bars"></span></a>
                 </div>
+                <!--<form class="flex items-center lg:ml-2 mt-5 lg:mt-0" action="/Fabric_TraceabilitySys_war_exploded/t3" method="get">    -->
                 <form class="flex items-center lg:ml-2 mt-5 lg:mt-0" action="/Fabric_TraceabilitySys_war_exploded/t3" method="get">
                     <label class="form-control-addon-within border-secondary rounded-full overflow-hidden">
                         <input v-model="UserCode" type="text" class="form-control border-none" placeholder="输入溯源码" name="userCode">
                         <span class="flex items-center pr-4">
-                            <button type="button"
+                            <button type="button" @click="showInfo()"
                                 class="dark:text-gray-700 dark:hover:text-primary text-secondary hover:text-primary btn btn-link la la-search text-xl leading-none">
                             </button>
                         </span>
@@ -154,13 +156,13 @@
                         <tr>
                             <th class="w-px">
                                 <label class="custom-checkbox">
-                                    
+
                                     <span></span>
                                 </label>
                             </th>
                             <th class="text-left uppercase">茶树区块号</th>
                             <th class="text-center uppercase">茶园编号</th>
-                            
+
                             <th class="text-center uppercase">茶树护养</th>
                             <th class="text-center uppercase">生长环境</th>
                             <th class="uppercase"></th>
@@ -170,7 +172,7 @@
                         <tr>
                             <td>
                                 <label class="custom-checkbox">
-                                   
+
                                     <span></span>
                                 </label>
                             </td>
@@ -181,12 +183,12 @@
                                 <div class="badge badge_outlined badge_secondary uppercase">{{TeaTree.teaTreeGrowingEnv}}</div>
                             </td>
                             <td class="text-right whitespace-no-wrap">
-                               
+
                             </td>
                         </tr>
-                        
-                        
-                        
+
+
+
                     </tbody>
                 </table>
             </div>
@@ -203,13 +205,13 @@
                         <tr>
                             <th class="w-px">
                                 <label class="custom-checkbox">
-                                    
+
                                     <span></span>
                                 </label>
                             </th>
                             <th class="text-left uppercase">茶树区块号</th>
                             <th class="text-center uppercase">采茶师编号</th>
-                            
+
                             <th class="text-center uppercase">采摘时间</th>
                             <th class="text-center uppercase">鲜叶编号</th>
                             <th class="text-center uppercase">鲜叶质量</th>
@@ -220,7 +222,7 @@
                         <tr>
                             <td>
                                 <label class="custom-checkbox">
-                                   
+
                                     <span></span>
                                 </label>
                             </td>
@@ -230,12 +232,12 @@
                             <td class="text-center">{{TeaPick.teaPickId}}</td>
                             <td class="text-center">{{TeaPick.teaPickQuality}}</td>
                             <td class="text-right whitespace-no-wrap">
-                               
+
                             </td>
                         </tr>
-                        
-                        
-                        
+
+
+
                     </tbody>
                 </table>
             </div>
@@ -249,22 +251,22 @@
                 <table class="table table-auto table_hoverable w-full">
                     <thead>
                         <tr>
-                            
+
                             <th class="text-left uppercase">制茶师编号</th>
                             <th class="text-left uppercase">制茶时间</th>
-                            
+
                             <th class="text-center uppercase">制茶工艺</th>
                             <th class="text-center uppercase">鲜叶编号</th>
                             <th class="text-center uppercase">鲜叶质量</th>
                             <th class="text-center uppercase">茶叶批编号</th>
                             <th class="text-center uppercase">茶叶批质量</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            
-                            
+
+
                             <td>{{TeaMake.teaMakePer.eid}}</td>
                             <td>{{TeaMake.teaMakeTime}}</td>
                             <td class="text-center">{{TeaMake.teaMakeWay}}</td>
@@ -287,23 +289,23 @@
                 <table class="table table-auto table_hoverable w-full">
                     <thead>
                         <tr>
-                            
+
                             <th class="text-left uppercase">定级人编号</th>
                             <th class="text-left uppercase">定级时间</th>
-                            
+
                             <th class="text-center uppercase">茶叶批编号</th>
                             <th class="text-center uppercase">茶叶等级</th>
-                      
-                            
+
+
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td >{{TeaRank.teaRankPer.eid}}</td>
                             <td>{{TeaRank.teaRankTime}}</td>
-                
+
                             <td class="text-center">{{TeaRank.teaRankId}}</td>
-                            
+
                             <td class="text-center">{{TeaRank.teaRankRank}}</td>
                         </tr>
 
@@ -320,7 +322,7 @@
                 <table class="table table-auto table_hoverable w-full">
                     <thead>
                         <tr>
-                            
+
                             <th class="text-left uppercase">操作人编号</th>
                             <th class="text-left uppercase">包装时间</th>
                             <th class="text-left uppercase">小盒编号</th>
@@ -328,26 +330,26 @@
                             <th class="text-center uppercase">茶叶批编号</th>
                             <th class="text-left uppercase">茶叶等级</th>
                             <th class="text-left uppercase">大盒编号</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            
-                            
+
+
                             <td >{{TeaPack.teaPackPer.eid}}</td>
                             <td>{{TeaPack.teaPackTime}}</td>
-                
+
                             <td>{{TeaPack.teaPackSmllBoxId}}</td>
-                            
+
                             <td class="text-center">c82dssd85：未改</td>
                             <td class="text-center">c8954154：未改</td>
                             <td >&nbsp;&nbsp;&nbsp;优：未改</td>
                             <td >{{TeaPack.teaPackBigBoxId}}</td>
-                            
+
                         </tr>
 
-                        
+
                     </tbody>
                 </table>
             </div>
@@ -361,35 +363,35 @@
                 <table class="table table-auto table_hoverable w-full">
                     <thead>
                         <tr>
-                            
+
                             <th class="text-left uppercase">质检批次ID</th>
                             <th class="text-left uppercase">质检人编号</th>
                             <th class="text-left uppercase">质检时间</th>
                             <th class="text-center uppercase">大盒编号</th>
                             <th class="text-center uppercase">小盒编号</th>
                             <th class="text-left uppercase">质检结果</th>
-                       
-                            
+
+
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            
-                            
+
+
                             <td >{{TeaTesting.teaTestingId}}</td>
                             <td>{TeaTesting}</td>
-                
+
                             <td>{{TeaTesting.teaTestingTime}}</td>
-                            
+
                             <td class="text-center">{{TeaTesting.teaTestingBigBoxId}}</td>
                             <td class="text-center">{{TeaTesting.teaTestingSmllBoxId}}</td>
                             <td >&nbsp;&nbsp;&nbsp;{{TeaTesting.teaTestingResult}}</td>
-                             
-                            
+
+
                         </tr>
-                        
-                        
-                        
+
+
+
                     </tbody>
                 </table>
             </div>
@@ -403,35 +405,35 @@
                 <table class="table table-auto table_hoverable w-full">
                     <thead>
                         <tr>
-                            
+
                             <th class="text-left uppercase">仓储编号</th>
                             <th class="text-left uppercase">管理员编号</th>
                             <th class="text-left uppercase">入库时间</th>
                             <th class="text-center uppercase">出库时间</th>
                             <th class="text-center uppercase">大盒编号</th>
-                         
-                       
-                            
+
+
+
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            
-                            
+
+
                             <td >875415</td>
                             <td>9524</td>
-                
+
                             <td>2021/05/05</td>
-                            
-                            <td class="text-center">2021/05/06</td> 
-                            <td class="text-center">9568</td>   
-                      
-                             
-                            
+
+                            <td class="text-center">2021/05/06</td>
+                            <td class="text-center">9568</td>
+
+
+
                         </tr>
-                        
-                        
-                        
+
+
+
                     </tbody>
                 </table>
             </div>
@@ -445,7 +447,7 @@
                 <table class="table table-auto table_hoverable w-full">
                     <thead>
                         <tr>
-                            
+
                             <th class="text-left uppercase">买方编号</th>
                             <th class="text-left uppercase">卖方编号</th>
                             <th class="text-left uppercase">销售时间</th>
@@ -453,32 +455,32 @@
                             <th class="text-center uppercase">大/小盒编号</th>
                             <th class="text-center uppercase">仓库编号</th>
                             <th class="text-center uppercase">交货方式</th>
-                         
-                       
-                            
+
+
+
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            
-                            
+
+
                             <td >985654</td>
                             <td>845742</td>
-                
+
                             <td>2021/05/10</td>
-                            
-                            <td class="text-center">零售</td> 
-                            <td class="text-center">9568/5454</td>  
-                            <td class="text-center">547851</td> 
-                            <td class="text-center">快递</td>   
-                       
-                      
-                             
-                            
+
+                            <td class="text-center">零售</td>
+                            <td class="text-center">9568/5454</td>
+                            <td class="text-center">547851</td>
+                            <td class="text-center">快递</td>
+
+
+
+
                         </tr>
-                        
-                        
-                        
+
+
+
                     </tbody>
                 </table>
             </div>
@@ -493,7 +495,7 @@
                 <table class="table table-auto table_hoverable w-full">
                     <thead>
                         <tr>
-                            
+
                             <th class="text-left uppercase">物流单号</th>
                             <th class="text-left uppercase">物流公司</th>
                             <th class="text-left uppercase">发货地址</th>
@@ -501,38 +503,38 @@
                             <th class="text-center uppercase">收货地址</th>
                             <th class="text-center uppercase">收货时间</th>
                             <th class="text-center uppercase">物流详情</th>
-                         
-                       
-                            
+
+
+
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            
-                            
+
+
                             <td >58445541</td>
                             <td>C快递公司</td>
-                
+
                             <td>A地</td>
-                            
-                            <td class="text-center">2021/05/07</td> 
-                            <td class="text-center">B地</td>   
-                            <td class="text-center">2021/05/09</td> 
-                            <td class="text-center">点击查看</td>   
-                      
-                             
-                            
+
+                            <td class="text-center">2021/05/07</td>
+                            <td class="text-center">B地</td>
+                            <td class="text-center">2021/05/09</td>
+                            <td class="text-center">点击查看</td>
+
+
+
                         </tr>
-                        
-                        
-                        
+
+
+
                     </tbody>
                 </table>
             </div>
         </div>
         </template>-->
 
-        <div class="block">
+<!--        <div class="block">
             <el-timeline>
                 <el-timeline-item timestamp="2018/4/12" placement="top">
                     <el-card>
@@ -598,6 +600,95 @@
                     </el-card>
                 </el-timeline-item>
             </el-timeline>
+        </div>    -->
+
+        <div class="block" v-if="retr">
+            <el-timeline>
+                <el-collapse v-model="activeNames" @change="handleChange">
+                <el-timeline-item v-bind:timestamp="allPojo.teaPick.teaPickTime" placement="top">
+                    <el-card>
+                        <h4>采摘信息</h4>
+                            <!--<el-collapse-item title="阿里巴巴 提交于 2018/4/12 20:46" name="1">-->
+                            <el-collapse-item v-bind:title="title1" name="1">
+                                <div>采茶师：{{allPojo.teaPick.teaPickPer.ename}}</div>
+                                <div>采摘时间：{{allPojo.teaPick.teaPickTime}}</div>
+                                <div>采摘公司：{{allPojo.teaPick.teaPickPer.company}}</div>
+                                <div>采摘量：{{allPojo.teaPick.output}}</div>
+                                <div>茶叶批编号：{{allPojo.teaPick.teaPickId}}</div>
+                                <div>所属茶树编号：{{allPojo.teaTree.teaTreeId}}</div>
+                                <div>所属茶树种类：{{allPojo.teaTree.teaTreeKind}}</div>
+                                <div>所属茶树状况：{{allPojo.teaTree.teaTreeState}}</div>
+                                <div>所属茶树地址：{{allPojo.teaTree.teaTreeAddress}}</div>
+                                <div>所属茶树高度：{{allPojo.teaTree.teaTreeHeight}}</div>
+                                <div>所属茶树生长环境：{{allPojo.teaTree.teaTreeGrowingEnv}}</div>
+                                <div>所属茶树护养情况：{{allPojo.teaTree.teaTreeCultivate}}</div>
+                                <br>
+                                <div>所属茶园名：{{allPojo.teaGarden.teaGardenName}}</div>
+                                <div>所属茶园编号：{{allPojo.teaGarden.teaGardenId1}}</div>
+                                <div>所属茶园地址：{{allPojo.teaGarden.teaGardenAddress}}</div>
+                                <div>所属茶园面积：{{allPojo.teaGarden.teaGardenArea}}</div>
+                                <div>所属茶园公司：{{allPojo.teaGarden.company}}</div>
+                                <br>
+                                <div>所属茶区名：{{allPojo.teaArea.teaAreaName}}</div>
+                                <div>所属茶区编号：{{allPojo.teaArea.teaAreaId1}}</div>
+                                <div>所属茶区地址：{{allPojo.teaArea.teaAreaAddress}}</div>
+                                <div>所属茶区面积：{{allPojo.teaArea.teaAreaArea}}</div>
+                                <div>所属茶区公司：{{allPojo.teaArea.company}}</div>
+                            </el-collapse-item>
+                    </el-card>
+                </el-timeline-item>
+                <el-timeline-item v-bind:timestamp="allPojo.teaMake.teaMakeTime" placement="top">
+                    <el-card>
+                        <h4>制茶信息</h4>
+                            <el-collapse-item v-bind:title="title2" name="2">
+                                <div>制茶师：{{allPojo.teaMake.teaMakePer.ename}}</div>
+                                <div>制茶时间：{{allPojo.teaMake.teaMakeTime}}</div>
+                                <div>制茶方式：{{allPojo.teaMake.teaMakeWay}}</div>
+                                <div>制茶量：{{allPojo.teaMake.output}}</div>
+                                <div>茶叶批编号：{{allPojo.teaMake.teaMakeId}}</div>
+                                <div>制茶公司：{{allPojo.teaMake.teaMakePer.company}}</div>
+                            </el-collapse-item>
+                    </el-card>
+                </el-timeline-item>
+                <el-timeline-item v-bind:timestamp="allPojo.teaRank.teaRankTime" placement="top">
+                    <el-card>
+                        <h4>定级信息</h4>
+                        <el-collapse-item v-bind:title="title3" name="3">
+                            <div>定级人：{{allPojo.teaRank.teaRankPer.ename}}</div>
+                            <div>定级时间：{{allPojo.teaRank.teaRankTime}}</div>
+                            <div>等级：{{allPojo.teaRank.teaRankRank}}</div>
+                            <div>茶叶批编号：{{allPojo.teaRank.teaRankId}}</div>
+                            <div>定级公司：{{allPojo.teaRank.teaRankPer.company}}</div>
+                        </el-collapse-item>
+                    </el-card>
+                </el-timeline-item>
+                <el-timeline-item v-bind:timestamp="this.allPojo.teaPack.teaPackTime" placement="top">
+                        <el-card>
+                            <h4>包装信息</h4>
+                            <el-collapse-item v-bind:title="title4" name="4">
+                                <div>包装人：{{allPojo.teaPack.teaPackPer.ename}}</div>
+                                <div>包装时间：{{allPojo.teaPack.teaPackTime}}</div>
+                                <div>大盒编号：{{allPojo.teaPack.teaPackBigBoxId}}</div>
+                                <div>茶叶批编号：{{allPojo.teaPack.teaPackID}}</div>
+                                <div>包装公司：{{allPojo.teaPack.teaPackPer.company}}</div>
+                            </el-collapse-item>
+                        </el-card>
+                </el-timeline-item>
+                    <el-timeline-item v-bind:timestamp="allPojo.teaTesting.teaTestingTime" placement="top">
+                        <el-card>
+                            <h4>质检</h4>
+                            <el-collapse-item v-bind:title="title5" name="5">
+                                <div>质检员：{{allPojo.teaTesting.teaTestingPer.ename}}</div>
+                                <div>质检时间：{{allPojo.teaTesting.teaTestingTime}}</div>
+                                <div>大盒编号：{{allPojo.teaTesting.teaTestingBigBoxId}}</div>
+                                <div>质检结果：{{allPojo.teaTesting.teaTestingResult}}</div>
+                                <div>质检记录：{{allPojo.teaTesting.teaTestingId}}</div>
+                                <div>质检单位：{{allPojo.teaTesting.teaTestingPer.company}}</div>
+                            </el-collapse-item>
+                        </el-card>
+                    </el-timeline-item>
+                </el-collapse>
+            </el-timeline>
         </div>
 
 
@@ -606,7 +697,7 @@
         <!-- Footer  -->
         <footer class="flex mt-auto">
             <div class="footer">
-                <span class='uppercase'>&copy; 2021 茶叶溯源管理后台</span>
+                <span class='uppercase'>&copy; 2022 茶叶溯源管理后台</span>
                 <nav class="ml-auto">
                     <a href="">支持</a>
                     <span class="divider mx-2">|</span>

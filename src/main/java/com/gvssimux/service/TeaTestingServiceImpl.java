@@ -15,7 +15,7 @@ public class TeaTestingServiceImpl implements TeaTestingService{
 
 
     /*插入*/
-    public String insertOne(Contract contract, TeaTesting record){
+    public String insertOne( Contract contract,TeaTesting record){
 
         byte[] bytes = new byte[0];
         byte[] bytes2 = new byte[0];
@@ -47,6 +47,24 @@ public class TeaTestingServiceImpl implements TeaTestingService{
         }
         return s;
 
+    }
+
+    /*查询有多少个质检记录*/
+    public int querySum(Contract contract,String companyName){
+        byte[] bytes = new byte[0];
+        String str = "{\"selector\":{\"company\":\""+companyName+"\",\"type\":\"TeaTesting\"}, \"use_index\":[]}";// 富查询字符串
+        try {
+            bytes = contract.submitTransaction("richQuery", str);
+            String s = new String(bytes);
+            System.out.println("s====>"+s);
+            JSONObject jsonObject = JSONObject.parseObject(s);
+            QueryResultList resultList = JSON.toJavaObject(jsonObject, QueryResultList.class);
+            System.out.println("resultList======>"+resultList);
+            return resultList.getResultList().size();// 返回茶区数量
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     /*spring 注入k */

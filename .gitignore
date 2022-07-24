@@ -23,7 +23,7 @@
 /target/
 /src/main/resources/database.properties
 *.log
-
+*.idea
 
 
 

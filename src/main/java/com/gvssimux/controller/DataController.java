@@ -39,11 +39,11 @@ public class DataController {
      * */
     @ResponseBody
     @GetMapping("/userCode/key")
-    public String userCode(@Param("userCode") String key, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String userCode(@Param("userCode") String key,HttpServletRequest request) throws Exception {
         log.info("===>请求:userCode:用户溯源码===>");
         TeaPack pack;
         String json;
-        key = request.getParameter("userCode");
+       key = request.getParameter("userCode");
         if (key.equals("")){
             return "溯源码为空";
         }
@@ -54,7 +54,7 @@ public class DataController {
         log.info("key===> "+key);
         try {
             /*直接提交溯源码，看是否次溯源码已被使用*/
-            byte[] bytes = contract.submitTransaction("getAllPojo", key);
+            byte[] bytes = contract.submitTransaction("queryData", key);
             String s = new String(bytes);
             System.out.println(s);
             return s;
@@ -62,6 +62,7 @@ public class DataController {
         } catch(Throwable e) {
             /*溯源码没有被查询过*/
             try {
+                System.out.println("====>开始创建UserCode");
                return createUserCodeByKey(key);
             }
             catch (Throwable r){
