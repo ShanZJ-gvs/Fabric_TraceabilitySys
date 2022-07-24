@@ -116,7 +116,7 @@
                     <a :href="todata" data-target="pages" data-toggle="tooltip-menu" data-tippy-content="Pages"><span
                             class="icon la la-file-alt"></span><span class="title">数据总览</span></a>
 
-                    <a href="./toauthlogin" data-toggle="tooltip-menu" data-tippy-content="Blank Page"><span
+                    <a href="./" data-toggle="tooltip-menu" data-tippy-content="Blank Page"><span
                             class="icon la la-file"></span><span class="title">登录</span></a>
                 </template>
                 <a href="./tosearch" target="_blank" data-toggle="tooltip-menu" v-if="!iscompany"
@@ -155,7 +155,7 @@
                         <tr v-for="(a, index) in listArea">
                             <td>{{index}}</td>
                             <td>{{a.teaAreaId1}}</td> <!--茶区编号 -->
-                            <td>{{a.teaAreaName}}</td> <!--茶区名字-->
+                            <td class="text-center">{{a.teaAreaName}}</td> <!--茶区名字-->
                             <td class="text-center">{{a.teaAreaAddress}}</td>
                             <td class="text-center">
                                 <div class="badge badge_outlined badge_secondary uppercase">{{a.teaAreaArea}}</div>
@@ -200,7 +200,7 @@
                         <tr v-for="(a, index) in listGarden">
                             <td>{{index}}</td>
                             <td>{{a.teaGardenId1}}</td> <!--茶区编号 -->
-                            <td>{{a.teaGardenName}}</td> <!--茶区名字-->
+                            <td class="text-center">{{a.teaGardenName}}</td> <!--茶区名字-->
                             <td class="text-center">{{a.teaGardenAddress}}</td>
                             <td class="text-center">
                                 <div class="badge badge_outlined badge_secondary uppercase">{{a.teaGardenArea}}</div>
@@ -822,7 +822,7 @@
         <!-- Footer  -->
         <footer class="flex mt-auto">
             <div class="footer">
-                <span class='uppercase'>&copy; 2021 茶叶溯源管理后台</span>
+                <span class='uppercase'>&copy; 2022 茶叶溯源管理后台</span>
                 <nav class="ml-auto">
                     <a href="">支持</a>
                     <span class="divider mx-2">|</span>
@@ -844,6 +844,7 @@
     <!--element-->
     <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.8/index.js"></script>
 
+    <!--shanzj-->
     <script src="assets/js/datas_shanzj.js"></script>
     <script src="assets/js/topbar_shanzj.js"></script>
     <script src="assets/js/menu_shanzj.js"></script>

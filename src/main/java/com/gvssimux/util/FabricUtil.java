@@ -29,14 +29,14 @@ public class FabricUtil<T> {
     static Path walletPath = Paths.get("/usr/software/Fabric_TraceabilitySys/wallet");
 
     public static String fz1(String key,String value,int index) throws Exception {
-        Contract contract = getContract();
+        org.hyperledger.fabric.client.Contract contract = getContract();
         QueryResultList resultList = JSON.toJavaObject(JSONObject.parseObject(
                 new String(
-                        contract.submitTransaction("queryById" , "{\"selector\":{\""+key+"\":\""+value+"\"}, \"use_index\":[]}")
+                        contract.submitTransaction("richQuery" , "{\"selector\":{\""+key+"\":\""+value+"\"}, \"use_index\":[]}")
                 )
         ),QueryResultList.class);
         System.out.println("提交交易"+new String(
-                contract.submitTransaction("queryById" , "{\"selector\":{\""+key+"\":\""+value+"\"}, \"use_index\":[]}")
+                contract.submitTransaction("richQuery" , "{\"selector\":{\""+key+"\":\""+value+"\"}, \"use_index\":[]}")
         ));
         System.out.println(resultList);
         QueryResult result = resultList.getResultList().get(index);

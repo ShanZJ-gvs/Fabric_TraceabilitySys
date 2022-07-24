@@ -50,14 +50,6 @@ public class TeaGarden {
     private final String type = "TeaGarden";
 
 
-    private String teaGardenAreaid;
-
-
-    private String teaGardenTreekind;
-
-
-    private String teaGardenTeaid;
-
 
 
 }

@@ -4,10 +4,11 @@ const vm = new Vue({
     data:{
         activeNames: ['0'],
         UserCode:"24c0e81c573147589634ae12faa32236",
-        retr:true,
+        retr:false,
         msg:"",
         /*AllPojo:{*/
-        TeaArea:{
+        allPojo:{},
+       /* TeaArea:{
             "teaAreaLongitude": "",
             "teaAreaArea": "",
             "teaGardenId2": "",
@@ -83,7 +84,7 @@ const vm = new Vue({
             "teaTestingTime": "",
             "teaTestingBigBoxId": "",
             "teaTestingResult": ""
-        }
+        }*/
         /* }*/
     },
     mounted () {
@@ -220,21 +221,12 @@ const vm = new Vue({
                     }else {
                         console.log("json:",JSON.parse(JSON.stringify(response.data)));
                         console.log("json:",JSON.parse(JSON.stringify(response.data.teaArea)));
-                        console.log(this);
+                        this.allPojo = JSON.parse(JSON.stringify(response.data));
                         /**
                          * 把response的.data先转成字符串，再把字符串转为json格式
                          * JSON.parse() 方法将数据转换为 JavaScript 对象。
                          * */
-                        /* this.AllPojo = JSON.parse(JSON.stringify(response.data));*/
-                        this.TeaArea = JSON.parse(JSON.stringify(response.data.teaArea));
-                        this.TeaGarden = JSON.parse(JSON.stringify(response.data.teaGarden));
-                        this.TeaTree = JSON.parse(JSON.stringify(response.data.teaTree));
-                        this.TeaPick = JSON.parse(JSON.stringify(response.data.teaPick));
-                        this.TeaPack = JSON.parse(JSON.stringify(response.data.teaPack));
-                        this.TeaMake = JSON.parse(JSON.stringify(response.data.teaMake));
-                        this.TeaRank = JSON.parse(JSON.stringify(response.data.teaRank));
-                        this.TeaTesting = JSON.parse(JSON.stringify(response.data.teaTesting));
-                        if (this.TeaArea!= null){
+                        if (this.allPojo.teaArea!= null){
                             this.retr = true;
                         }
                     }
@@ -243,5 +235,37 @@ const vm = new Vue({
                 });
 
         }
+    },
+    computed:{
+        value1:{
+            get(){
+                return this.allPojo.teaGarden.company+" 提交于 "+this.allPojo.teaPack.teaPackTime
+            }
+        },
+        title1:{
+            get(){
+                return this.allPojo.teaGarden.company+" 提交于 "+this.allPojo.teaPick.teaPickTime
+            }
+        },
+        title2:{
+            get(){
+                return this.allPojo.teaGarden.company+" 提交于 "+this.allPojo.teaMake.teaMakeTime
+            }
+        },
+        title3:{
+            get(){
+                return this.allPojo.teaGarden.company+" 提交于 "+this.allPojo.teaRank.teaRankTime
+            }
+        },
+        title4:{
+            get(){
+                return this.allPojo.teaGarden.company+" 提交于 "+this.allPojo.teaPack.teaPackTime
+            }
+        },
+        title5:{
+            get(){
+                return this.allPojo.teaGarden.company+" 提交于 "+this.allPojo.teaTesting.teaTestingTime
+            }
+        },
     }
 })

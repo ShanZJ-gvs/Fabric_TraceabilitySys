@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gvssimux.dao.TeaTreeDao">
+  <resultMap id="BaseResultMap" type="com.gvssimux.pojo.TeaTree">
+    <result column="tea_tree_id" jdbcType="VARCHAR" property="teaTreeId" />
+    <result column="tea_tree_address" jdbcType="VARCHAR" property="teaTreeAddress" />
+    <result column="tea_tree_longitude" jdbcType="VARCHAR" property="teaTreeLongitude" />
+    <result column="tea_tree_height" jdbcType="DOUBLE" property="teaTreeHeight" />
+    <result column="tea_tree_kind" jdbcType="VARCHAR" property="teaTreeKind" />
+    <result column="tea_tree_state" jdbcType="VARCHAR" property="teaTreeState" />
+    <result column="tea_tree_cultivate" jdbcType="VARCHAR" property="teaTreeCultivate" />
+    <result column="tea_tree_growingenv" jdbcType="VARCHAR" property="teaTreeGrowingenv" />
+  </resultMap>
+  <insert id="insert" parameterType="com.gvssimux.pojo.TeaTree">
+    insert into tea_tree (tea_tree_id, tea_tree_address, tea_tree_longitude, 
+      tea_tree_height, tea_tree_kind, tea_tree_state, 
+      tea_tree_cultivate, tea_tree_growingenv)
+    values (#{teaTreeId,jdbcType=VARCHAR}, #{teaTreeAddress,jdbcType=VARCHAR}, #{teaTreeLongitude,jdbcType=VARCHAR}, 
+      #{teaTreeHeight,jdbcType=DOUBLE}, #{teaTreeKind,jdbcType=VARCHAR}, #{teaTreeState,jdbcType=VARCHAR}, 
+      #{teaTreeCultivate,jdbcType=VARCHAR}, #{teaTreeGrowingenv,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gvssimux.pojo.TeaTree">
+    insert into tea_tree
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="teaTreeId != null">
+        tea_tree_id,
+      </if>
+      <if test="teaTreeAddress != null">
+        tea_tree_address,
+      </if>
+      <if test="teaTreeLongitude != null">
+        tea_tree_longitude,
+      </if>
+      <if test="teaTreeHeight != null">
+        tea_tree_height,
+      </if>
+      <if test="teaTreeKind != null">
+        tea_tree_kind,
+      </if>
+      <if test="teaTreeState != null">
+        tea_tree_state,
+      </if>
+      <if test="teaTreeCultivate != null">
+        tea_tree_cultivate,
+      </if>
+      <if test="teaTreeGrowingenv != null">
+        tea_tree_growingenv,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="teaTreeId != null">
+        #{teaTreeId,jdbcType=VARCHAR},
+      </if>
+      <if test="teaTreeAddress != null">
+        #{teaTreeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="teaTreeLongitude != null">
+        #{teaTreeLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="teaTreeHeight != null">
+        #{teaTreeHeight,jdbcType=DOUBLE},
+      </if>
+      <if test="teaTreeKind != null">
+        #{teaTreeKind,jdbcType=VARCHAR},
+      </if>
+      <if test="teaTreeState != null">
+        #{teaTreeState,jdbcType=VARCHAR},
+      </if>
+      <if test="teaTreeCultivate != null">
+        #{teaTreeCultivate,jdbcType=VARCHAR},
+      </if>
+      <if test="teaTreeGrowingenv != null">
+        #{teaTreeGrowingenv,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

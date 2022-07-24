@@ -38,6 +38,7 @@ public class LoginController {
             //把用户的信息存在session中,用于验证
             session.setAttribute("company",user.getUserUname());
             System.out.println("LoginController===>");
+            //
             model.addAttribute("company",user.getUserUname());
             return "home";
         }

@@ -73,31 +73,4 @@ public class TeaArea {
      * */
     private final String type = "TeaArea";
 
-
-
-
-    private List<String> teaKinds;
-
-
-    private List<String> teaGardenIds;
-
-
-    private List<String>  teaAreaSonids;
-
-
-    public TeaArea(@JsonProperty("teaAreaId1") String teaAreaId1,@JsonProperty("teaAreaAddress") String teaAreaAddress,@JsonProperty("teaAreaLongitude") String teaAreaLongitude,@JsonProperty("teaAreaArea") String teaAreaArea,@JsonProperty("teaAreaDay") String teaAreaDay,@JsonProperty("teaAreaId2") String teaAreaId2,@JsonProperty("teaGardenId2") String teaGardenId2, List<String> teaKinds, List<String> teaGardenIds, List<String> teaAreaSonids) {
-        this.teaAreaId1 = teaAreaId1;
-        this.teaAreaAddress = teaAreaAddress;
-        this.teaAreaLongitude = teaAreaLongitude;
-        this.teaAreaArea = teaAreaArea;
-        this.teaAreaDay = teaAreaDay;
-        this.teaAreaId2 = teaAreaId2;
-        this.teaGardenId2 = teaGardenId2;
-        this.teaKinds = teaKinds;
-        this.teaGardenIds = teaGardenIds;
-        this.teaAreaSonids = teaAreaSonids;
-    }
-
-    public TeaArea() {
-    }
 }

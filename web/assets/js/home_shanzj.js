@@ -18,6 +18,30 @@ const vm = new Vue({
 
     },
     mounted () {
+        axios.get('/Fabric_TraceabilitySys_war_exploded/rankper',  // 获取当前公司各级茶叶的量
+            {
+                params: {
+                    companyName:document.getElementById("company").innerHTML
+                }
+            })
+            .then((response) =>{ // 这里如果不用箭头函数的话，this指的Windows
+
+                const jsonData = JSON.parse(JSON.stringify(response.data));
+                console.log("rankper 返回数据的json===》",jsonData);
+
+                this.company1 = document.getElementById("company").innerHTML;
+
+                for (let i = 0; i < this.rankkey.length; i++) {
+                    if (jsonData[this.rankpersumvalue[i]] !== 0){
+                        this.rankpersumvalue[i] = jsonData[this.rankkey[i]];
+                    }else {
+                        this.rankpersumvalue[i] = 0;
+                    }
+                };
+
+            }, function (error) {
+                console.log(error);
+            });
         axios.get('/Fabric_TraceabilitySys_war_exploded/kinds',
                 {
                     params: {
@@ -113,30 +137,7 @@ const vm = new Vue({
                 console.log(error);
             });
 
-        axios.get('/Fabric_TraceabilitySys_war_exploded/rankper',  // 获取当前公司各级茶叶的量
-            {
-                params: {
-                    companyName:document.getElementById("company").innerHTML
-                }
-            })
-            .then((response) =>{ // 这里如果不用箭头函数的话，this指的Windows
 
-                const jsonData = JSON.parse(JSON.stringify(response.data));
-                console.log("rankper 返回数据的json===》",jsonData);
-
-                this.company1 = document.getElementById("company").innerHTML;
-
-                for (let i = 0; i < this.rankkey.length; i++) {
-                    if (jsonData[this.rankpersumvalue[i]] !== 0){
-                        this.rankpersumvalue[i] = jsonData[this.rankkey[i]];
-                    }else {
-                        this.rankpersumvalue[i] = 0;
-                    }
-                };
-
-            }, function (error) {
-                console.log(error);
-            });
 
        /* function canvas1() {
             console.log("canvas===>");
@@ -785,7 +786,7 @@ function canvas2(){
                                 ticks: {
                                     stepSize: 1000,
                                     min: 0,
-                                    max: 1000000,
+                                    max: 10000,
                                 },
                             },
                         ],
@@ -840,9 +841,9 @@ function canvas2(){
                                     drawBorder: false,
                                 },
                                 ticks: {
-                                    stepSize: 3000,
+                                    stepSize: 1000,
                                     min: 0,
-                                    max: 150000,
+                                    max: 10000,
                                 },
                             },
                         ],

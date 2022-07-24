@@ -183,7 +183,7 @@ public class FormsController {
         pojo.setTeaPickId(request.getParameter("tea_pick_id"));// 用teaPickId充当茶叶批id，因为一批茶叶的是同时采摘的
         pojo.setTeaTreeId2(request.getParameter("tea_tree_id2"));
         pojo.setTeaPickQuality(request.getParameter("tea_pick_quality"));
-        pojo.setCompany(request.getParameter("companyName"));// 公司
+        pojo.setCompany(request.getParameter("companyName")); //公司
         pojo.setOutput(Integer.valueOf(request.getParameter("output"))); //产量
 
         pojo.setTeaPickPer(employee);
@@ -368,6 +368,7 @@ public class FormsController {
         pojo.setTeaTestingResult(request.getParameter("tea_testing_result"));// 质检结果
         pojo.setTeaTestingSmllBoxId(request.getParameter("tea_testing_smll_box_id"));// 小盒编号
         pojo.setTeaTestingBigBoxId(request.getParameter("tea_testing_big_box_id"));// 小盒编号
+        pojo.setCompany(request.getParameter("companyName")); //公司
         request.getParameter("key");// ssl密钥
 
 

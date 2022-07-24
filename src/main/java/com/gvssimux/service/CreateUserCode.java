@@ -60,6 +60,7 @@ public class CreateUserCode {
 
 
         json = FabricUtil.fz1("teaTreeId","t356",0);
+        json = FabricUtil.fz1("teaTreeId",pick.getTeaTreeId2(),0);
         jsonObj = JSONObject.parseObject(json);//转JSONObject对象
         TeaTree tree = jsonObj.toJavaObject(TeaTree.class);
             /*TeaTree tree = new TeaTree();
@@ -76,12 +77,14 @@ public class CreateUserCode {
 
 
         json = FabricUtil.fz1("teaGardenId1", "gt23",0);
+        json = FabricUtil.fz1("teaGardenId1", tree.getTeaGardenId2(),0);
         jsonObj = JSONObject.parseObject(json);//转JSONObject对象
         TeaGarden garden = jsonObj.toJavaObject(TeaGarden.class);
         allPojo.setTeaGarden(garden);
         System.out.println("成功获取garden");
 
         json = FabricUtil.fz1("teaAreaId1","a676",0);
+        json = FabricUtil.fz1("teaAreaId1",tree.getTeaAreaId2(),0);
         jsonObj = JSONObject.parseObject(json);//转JSONObject对象
         TeaArea area = jsonObj.toJavaObject(TeaArea.class);
         allPojo.setTeaArea(area);

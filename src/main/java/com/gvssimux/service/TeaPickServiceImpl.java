@@ -132,6 +132,23 @@ public class TeaPickServiceImpl implements TeaPickService{
 
         try {
             bytes = contract.submitTransaction("richQuery", str);
+            String s = new String(bytes);
+            //System.out.println("提交交易" + s);
+            JSONObject jsonObject = JSONObject.parseObject(s);
+            QueryResultList resultList = JSON.toJavaObject(jsonObject, QueryResultList.class);// 获取结果集
+            if (bytes!=null){
+                try {
+                    QueryResult queryResult = resultList.getResultList().get(0); // 获取结果
+                    String jsonStr = queryResult.getJson(); // 提取jsonStr
+                    JSONObject jsonObject2 = JSONObject.parseObject(jsonStr);
+                    TeaPick teaPick = JSON.toJavaObject(jsonObject2, TeaPick.class);
+                    Integer output = teaPick.getOutput();
+                    return output;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
         } catch (EndorseException e) {
             e.printStackTrace();
         } catch (SubmitException e) {
@@ -143,17 +160,8 @@ public class TeaPickServiceImpl implements TeaPickService{
         }
 
 
-        String s = new String(bytes);
-        //System.out.println("提交交易" + s);
-        JSONObject jsonObject = JSONObject.parseObject(s);
-        QueryResultList resultList = JSON.toJavaObject(jsonObject, QueryResultList.class);// 获取结果集
-        QueryResult queryResult = resultList.getResultList().get(0); // 获取结果
-        String jsonStr = queryResult.getJson(); // 提取jsonStr
-        JSONObject jsonObject2 = JSONObject.parseObject(jsonStr);
-        TeaPick teaPick = JSON.toJavaObject(jsonObject2, TeaPick.class);
-        Integer output = teaPick.getOutput();
 
-        return output;
+        return 0;
     }
 
     public void setK(String k) {

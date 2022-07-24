@@ -29,5 +29,10 @@ public class TeaPack {
     // 公司
     private String company;
 
+    /**
+     * 用于在富查询时标识查询类型的实体对象
+     * */
+    private final String type = "TeaPack";
+
 
 }
